@@ -36,7 +36,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/introduction-to-tokusatsu-super-sentai.jpg"
+                  href="/genre/super-sentai"
                   className="hover:text-primary transition-colors"
                 >
                   Super Sentai Series

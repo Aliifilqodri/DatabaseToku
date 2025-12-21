@@ -4,27 +4,17 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  BookOpen,
-  Layers,
-  ChevronRight,
-  Sword,
-  Shield,
-  Zap,
-  Activity,
-  Search,
-  Target,
-} from "lucide-react";
+import { BookOpen, Layers, Sword, Zap, Activity, Target } from "lucide-react";
 import Link from "next/link";
 
 // --- DATA HERO SLIDER (GOKAIGER EXCLUSIVE) ---
 const heroEntries = [
   {
-    id: "gokai-red",
+    id: "gokai-red", // Matches key in characterDatabase
     title: "GOKAI RED",
     subtitle: "CAPTAIN MARVELOUS",
     desc: "Kapten bajak laut yang tak kenal takut. Dia memimpin krunya dengan insting liar demi mencari Harta Karun Terbesar di Alam Semesta.",
-    image: "/sentai/marvelous/Captain_Marvelous.webp", // Path dari folder public
+    image: "/sentai/marvelous/Captain_Marvelous.webp", // Ensure this path is correct
     logo: "MARVELOUS",
     bounty: "UNLIMITED",
     color: "text-red-600",
@@ -39,11 +29,11 @@ const heroEntries = [
     motif: "Captain",
   },
   {
-    id: "joe-gibken",
+    id: "joe-gibken", // Matches key in characterDatabase
     title: "GOKAI BLUE",
     subtitle: "JOE GIBKEN",
     desc: "Wakil kapten yang tenang dan ahli pedang. Mantan elit Zangyack yang bersumpah setia pada Marvelous setelah diselamatkan olehnya.",
-    image: "/sentai/joe/Joe_Gibken.webp",
+    image: "/sentai/joe/Joe_Gibken.webp", // Ensure this path is correct
     logo: "JOE",
     bounty: "Z=8,000,000",
     color: "text-blue-500",
@@ -53,11 +43,11 @@ const heroEntries = [
     motif: "Swordsman",
   },
   {
-    id: "luka-millfy",
+    id: "luka-millfy", // Matches key in characterDatabase
     title: "GOKAI YELLOW",
     subtitle: "LUKA MILLFY",
     desc: "Pengintai kapal yang mencintai harta karun. Meski terlihat serakah, dia bertarung demi melindungi anak-anak dari kemiskinan.",
-    image: "/sentai/luka/Luka_Millfy.webp",
+    image: "/sentai/luka/Luka_Millfy.webp", // Ensure this path is correct
     logo: "LUKA",
     bounty: "Z=3,000,000",
     color: "text-yellow-400",
@@ -67,14 +57,14 @@ const heroEntries = [
     motif: "Lookout",
   },
   {
-    id: "gokai-silver",
+    id: "gokai-silver", // Matches key in characterDatabase
     title: "GOKAI SILVER",
     subtitle: "GAI IKARI",
     desc: "Satu-satunya manusia Bumi di tim. Superfan Super Sentai yang mendapatkan kekuatan dari semangat para pahlawan terdahulu.",
-    image: "/sentai/gai/Gai_Ikari.webp",
+    image: "/sentai/gai/Gai_Ikari.webp", // Ensure this path is correct
     logo: "GAI",
     bounty: "Z=300,000",
-    color: "text-gray-300", // Silver
+    color: "text-gray-300",
     bgGradient: "from-gray-800/50 to-transparent",
     stats: {
       punch: "5.5 t",
@@ -88,6 +78,7 @@ const heroEntries = [
 ];
 
 // --- DATA ANGGOTA KRU (WANTED POSTERS) ---
+// IDs here must match keys in characterDatabase
 const crewMembers = [
   {
     id: "gokai-red",
@@ -176,7 +167,6 @@ const mechaUnits = [
 export default function HomePage() {
   const [current, setCurrent] = useState(0);
 
-  // Auto Slide setiap 6 detik
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === heroEntries.length - 1 ? 0 : prev + 1));
@@ -192,7 +182,7 @@ export default function HomePage() {
 
       {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full overflow-hidden">
-        {/* Background Image Layer */}
+        {/* Background Image */}
         {heroEntries.map((entry, idx) => (
           <div
             key={entry.id}
@@ -205,20 +195,19 @@ export default function HomePage() {
               alt={entry.title}
               className="h-full w-full object-cover object-top brightness-[0.6]"
             />
-            {/* Dynamic Gradient based on Ranger Color */}
             <div
-              className={`absolute inset-0 bg-gradient-to-r ${entry.bgGradient} via-[#050505]/40 to-transparent`}
+              className={`absolute inset-0 bg-gradient-to-r ${entry.bgGradient} via-[#050505]/60 to-[#050505]/90 md:to-transparent`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
           </div>
         ))}
 
         {/* Hero Content */}
-        <div className="relative z-20 h-full flex items-center px-6 sm:px-12 lg:px-20 pt-16">
-          <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Info Text */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 border border-white/20 bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase text-white">
+        <div className="relative z-20 h-full flex items-center px-6 sm:px-12 lg:px-20 pt-20 md:pt-16">
+          <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left: Info Text (RESPONSIVE TYPOGRAPHY) */}
+            <div className="space-y-4 md:space-y-6">
+              <div className="inline-flex items-center gap-3 border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-mono tracking-widest uppercase text-white">
                 <span
                   className={`w-2 h-2 rounded-full ${activeHero.color.replace(
                     "text-",
@@ -230,52 +219,52 @@ export default function HomePage() {
 
               <div>
                 <h2
-                  className={`font-oswald text-3xl font-bold uppercase tracking-[0.2em] mb-2 ${activeHero.color}`}
+                  className={`font-oswald text-xl md:text-3xl font-bold uppercase tracking-[0.2em] mb-1 md:mb-2 ${activeHero.color}`}
                 >
                   {activeHero.subtitle}
                 </h2>
-                <h1 className="font-oswald text-7xl md:text-9xl font-black italic tracking-tighter text-white leading-[0.9] drop-shadow-2xl">
+                <h1 className="font-oswald text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black italic tracking-tighter text-white leading-[0.9] drop-shadow-2xl">
                   {activeHero.logo}
                 </h1>
               </div>
 
-              <div className="flex gap-3">
-                <Badge className="bg-white text-black font-bold text-sm px-3 rounded-sm">
+              <div className="flex gap-2 md:gap-3">
+                <Badge className="bg-white text-black font-bold text-xs md:text-sm px-2 md:px-3 rounded-sm">
                   {activeHero.year}
                 </Badge>
                 <Badge
                   variant="outline"
-                  className="text-gray-300 border-gray-500 text-sm px-3 rounded-sm uppercase"
+                  className="text-gray-300 border-gray-500 text-xs md:text-sm px-2 md:px-3 rounded-sm uppercase"
                 >
                   Role: {activeHero.motif}
                 </Badge>
               </div>
 
-              <p className="max-w-xl text-lg text-gray-200 border-l-4 border-white/50 pl-6 py-1 leading-relaxed shadow-black drop-shadow-md">
+              <p className="text-sm md:text-lg text-gray-200 border-l-4 border-white/50 pl-4 md:pl-6 py-1 leading-relaxed shadow-black drop-shadow-md line-clamp-3 md:line-clamp-none">
                 {activeHero.desc}
               </p>
 
-              <div className="flex gap-4 pt-4">
+              <div className="flex flex-wrap gap-3 md:gap-4 pt-2 md:pt-4">
                 <Link href={`/character/${activeHero.id}`}>
                   <Button
-                    className={`h-14 px-8 font-bold text-lg uppercase tracking-wider rounded-none clip-angle border-none text-white ${activeHero.color.replace(
+                    className={`h-12 md:h-14 px-6 md:px-8 font-bold text-sm md:text-lg uppercase tracking-wider rounded-none clip-angle border-none text-white ${activeHero.color.replace(
                       "text-",
                       "bg-"
                     )} hover:brightness-110`}
                   >
-                    <BookOpen className="mr-2" size={20} /> View Dossier
+                    <BookOpen className="mr-2" size={18} /> View Dossier
                   </Button>
                 </Link>
                 <Button
                   variant="outline"
-                  className="h-14 px-8 border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-lg uppercase tracking-wider rounded-none clip-angle backdrop-blur-sm"
+                  className="h-12 md:h-14 px-6 md:px-8 border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-sm md:text-lg uppercase tracking-wider rounded-none clip-angle backdrop-blur-sm"
                 >
-                  <Layers className="mr-2" size={20} /> Transformations
+                  <Layers className="mr-2" size={18} /> Modes
                 </Button>
               </div>
             </div>
 
-            {/* Right: HUD Stats */}
+            {/* Right: HUD Stats (Hidden on Mobile) */}
             <div className="hidden lg:flex justify-end">
               <div className="glass-panel w-80 p-6 rounded-xl border border-white/10 relative overflow-hidden">
                 <Activity
@@ -286,7 +275,6 @@ export default function HomePage() {
                 </h3>
 
                 <div className="space-y-6 font-mono text-sm text-gray-300">
-                  {/* Stat Bars */}
                   <div>
                     <div className="flex justify-between mb-1">
                       <span className="flex items-center gap-2">
@@ -336,32 +324,31 @@ export default function HomePage() {
         </div>
 
         {/* Indicators */}
-        <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 gap-3 z-30">
+        <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2 md:gap-3 z-30">
           {heroEntries.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrent(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1 md:h-1.5 rounded-full transition-all duration-300 ${
                 current === idx
-                  ? "w-12 bg-white"
-                  : "w-4 bg-white/30 hover:bg-white/60"
+                  ? "w-8 md:w-12 bg-white"
+                  : "w-3 md:w-4 bg-white/30 hover:bg-white/60"
               }`}
             />
           ))}
         </div>
       </div>
 
-      {/* --- SECTION 2: THE CREW (WANTED POSTERS) --- */}
+      {/* --- SECTION 2: THE CREW (RESPONSIVE GRID) --- */}
       <div className="relative z-10 bg-[#0a0a0a] pb-20 pt-10">
-        {/* Section Header */}
-        <div className="px-6 sm:px-12 lg:px-20 mb-12">
+        <div className="px-6 sm:px-12 lg:px-20 mb-8 md:mb-12">
           <div className="flex items-center gap-4 mb-2">
             <Target className="text-red-600 animate-pulse" />
-            <span className="text-red-600 font-mono uppercase tracking-widest text-sm">
+            <span className="text-red-600 font-mono uppercase tracking-widest text-xs md:text-sm">
               Target Locked
             </span>
           </div>
-          <h2 className="font-oswald text-4xl md:text-5xl font-bold text-white uppercase">
+          <h2 className="font-oswald text-3xl md:text-5xl font-bold text-white uppercase">
             The{" "}
             <span className="text-stroke text-transparent stroke-white">
               Gokaiger
@@ -370,9 +357,9 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Character Grid */}
         <div className="px-6 sm:px-12 lg:px-20">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {/* Grid Responsive: 2 kolom di HP, 3 di Tablet, 6 di Desktop */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
             {crewMembers.map((crew) => (
               <Link
                 href={`/character/${crew.id}`}
@@ -384,26 +371,21 @@ export default function HomePage() {
                     .split(" ")[0]
                     .replace("text-", "")}/20`}
                 >
-                  {/* Image */}
                   <img
                     src={crew.image}
                     alt={crew.name}
                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500"
                   />
-
-                  {/* Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
-
-                  {/* Text */}
-                  <div className="absolute bottom-0 left-0 w-full p-4 text-center">
+                  <div className="absolute bottom-0 left-0 w-full p-3 md:p-4 text-center">
                     <p
-                      className={`text-[10px] uppercase font-bold tracking-widest mb-1 ${
+                      className={`text-[9px] md:text-[10px] uppercase font-bold tracking-widest mb-1 ${
                         crew.color.split(" ")[0]
                       }`}
                     >
                       {crew.role}
                     </p>
-                    <h3 className="font-oswald text-xl text-white uppercase leading-none italic group-hover:scale-110 transition-transform">
+                    <h3 className="font-oswald text-lg md:text-xl text-white uppercase leading-none italic group-hover:scale-110 transition-transform">
                       {crew.name}
                     </h3>
                   </div>
@@ -414,26 +396,27 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* --- SECTION 3: PIRATE MACHINES (MECHA) --- */}
+      {/* --- SECTION 3: PIRATE MACHINES (RESPONSIVE GRID) --- */}
       <div className="bg-[#050505] pb-32 border-t border-white/5">
         <div className="px-6 sm:px-12 lg:px-20 py-16">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h2 className="font-oswald text-3xl font-bold text-white uppercase">
+              <h2 className="font-oswald text-2xl md:text-3xl font-bold text-white uppercase">
                 Pirate Machines
               </h2>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 text-xs md:text-sm mt-1">
                 Primary Assault Vehicles
               </p>
             </div>
             <Button
               variant="link"
-              className="text-white decoration-transparent uppercase tracking-wider text-xs"
+              className="text-white decoration-transparent uppercase tracking-wider text-xs hidden md:block"
             >
               View Formation
             </Button>
           </div>
 
+          {/* Grid Responsive: 1 kolom di HP, 2 di Tablet, 3 di Desktop */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {mechaUnits.map((mech) => (
               <div

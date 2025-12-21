@@ -4,7 +4,14 @@ import { useState, use } from "react";
 import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Eye, Star, Calendar, Filter, AlertTriangle } from "lucide-react";
+import {
+  ArrowLeft,
+  Eye,
+  Star,
+  Calendar,
+  Filter,
+  AlertTriangle,
+} from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -217,53 +224,53 @@ export default function GenrePage({
 
         <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 lg:p-20">
           <div className="animate-in slide-in-from-bottom-10 fade-in duration-700 delay-100 max-w-4xl">
-            <h1 className="font-oswald text-6xl md:text-8xl font-black uppercase italic tracking-tighter text-white drop-shadow-lg leading-none mb-4">
+            <h1 className="font-oswald text-4xl sm:text-6xl md:text-8xl font-black uppercase italic tracking-tighter text-white drop-shadow-lg leading-none mb-4">
               {genreInfo.title}
             </h1>
-            <p className="text-lg md:text-xl text-gray-200 max-w-2xl font-sans leading-relaxed border-l-4 border-primary pl-6">
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl font-sans leading-relaxed border-l-4 border-primary pl-4 sm:pl-6">
               {genreInfo.desc}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 py-12">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-300">
-          <div className="flex items-center gap-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 sm:mb-10 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-300">
+          <div className="flex flex-wrap items-center gap-2">
             <Badge
               variant="outline"
-              className="text-white border-white/20 bg-white/5 px-4 py-2 text-sm uppercase cursor-pointer hover:bg-primary hover:border-primary transition-colors"
+              className="text-white border-white/20 bg-white/5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm uppercase cursor-pointer hover:bg-primary hover:border-primary transition-colors"
             >
               All Eras
             </Badge>
             <Badge
               variant="outline"
-              className="text-gray-400 border-white/10 px-4 py-2 text-sm uppercase cursor-pointer hover:text-white hover:border-white/30 transition-colors"
+              className="text-gray-400 border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm uppercase cursor-pointer hover:text-white hover:border-white/30 transition-colors"
             >
               Reiwa
             </Badge>
             <Badge
               variant="outline"
-              className="text-gray-400 border-white/10 px-4 py-2 text-sm uppercase cursor-pointer hover:text-white hover:border-white/30 transition-colors"
+              className="text-gray-400 border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm uppercase cursor-pointer hover:text-white hover:border-white/30 transition-colors"
             >
               Heisei
             </Badge>
             <Badge
               variant="outline"
-              className="text-gray-400 border-white/10 px-4 py-2 text-sm uppercase cursor-pointer hover:text-white hover:border-white/30 transition-colors"
+              className="text-gray-400 border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm uppercase cursor-pointer hover:text-white hover:border-white/30 transition-colors"
             >
               Showa
             </Badge>
           </div>
 
-          <div className="flex items-center gap-2 text-gray-400 text-sm">
+          <div className="flex items-center gap-2 text-gray-400 text-xs sm:text-sm">
             <span>Showing {filteredSeries.length} Series</span>
-            <Filter size={16} />
+            <Filter size={14} className="sm:w-4 sm:h-4" />
           </div>
         </div>
 
         {filteredSeries.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
             {filteredSeries.map((series, index) => (
               <Link
                 key={series.id}
@@ -279,35 +286,41 @@ export default function GenrePage({
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
-                    <Eye className="h-12 w-12 text-white drop-shadow-lg scale-50 transition-transform duration-300 group-hover:scale-100" />
+                    <Eye className="h-8 w-8 sm:h-12 sm:w-12 text-white drop-shadow-lg scale-50 transition-transform duration-300 group-hover:scale-100" />
                   </div>
-                  <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-md px-2 py-1 rounded text-xs font-bold text-yellow-400 flex items-center gap-1">
-                    <Star size={10} fill="currentColor" /> {series.rating}
+                  <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-md px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-bold text-yellow-400 flex items-center gap-1">
+                    <Star
+                      size={8}
+                      className="sm:w-2.5 sm:h-2.5"
+                      fill="currentColor"
+                    />{" "}
+                    {series.rating}
                   </div>
-                  <div className="absolute top-2 left-2 bg-primary/90 px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-wider shadow-lg">
+                  <div className="absolute top-2 left-2 bg-primary/90 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[8px] sm:text-[10px] font-bold text-white uppercase tracking-wider shadow-lg">
                     {series.era}
                   </div>
                 </div>
-                <div className="mt-3 space-y-1">
-                  <h3 className="font-oswald font-bold text-lg leading-tight text-white group-hover:text-primary transition-colors truncate">
+                <div className="mt-2 sm:mt-3 space-y-0.5 sm:space-y-1">
+                  <h3 className="font-oswald font-bold text-base sm:text-lg leading-tight text-white group-hover:text-primary transition-colors truncate">
                     {series.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-xs text-gray-400 font-mono">
-                    <Calendar size={12} /> {series.year}
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-400 font-mono">
+                    <Calendar size={10} className="sm:w-3 sm:h-3" />{" "}
+                    {series.year}
                   </div>
                 </div>
               </Link>
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-20 text-center animate-in fade-in slide-in-from-bottom-5">
-            <div className="h-24 w-24 rounded-full bg-zinc-900 flex items-center justify-center mb-4">
-              <Filter className="text-gray-600 h-10 w-10" />
+          <div className="flex flex-col items-center justify-center py-16 sm:py-20 text-center animate-in fade-in slide-in-from-bottom-5">
+            <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-zinc-900 flex items-center justify-center mb-3 sm:mb-4">
+              <Filter className="text-gray-600 h-8 w-8 sm:h-10 sm:w-10" />
             </div>
-            <h3 className="text-2xl font-oswald font-bold text-gray-300 mb-2">
+            <h3 className="text-xl sm:text-2xl font-oswald font-bold text-gray-300 mb-1 sm:mb-2">
               No Series Found
             </h3>
-            <p className="text-gray-500">
+            <p className="text-sm sm:text-base text-gray-500 px-4">
               We couldn't find any series for this category yet.
             </p>
           </div>
@@ -315,19 +328,20 @@ export default function GenrePage({
       </div>
 
       <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
-        <AlertDialogContent className="bg-zinc-950 border border-white/10 text-white">
+        <AlertDialogContent className="bg-zinc-950 border border-white/10 text-white w-[90%] sm:w-full rounded-lg sm:rounded-md p-4 sm:p-6">
           <AlertDialogHeader>
-            <AlertDialogTitle className="font-oswald text-2xl uppercase flex items-center gap-2 text-yellow-500">
-              <AlertTriangle /> Under Construction
+            <AlertDialogTitle className="font-oswald text-xl sm:text-2xl uppercase flex items-center gap-2 text-yellow-500">
+              <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6" /> Under
+              Construction
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-gray-400">
+            <AlertDialogDescription className="text-sm sm:text-base text-gray-400">
               This Wiki page is currently being updated. Only{" "}
               <strong>Kaizoku Sentai Gokaiger</strong> is available for preview
               right now. Please check back later!
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction className="bg-primary hover:bg-primary/80 text-white font-bold uppercase tracking-wider rounded-none clip-angle">
+          <AlertDialogFooter className="mt-4 sm:mt-0">
+            <AlertDialogAction className="bg-primary hover:bg-primary/80 text-white font-bold uppercase tracking-wider rounded-md sm:rounded-none clip-angle w-full sm:w-auto h-10 sm:h-auto text-sm sm:text-base">
               Understood
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// --- DEFINISI TIPE DATA ---
 type CharacterData = {
   id: string;
   name: string;
@@ -42,9 +41,7 @@ type CharacterData = {
   gallery: { image: string; description: string }[];
 };
 
-// --- DATABASE KARAKTER LENGKAP (GOKAIGER TEAM) ---
 const characterDatabase: Record<string, CharacterData> = {
-  // 1. GOKAI RED (Captain Marvelous)
   "gokai-red": {
     id: "gokai-red",
     name: "Captain Marvelous",
@@ -53,7 +50,7 @@ const characterDatabase: Record<string, CharacterData> = {
     color: "Red",
     themeColor:
       "text-red-600 border-red-600 selection:bg-red-600 selection:text-white",
-    image: "/sentai/marvelous/Captain_Marvelous.webp", // Simpan di: public/sentai/gokaiger/marvelous.webp
+    image: "/sentai/marvelous/Captain_Marvelous.webp",
     actor: "Ryota Ozawa",
     bounty: "Unlimited (∞)",
     quote: "Let's make it showy!",
@@ -61,11 +58,7 @@ const characterDatabase: Record<string, CharacterData> = {
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
     bio: "Kapten muda dari Bajak Laut Gokaiger. Mantan anggota Bajak Laut Merah yang mewarisi Ranger Key dari AkaRed. Dia terlihat arogan dan sembrono, tetapi sangat peduli pada krunya dan memiliki keinginan kuat untuk menemukan Harta Karun Terbesar di Alam Semesta.",
-    history: `
-      <p><strong>Masa Lalu:</strong> Marvelous diselamatkan oleh AkaRed saat planet asalnya dihancurkan Zangyack. Dia belajar arti menjadi bajak laut sejati dari AkaRed.</p>
-      <br/>
-      <p><strong>Perjalanan:</strong> Setelah AkaRed mengorbankan diri, Marvelous mengumpulkan kru baru (Joe, Luka, Doc, Ahim) dan berkeliling alam semesta mencari Harta Karun Terbesar.</p>
-    `,
+    history: `<p><strong>Masa Lalu:</strong> Marvelous diselamatkan oleh AkaRed saat planet asalnya dihancurkan Zangyack. Dia belajar arti menjadi bajak laut sejati dari AkaRed.</p><br/><p><strong>Perjalanan:</strong> Setelah AkaRed mengorbankan diri, Marvelous mengumpulkan kru baru (Joe, Luka, Doc, Ahim) dan berkeliling alam semesta mencari Harta Karun Terbesar.</p>`,
     forms: ["Normal", "Gold Mode (Armor)", "Cross Armor Mode"],
     arsenal: ["Mobilate", "Gokai Saber", "Gokai Gun", "Ranger Keys"],
     mecha: [
@@ -90,8 +83,6 @@ const characterDatabase: Record<string, CharacterData> = {
       },
     ],
   },
-
-  // 2. GOKAI BLUE (Joe Gibken)
   "gokai-blue": {
     id: "gokai-blue",
     name: "Joe Gibken",
@@ -108,11 +99,7 @@ const characterDatabase: Record<string, CharacterData> = {
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
     bio: "Wakil kapten yang tenang dan ahli pedang. Joe adalah mantan prajurit elit Zangyack yang membelot karena menolak membunuh warga sipil. Dia sangat setia kepada Marvelous yang menyelamatkannya.",
-    history: `
-      <p><strong>Masa Lalu:</strong> Mantan anggota pasukan khusus Zangyack. Dia diajari ilmu pedang oleh seniornya, Sid Bamick.</p>
-      <br/>
-      <p><strong>Tragedi:</strong> Setelah Sid diubah menjadi cyborg Barizorg, Joe bersumpah untuk menyelamatkan jiwanya atau menghentikannya dengan tangannya sendiri.</p>
-    `,
+    history: `<p><strong>Masa Lalu:</strong> Mantan anggota pasukan khusus Zangyack. Dia diajari ilmu pedang oleh seniornya, Sid Bamick.</p><br/><p><strong>Tragedi:</strong> Setelah Sid diubah menjadi cyborg Barizorg, Joe bersumpah untuk menyelamatkan jiwanya atau menghentikannya dengan tangannya sendiri.</p>`,
     forms: ["Normal", "Cross Armor Mode", "5-Sword Style"],
     arsenal: [
       "Mobilate",
@@ -133,8 +120,6 @@ const characterDatabase: Record<string, CharacterData> = {
       },
     ],
   },
-
-  // 3. GOKAI YELLOW (Luka Millfy) - Updated Path
   "luka-millfy": {
     id: "luka-millfy",
     name: "Luka Millfy",
@@ -143,7 +128,7 @@ const characterDatabase: Record<string, CharacterData> = {
     color: "Yellow",
     themeColor:
       "text-yellow-400 border-yellow-400 selection:bg-yellow-400 selection:text-black",
-    image: "/sentai/luka/Luka_Millfy.webp", // Path baru sesuai request
+    image: "/sentai/luka/Luka_Millfy.webp",
     actor: "Mao Ichimichi",
     bounty: "Z=3,000,000",
     quote: "Ay-yi-yi, tempat ini berantakan sekali!",
@@ -151,11 +136,7 @@ const characterDatabase: Record<string, CharacterData> = {
     firstAppearance: "Goseiger vs. Shinkenger",
     lastAppearance: "Ten Gokaiger",
     bio: "Luka Millfy adalah pengintai kru yang tomboy dan mencintai uang. Tumbuh dalam kemiskinan ekstrim, dia bertekad untuk membeli 'dunia' agar tidak ada anak-anak yang menderita lagi.",
-    history: `
-      <p><strong>Masa Kecil:</strong> Kehilangan adiknya Lia karena penyakit dan kemiskinan. Dia bertahan hidup sebagai pencuri.</p>
-      <br/>
-      <p><strong>Pertemuan:</strong> Bertemu Marvelous dan Joe saat mencoba mencuri dari gudang Zangyack yang sama.</p>
-    `,
+    history: `<p><strong>Masa Kecil:</strong> Kehilangan adiknya Lia karena penyakit dan kemiskinan. Dia bertahan hidup sebagai pencuri.</p><br/><p><strong>Pertemuan:</strong> Bertemu Marvelous dan Joe saat mencoba mencuri dari gudang Zangyack yang sama.</p>`,
     forms: ["Normal", "Cross Armor Mode", "Gokai Christmas"],
     arsenal: [
       "Mobilate",
@@ -191,8 +172,6 @@ const characterDatabase: Record<string, CharacterData> = {
       },
     ],
   },
-
-  // 4. GOKAI GREEN (Don Dogoier / Doc)
   "gokai-green": {
     id: "gokai-green",
     name: "Don Dogoier (Doc)",
@@ -209,11 +188,7 @@ const characterDatabase: Record<string, CharacterData> = {
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
     bio: "Juru masak dan teknisi kapal yang cerdas namun penakut. Dia dijuluki 'Doc' oleh Marvelous. Meskipun sering panik, dia ahli dalam strategi dan perbaikan peralatan.",
-    history: `
-      <p><strong>Bergabung:</strong> Marvelous merekrutnya karena dia butuh seseorang untuk bersih-bersih dan memasak, bukan karena kemampuan bertarungnya.</p>
-      <br/>
-      <p><strong>Gaya Bertarung:</strong> Doc bertarung dengan gaya akrobatik yang konyol dan sering kali tidak sengaja mengalahkan musuh karena keberuntungan atau kepanikan.</p>
-    `,
+    history: `<p><strong>Bergabung:</strong> Marvelous merekrutnya karena dia butuh seseorang untuk bersih-bersih dan memasak, bukan karena kemampuan bertarungnya.</p><br/><p><strong>Gaya Bertarung:</strong> Doc bertarung dengan gaya akrobatik yang konyol dan sering kali tidak sengaja mengalahkan musuh karena keberuntungan atau kepanikan.</p>`,
     forms: ["Normal", "Cross Armor Mode", "Gokai Christmas"],
     arsenal: [
       "Mobilate",
@@ -235,8 +210,6 @@ const characterDatabase: Record<string, CharacterData> = {
       },
     ],
   },
-
-  // 5. GOKAI PINK (Ahim de Famille)
   "gokai-pink": {
     id: "gokai-pink",
     name: "Ahim de Famille",
@@ -253,11 +226,7 @@ const characterDatabase: Record<string, CharacterData> = {
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
     bio: "Putri dari Planet Famille yang dihancurkan Zangyack. Dia bergabung dengan Gokaiger untuk menjadi simbol harapan bagi rakyatnya yang selamat. Sopan, anggun, namun mematikan.",
-    history: `
-      <p><strong>Latar Belakang:</strong> Dia meminta Marvelous untuk membiarkannya bergabung agar wajahnya terpampang di poster buronan, sehingga rakyatnya tahu dia masih hidup dan berjuang.</p>
-      <br/>
-      <p><strong>Keahlian:</strong> Ahim sering menggunakan dua pistol (Gokai Gun) dalam pertempuran jarak jauh dengan gaya yang elegan.</p>
-    `,
+    history: `<p><strong>Latar Belakang:</strong> Dia meminta Marvelous untuk membiarkannya bergabung agar wajahnya terpampang di poster buronan, sehingga rakyatnya tahu dia masih hidup dan berjuang.</p><br/><p><strong>Keahlian:</strong> Ahim sering menggunakan dua pistol (Gokai Gun) dalam pertempuran jarak jauh dengan gaya yang elegan.</p>`,
     forms: ["Normal", "Cross Armor Mode"],
     arsenal: ["Mobilate", "Gokai Gun (Dual Wield)", "Ranger Keys"],
     mecha: [
@@ -275,8 +244,6 @@ const characterDatabase: Record<string, CharacterData> = {
       },
     ],
   },
-
-  // 6. GOKAI SILVER (Gai Ikari)
   "gokai-silver": {
     id: "gokai-silver",
     name: "Gai Ikari",
@@ -292,12 +259,8 @@ const characterDatabase: Record<string, CharacterData> = {
     homeworld: "Earth",
     firstAppearance: "Gokaiger Ep. 17",
     lastAppearance: "Ten Gokaiger",
-    bio: "Satu-satunya manusia Bumi di tim. Gai adalah superfan Super Sentai yang mendapatkan kekuatannya dari semangat para ranger terdahulu (DragonRanger, TimeFire, AbareKiller) setelah menyelamatkan seorang gadis dari kecelakaan.",
-    history: `
-      <p><strong>Asal Usul:</strong> Dalam koma setelah kecelakaan, dia ditemui oleh tiga hantu ranger ke-6 yang memberinya Gokai Cellular dan Ranger Key.</p>
-      <br/>
-      <p><strong>Peran:</strong> Ensiklopedia berjalan bagi tim. Dia yang menjelaskan sejarah Super Sentai kepada kru bajak laut yang tidak tahu apa-apa.</p>
-    `,
+    bio: "Satu-satunya manusia Bumi di tim. Gai adalah superfan Super Sentai yang mendapatkan kekuatannya dari semangat para ranger terdahulu setelah menyelamatkan seorang gadis dari kecelakaan.",
+    history: `<p><strong>Asal Usul:</strong> Dalam koma setelah kecelakaan, dia ditemui oleh tiga hantu ranger ke-6 yang memberinya Gokai Cellular dan Ranger Key.</p><br/><p><strong>Peran:</strong> Ensiklopedia berjalan bagi tim. Dia yang menjelaskan sejarah Super Sentai kepada kru bajak laut yang tidak tahu apa-apa.</p>`,
     forms: ["Normal", "Gold Mode", "Cross Armor Mode"],
     arsenal: ["Gokai Cellular", "Gokai Spear", "Ranger Keys"],
     mecha: [{ name: "GoZyuDrill", image: "/sentai/gai/KSG-GozyuDrill.webp" }],
@@ -321,38 +284,33 @@ export default function CharacterProfilePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-
   const [data, setData] = useState<CharacterData | null>(null);
   const [activeTab, setActiveTab] = useState("profile");
 
   useEffect(() => {
-    // Default ke Luka jika ID tidak ditemukan (sebagai fallback demo)
-    const char = characterDatabase[id] || characterDatabase["luka-millfy"];
-    setData(char);
+    if (id && characterDatabase[id]) {
+      setData(characterDatabase[id]);
+    } else {
+      setData(characterDatabase["luka-millfy"]);
+    }
   }, [id]);
 
   if (!data)
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white">
-        Accessing Archives...
+      <div className="min-h-screen bg-black flex items-center justify-center text-white font-mono">
+        ACCESSING ARCHIVES...
       </div>
     );
 
-  // Mengatur warna glow background (Update untuk warna baru)
   const glowColor =
-    data.color === "Yellow"
-      ? "rgba(250, 204, 21, 0.5)"
-      : data.color === "Red"
-      ? "rgba(220, 38, 38, 0.5)"
-      : data.color === "Blue"
-      ? "rgba(59, 130, 246, 0.5)"
-      : data.color === "Green"
-      ? "rgba(34, 197, 94, 0.5)"
-      : data.color === "Pink"
-      ? "rgba(244, 114, 182, 0.5)"
-      : data.color === "Silver"
-      ? "rgba(209, 213, 219, 0.5)"
-      : "rgba(255, 255, 255, 0.5)";
+    {
+      Yellow: "rgba(250, 204, 21, 0.5)",
+      Red: "rgba(220, 38, 38, 0.5)",
+      Blue: "rgba(59, 130, 246, 0.5)",
+      Green: "rgba(34, 197, 94, 0.5)",
+      Pink: "rgba(244, 114, 182, 0.5)",
+      Silver: "rgba(209, 213, 219, 0.5)",
+    }[data.color] || "rgba(255, 255, 255, 0.5)";
 
   return (
     <div
@@ -362,9 +320,7 @@ export default function CharacterProfilePage({
     >
       <Navbar />
 
-      {/* --- HERO SECTION --- */}
-      <div className="relative w-full pt-28 pb-12 px-6 sm:px-12 lg:px-20 overflow-hidden border-b border-white/10">
-        {/* Background Effects */}
+      <div className="relative w-full pt-20 pb-8 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden border-b border-white/10">
         <div
           className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-current opacity-10 pointer-events-none"
           style={{ color: glowColor.replace("0.5", "1") }}
@@ -374,95 +330,91 @@ export default function CharacterProfilePage({
           style={{ backgroundColor: glowColor }}
         />
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-12 items-end">
-          {/* Avatar Card */}
-          <div className="relative aspect-[3/4] lg:aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl animate-in fade-in slide-in-from-left duration-700">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8 md:gap-12 items-end">
+          <div className="relative aspect-[3/4] lg:aspect-square rounded-xl md:rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl animate-in fade-in slide-in-from-left duration-700">
             <img
               src={data.image}
               alt={data.name}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <Badge className="mb-3 bg-white/90 text-black hover:bg-white font-bold uppercase tracking-wider">
+            <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6">
+              <Badge className="mb-2 md:mb-3 bg-white/90 text-black hover:bg-white font-bold uppercase tracking-wider text-xs md:text-sm">
                 {data.series}
               </Badge>
-              <h1 className="font-oswald text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-none mb-1 text-white drop-shadow-lg">
+              <h1 className="font-oswald text-4xl sm:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-none mb-1 text-white drop-shadow-lg">
                 {data.rangerName}
               </h1>
-              <p className="text-xl font-medium text-gray-300 font-mono">
+              <p className="text-lg md:text-xl font-medium text-gray-300 font-mono">
                 {data.name}
               </p>
             </div>
           </div>
 
-          {/* Right Stats */}
-          <div className="lg:col-span-2 space-y-8 animate-in fade-in slide-in-from-bottom duration-700 delay-200">
+          <div className="lg:col-span-2 space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom duration-700 delay-200">
             <div
-              className="glass-panel p-8 rounded-xl border-l-4 border-current relative overflow-hidden"
+              className="glass-panel p-6 md:p-8 rounded-xl border-l-4 border-current relative overflow-hidden"
               style={{ borderColor: glowColor.replace("0.5", "1") }}
             >
               <Quote
-                size={40}
-                className={`absolute top-4 right-4 opacity-20 ${
+                size={32}
+                className={`absolute top-4 right-4 opacity-20 md:w-10 md:h-10 ${
                   data.themeColor.split(" ")[0]
                 }`}
               />
-              <p className="text-2xl md:text-3xl font-oswald font-medium italic text-gray-100 leading-tight">
+              <p className="text-xl md:text-3xl font-oswald font-medium italic text-gray-100 leading-tight pr-8">
                 "{data.quote}"
               </p>
-
-              <div className="flex flex-wrap gap-4 mt-6">
+              <div className="flex flex-wrap gap-3 md:gap-4 mt-4 md:mt-6">
                 <Badge
                   variant="outline"
-                  className="text-gray-400 border-white/20 py-1 px-3 uppercase text-xs tracking-widest"
+                  className="text-gray-400 border-white/20 py-1 px-2 md:px-3 uppercase text-[10px] md:text-xs tracking-widest"
                 >
                   First: {data.firstAppearance.split(":")[0]}
                 </Badge>
                 <Badge
                   variant="outline"
-                  className="text-gray-400 border-white/20 py-1 px-3 uppercase text-xs tracking-widest"
+                  className="text-gray-400 border-white/20 py-1 px-2 md:px-3 uppercase text-[10px] md:text-xs tracking-widest"
                 >
                   Status: Active
                 </Badge>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
               <StatBox
                 label="Bounty/Rank"
                 value={data.bounty}
-                icon={<Target size={14} />}
+                icon={<Target size={12} className="md:w-3.5 md:h-3.5" />}
               />
               <StatBox
                 label="Homeworld"
                 value={data.homeworld}
-                icon={<MapPin size={14} />}
+                icon={<MapPin size={12} className="md:w-3.5 md:h-3.5" />}
               />
               <StatBox
                 label="Portrayer"
                 value={data.actor}
-                icon={<User size={14} />}
+                icon={<User size={12} className="md:w-3.5 md:h-3.5" />}
               />
               <StatBox
                 label="Color ID"
                 value={data.color}
-                icon={<Layers size={14} />}
+                icon={<Layers size={12} className="md:w-3.5 md:h-3.5" />}
               />
             </div>
 
-            <div className="flex gap-4 pt-2">
-              <Link href="/characters">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
+              <Link href="/characters" className="w-full sm:w-auto">
                 <Button
                   variant="outline"
-                  className="h-12 border-white/20 bg-white/5 hover:bg-white/10 text-gray-200 uppercase tracking-wider font-bold"
+                  className="h-10 md:h-12 w-full border-white/20 bg-white/5 hover:bg-white/10 text-gray-200 uppercase tracking-wider font-bold text-sm md:text-base"
                 >
-                  <ArrowLeft className="mr-2" size={18} /> Database
+                  <ArrowLeft className="mr-2 h-4 w-4 md:h-[18px] md:w-[18px]" />{" "}
+                  Database
                 </Button>
               </Link>
-              <Button
-                className={`h-12 text-black font-bold uppercase tracking-wider bg-white hover:bg-gray-200`}
-              >
+              <Button className="h-10 md:h-12 w-full sm:w-auto text-black font-bold uppercase tracking-wider bg-white hover:bg-gray-200 text-sm md:text-base">
                 Download Dossier
               </Button>
             </div>
@@ -470,43 +422,40 @@ export default function CharacterProfilePage({
         </div>
       </div>
 
-      {/* --- CONTENT TABS --- */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 py-12">
-        <div className="flex gap-8 border-b border-white/10 mb-10 overflow-x-auto scrollbar-hide">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-8 md:py-12">
+        <div className="flex gap-4 md:gap-8 border-b border-white/10 mb-8 md:mb-10 overflow-x-auto scrollbar-hide pb-2 md:pb-0">
           {["profile", "history", "arsenal", "gallery", "trivia"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-4 text-lg font-oswald font-bold uppercase tracking-widest transition-all whitespace-nowrap px-2
-                     ${
-                       activeTab === tab
-                         ? `border-b-4 ${
-                             data.themeColor.split(" ")[1]
-                           } text-white scale-105`
-                         : "text-gray-500 hover:text-gray-300 border-transparent"
-                     }`}
+              className={`pb-3 md:pb-4 text-sm md:text-lg font-oswald font-bold uppercase tracking-widest transition-all whitespace-nowrap px-2 ${
+                activeTab === tab
+                  ? `border-b-4 ${
+                      data.themeColor.split(" ")[1]
+                    } text-white scale-105`
+                  : "text-gray-500 hover:text-gray-300 border-transparent"
+              }`}
             >
               {tab}
             </button>
           ))}
         </div>
 
-        <div className="min-h-[400px] animate-in fade-in duration-500">
-          {/* TAB: PROFILE */}
+        <div className="min-h-[300px] md:min-h-[400px] animate-in fade-in duration-500">
           {activeTab === "profile" && (
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               <div className="md:col-span-2">
-                <h3 className="text-2xl font-oswald uppercase text-white mb-6 flex items-center gap-2">
-                  <User className="text-gray-400" size={24} /> Personal Data
+                <h3 className="text-xl md:text-2xl font-oswald uppercase text-white mb-4 md:mb-6 flex items-center gap-2">
+                  <User className="text-gray-400 h-5 w-5 md:h-6 md:w-6" />{" "}
+                  Personal Data
                 </h3>
-                <p className="text-gray-300 text-lg leading-relaxed mb-8 font-light">
+                <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6 md:mb-8 font-light">
                   {data.bio}
                 </p>
               </div>
-
               <div className="space-y-6">
-                <div className="bg-zinc-900/40 p-6 rounded-xl border border-white/5">
-                  <h4 className="text-sm text-gray-500 uppercase font-bold mb-4">
+                <div className="bg-zinc-900/40 p-5 md:p-6 rounded-xl border border-white/5">
+                  <h4 className="text-xs md:text-sm text-gray-500 uppercase font-bold mb-3 md:mb-4">
                     Forms & Modes
                   </h4>
                   <div className="flex flex-wrap gap-2">
@@ -514,18 +463,18 @@ export default function CharacterProfilePage({
                       <Badge
                         key={i}
                         variant="secondary"
-                        className="bg-white/10 text-white hover:bg-white/20 py-1.5"
+                        className="bg-white/10 text-white hover:bg-white/20 py-1 md:py-1.5 text-xs"
                       >
                         {form}
                       </Badge>
                     ))}
                   </div>
                 </div>
-                <div className="bg-zinc-900/40 p-6 rounded-xl border border-white/5">
-                  <h4 className="text-sm text-gray-500 uppercase font-bold mb-4">
+                <div className="bg-zinc-900/40 p-5 md:p-6 rounded-xl border border-white/5">
+                  <h4 className="text-xs md:text-sm text-gray-500 uppercase font-bold mb-3 md:mb-4">
                     Abilities
                   </h4>
-                  <div className="space-y-4 font-mono text-xs">
+                  <div className="space-y-3 md:space-y-4 font-mono text-[10px] md:text-xs">
                     <SkillBar
                       label="Agility"
                       percent={90}
@@ -545,56 +494,58 @@ export default function CharacterProfilePage({
             </div>
           )}
 
-          {/* TAB: HISTORY */}
           {activeTab === "history" && (
             <div className="max-w-4xl">
-              <div className="bg-zinc-900/30 p-8 rounded-xl border-l-2 border-white/10">
+              <div className="bg-zinc-900/30 p-6 md:p-8 rounded-xl border-l-2 border-white/10">
                 <div
-                  className="text-gray-300 leading-relaxed text-lg space-y-6 font-light"
+                  className="text-gray-300 leading-relaxed text-base md:text-lg space-y-4 md:space-y-6 font-light"
                   dangerouslySetInnerHTML={{ __html: data.history }}
                 />
               </div>
             </div>
           )}
 
-          {/* TAB: ARSENAL */}
           {activeTab === "arsenal" && (
-            <div className="grid sm:grid-cols-2 gap-8">
-              <div className="bg-zinc-900/30 p-8 rounded-xl border border-white/5">
-                <h3 className="text-xl font-oswald uppercase text-white mb-6 flex items-center gap-2">
-                  <Zap className="text-yellow-400" size={20} /> Arsenal
+            <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
+              <div className="bg-zinc-900/30 p-6 md:p-8 rounded-xl border border-white/5">
+                <h3 className="text-lg md:text-xl font-oswald uppercase text-white mb-4 md:mb-6 flex items-center gap-2">
+                  <Zap className="text-yellow-400 h-4 w-4 md:h-5 md:w-5" />{" "}
+                  Arsenal
                 </h3>
-                <ul className="space-y-4">
+                <ul className="space-y-3 md:space-y-4">
                   {data.arsenal.map((item, i) => (
                     <li
                       key={i}
-                      className="flex items-center gap-4 text-gray-300"
+                      className="flex items-center gap-3 md:gap-4 text-gray-300 text-sm md:text-base"
                     >
                       <div
                         className={`h-1.5 w-1.5 rounded-full ${data.themeColor
                           .split(" ")[0]
                           .replace("text-", "bg-")}`}
                       />
-                      <span className="font-medium text-lg">{item}</span>
+                      <span className="font-medium">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-
-              <div className="bg-zinc-900/30 p-8 rounded-xl border border-white/5">
-                <h3 className="text-xl font-oswald uppercase text-white mb-6 flex items-center gap-2">
-                  <Shield className="text-blue-400" size={20} /> Mecha Units
+              <div className="bg-zinc-900/30 p-6 md:p-8 rounded-xl border border-white/5">
+                <h3 className="text-lg md:text-xl font-oswald uppercase text-white mb-4 md:mb-6 flex items-center gap-2">
+                  <Shield className="text-blue-400 h-4 w-4 md:h-5 md:w-5" />{" "}
+                  Mecha Units
                 </h3>
                 {data.mecha.map((mech, i) => (
-                  <div key={i} className="mb-6 last:mb-0 group cursor-pointer">
+                  <div
+                    key={i}
+                    className="mb-4 md:mb-6 last:mb-0 group cursor-pointer"
+                  >
                     <div className="aspect-video bg-black rounded-lg overflow-hidden relative mb-2 border border-white/5 group-hover:border-white/20 transition-all">
                       <img
                         src={mech.image}
                         alt={mech.name}
                         className="w-full h-full object-contain p-2 opacity-90 group-hover:opacity-100 transition-opacity"
                       />
-                      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/50 to-transparent p-3">
-                        <span className="text-xl font-oswald uppercase tracking-widest text-white">
+                      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/50 to-transparent p-2 md:p-3">
+                        <span className="text-lg md:text-xl font-oswald uppercase tracking-widest text-white">
                           {mech.name}
                         </span>
                       </div>
@@ -605,9 +556,8 @@ export default function CharacterProfilePage({
             </div>
           )}
 
-          {/* TAB: GALLERY */}
           {activeTab === "gallery" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
               {data.gallery.length > 0 ? (
                 data.gallery.map((item, idx) => (
                   <div
@@ -621,37 +571,42 @@ export default function CharacterProfilePage({
                         className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       />
                     </div>
-                    <div className="p-4 bg-zinc-900/90 absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-white/10">
-                      <p className="text-sm text-gray-300 font-medium leading-relaxed">
+                    <div className="p-3 md:p-4 bg-zinc-900/90 absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-white/10">
+                      <p className="text-xs md:text-sm text-gray-300 font-medium leading-relaxed">
                         {item.description}
                       </p>
                     </div>
                     <div className="absolute top-3 right-3 bg-black/50 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ImageIcon size={16} className="text-white" />
+                      <ImageIcon
+                        size={14}
+                        className="text-white md:w-4 md:h-4"
+                      />
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="col-span-full text-center py-20 text-gray-500">
-                  <ImageIcon className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                <div className="col-span-full text-center py-16 md:py-20 text-gray-500">
+                  <ImageIcon className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 opacity-20" />
                   <p>No images available in database.</p>
                 </div>
               )}
             </div>
           )}
 
-          {/* TAB: TRIVIA */}
           {activeTab === "trivia" && (
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
               {data.trivia.map((fact, i) => (
                 <div
                   key={i}
-                  className="flex gap-4 p-5 bg-zinc-900/50 rounded-xl border border-white/5 hover:border-white/20 transition-all"
+                  className="flex gap-3 md:gap-4 p-4 md:p-5 bg-zinc-900/50 rounded-xl border border-white/5 hover:border-white/20 transition-all"
                 >
                   <div className="flex-shrink-0 mt-1">
-                    <Star size={18} className="text-yellow-400" />
+                    <Star
+                      size={16}
+                      className="text-yellow-400 md:w-[18px] md:h-[18px]"
+                    />
                   </div>
-                  <p className="text-gray-300 text-lg">{fact}</p>
+                  <p className="text-gray-300 text-sm md:text-lg">{fact}</p>
                 </div>
               ))}
             </div>
@@ -662,7 +617,6 @@ export default function CharacterProfilePage({
   );
 }
 
-// --- HELPER COMPONENTS ---
 function StatBox({
   label,
   value,
@@ -673,12 +627,12 @@ function StatBox({
   icon: any;
 }) {
   return (
-    <div className="p-4 bg-zinc-900/80 border border-white/5 rounded-lg hover:border-white/20 transition-colors backdrop-blur-sm">
-      <div className="flex items-center gap-2 text-gray-500 mb-2 text-[10px] uppercase font-bold tracking-widest">
+    <div className="p-3 md:p-4 bg-zinc-900/80 border border-white/5 rounded-lg hover:border-white/20 transition-colors backdrop-blur-sm">
+      <div className="flex items-center gap-2 text-gray-500 mb-1 md:mb-2 text-[8px] md:text-[10px] uppercase font-bold tracking-widest">
         {icon} {label}
       </div>
       <div
-        className="font-oswald text-lg text-white truncate font-medium"
+        className="font-oswald text-sm md:text-lg text-white truncate font-medium"
         title={value}
       >
         {value}
@@ -698,11 +652,11 @@ function SkillBar({
 }) {
   return (
     <div>
-      <div className="flex justify-between mb-1 text-xs font-bold tracking-wider">
+      <div className="flex justify-between mb-1 text-[10px] md:text-xs font-bold tracking-wider">
         <span className="text-gray-500 uppercase">{label}</span>
         <span className="text-white">{percent}%</span>
       </div>
-      <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+      <div className="h-1 md:h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
         <div
           className={`h-full ${color} rounded-full`}
           style={{ width: `${percent}%` }}
