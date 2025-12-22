@@ -2,7 +2,6 @@
 
 import { useState, useEffect, use } from "react";
 import { Navbar } from "@/components/navbar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
@@ -14,9 +13,14 @@ import {
   MapPin,
   Target,
   Layers,
-  ImageIcon,
+  Terminal,
+  Activity,
+  ChevronRight,
+  Download,
+  X,
 } from "lucide-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 type CharacterData = {
   id: string;
@@ -57,9 +61,9 @@ const characterDatabase: Record<string, CharacterData> = {
     homeworld: "Unknown Planet",
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
-    bio: "Kapten muda dari Bajak Laut Gokaiger. Mantan anggota Bajak Laut Merah yang mewarisi Ranger Key dari AkaRed. Dia terlihat arogan dan sembrono, tetapi sangat peduli pada krunya dan memiliki keinginan kuat untuk menemukan Harta Karun Terbesar di Alam Semesta.",
-    history: `<p><strong>Masa Lalu:</strong> Marvelous diselamatkan oleh AkaRed saat planet asalnya dihancurkan Zangyack. Dia belajar arti menjadi bajak laut sejati dari AkaRed.</p><br/><p><strong>Perjalanan:</strong> Setelah AkaRed mengorbankan diri, Marvelous mengumpulkan kru baru (Joe, Luka, Doc, Ahim) dan berkeliling alam semesta mencari Harta Karun Terbesar.</p>`,
-    forms: ["Normal", "Gold Mode (Armor)", "Cross Armor Mode"],
+    bio: "The charismatic leader of the Gokaiger pirates. A former member of the Red Pirates who inherited the Ranger Keys from AkaRed. While he often projects an aura of arrogance and recklessness, he possesses a fiercely protective soul for his crew and an unyielding drive to discover the 'Greatest Treasure in the Universe.'",
+    history: `<p><strong>The Genesis:</strong> Marvelous was rescued by AkaRed during the annihilation of his home planet by the Zangyack Empire. Under AkaRed's mentorship, he learned the true weight of the pirate creed.</p><br/><p><strong>The Quest:</strong> Following AkaRed's ultimate sacrifice, Marvelous forged a new crew—Joe, Luka, Doc, and Ahim—navigating the treacherous reaches of the cosmos to unlock the secrets of the 34 past Super Sentai teams.</p>`,
+    forms: ["Standard Gokai Red", "Gokai Red Gold Mode", "Galleon Armor Mode"],
     arsenal: ["Mobilate", "Gokai Saber", "Gokai Gun", "Ranger Keys"],
     mecha: [
       {
@@ -68,18 +72,18 @@ const characterDatabase: Record<string, CharacterData> = {
       },
     ],
     trivia: [
-      "Suka sekali makan kari.",
-      "Benci melakukan hal yang membosankan.",
-      "Bountynya tidak terbatas.",
+      "Possesses an insatiable craving for Earth's curry.",
+      "Despises mundane tasks and bureaucratic boredom.",
+      "The first individual in history to have an 'Unlimited' bounty tag.",
     ],
     gallery: [
       {
         image: "/sentai/marvelous/Captain_Marvelous_29.webp",
-        description: "Marvelous di Movie SSSB",
+        description: "Marvelous during the SSSB deployment.",
       },
       {
         image: "/sentai/marvelous/Marvelous_in_KingOhger_In_Space.webp",
-        description: "Marvelous in KingOhger In Space",
+        description: "Interspecies tactical alliance in KingOhger space.",
       },
     ],
   },
@@ -94,13 +98,13 @@ const characterDatabase: Record<string, CharacterData> = {
     image: "/sentai/joe/Joe_Gibken.webp",
     actor: "Yuki Yamada",
     bounty: "Z=8,000,000",
-    quote: "Aku akan menebas apapun yang menghalangi jalanku.",
+    quote: "I will cut down anything that stands in my path.",
     homeworld: "Unknown",
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
-    bio: "Wakil kapten yang tenang dan ahli pedang. Joe adalah mantan prajurit elit Zangyack yang membelot karena menolak membunuh warga sipil. Dia sangat setia kepada Marvelous yang menyelamatkannya.",
-    history: `<p><strong>Masa Lalu:</strong> Mantan anggota pasukan khusus Zangyack. Dia diajari ilmu pedang oleh seniornya, Sid Bamick.</p><br/><p><strong>Tragedi:</strong> Setelah Sid diubah menjadi cyborg Barizorg, Joe bersumpah untuk menyelamatkan jiwanya atau menghentikannya dengan tangannya sendiri.</p>`,
-    forms: ["Normal", "Cross Armor Mode", "5-Sword Style"],
+    bio: "The crew's stoic first mate and master swordsman. A former elite Zangyack operative who defected after refusing a direct order to execute civilians. His cold exterior masks a deep sense of honor and absolute loyalty to Marvelous.",
+    history: `<p><strong>Defection:</strong> Originally a high-ranking special forces soldier for Zangyack. He was trained in the arts of lethal swordsmanship by his mentor, Sid Bamick.</p><br/><p><strong>The Vow:</strong> After Sid was forcibly converted into the cyborg Barizorg, Joe swore an oath to either restore his soul or put his master to rest with his own blades.</p>`,
+    forms: ["Standard Gokai Blue", "Cross Armor Mode", "5-Sword Style Mastery"],
     arsenal: [
       "Mobilate",
       "Gokai Saber (Dual/Multi Wield)",
@@ -109,14 +113,14 @@ const characterDatabase: Record<string, CharacterData> = {
     ],
     mecha: [{ name: "Gokai Jet", image: "/sentai/joe/KSG-Gokai_Jet.webp" }],
     trivia: [
-      "Bisa menggunakan 5 pedang sekaligus.",
-      "Sangat buruk dalam hal memasak kue.",
-      "Selalu berlatih push-up di kapal.",
+      "Capable of wielding five swords simultaneously with surgical precision.",
+      "Notoriously unskilled at culinary arts, specifically baking.",
+      "Maintains a strict physical conditioning regimen of 1000+ reps daily.",
     ],
     gallery: [
       {
         image: "/sentai/joe/Zangyack_Agent_Gibken.webp",
-        description: "Joe saat bergabung dnegan pasukan Zangyack.",
+        description: "Tactical profile during Zangyack enlistment.",
       },
     ],
   },
@@ -131,50 +135,45 @@ const characterDatabase: Record<string, CharacterData> = {
     image: "/sentai/luka/Luka_Millfy.webp",
     actor: "Mao Ichimichi",
     bounty: "Z=3,000,000",
-    quote: "Ay-yi-yi, tempat ini berantakan sekali!",
+    quote: "Ay-yi-yi, this place is a total mess!",
     homeworld: "Unknown Planet",
     firstAppearance: "Goseiger vs. Shinkenger",
     lastAppearance: "Ten Gokaiger",
-    bio: "Luka Millfy adalah pengintai kru yang tomboy dan mencintai uang. Tumbuh dalam kemiskinan ekstrim, dia bertekad untuk membeli 'dunia' agar tidak ada anak-anak yang menderita lagi.",
-    history: `<p><strong>Masa Kecil:</strong> Kehilangan adiknya Lia karena penyakit dan kemiskinan. Dia bertahan hidup sebagai pencuri.</p><br/><p><strong>Pertemuan:</strong> Bertemu Marvelous dan Joe saat mencoba mencuri dari gudang Zangyack yang sama.</p>`,
-    forms: ["Normal", "Cross Armor Mode", "Gokai Christmas"],
+    bio: "The team's sharp-tongued scout and resident treasure hunter. Born into extreme poverty on a Zangyack-occupied world, she developed an obsession with wealth—not for greed, but to buy 'The World' to ensure no child ever suffers like she did.",
+    history: `<p><strong>Survivor:</strong> Witnessed the death of her sister, Lia, due to lack of medical resources. She survived as a high-stakes thief in the galactic underworld.</p><br/><p><strong>Alliance:</strong> Encountered Marvelous and Joe while attempting to hijack the same Zangyack supply freighter.</p>`,
+    forms: [
+      "Standard Gokai Yellow",
+      "Cross Armor Mode",
+      "Gokai Christmas Hybrid",
+    ],
     arsenal: [
       "Mobilate",
-      "Gokai Saber",
+      "Gokai Saber (Whip-Sword Mode)",
       "Gokai Gun",
-      "Ranger Keys",
       "Wire Hook",
     ],
     mecha: [
       { name: "Gokai Trailer", image: "/sentai/luka/KSG-Gokai_Trailer.webp" },
     ],
     trivia: [
-      "Benci Brokoli.",
-      "Sering meminjamkan uang dengan bunga tinggi ke Doc.",
-      "Ahli menyamar.",
+      "Has a biological aversion to broccoli.",
+      "Operates as the crew's unofficial loan shark with high interest rates.",
+      "Expert in high-tier infiltration and espionage.",
     ],
     gallery: [
       {
-        image: "/sentai/luka/Luka_Millfy.webp",
-        description: "Potret resmi Luka Millfy.",
-      },
-      {
-        image: "/sentai/luka/Luka_Millfy_29.webp",
-        description: "Senyum kemenangan Luka.",
-      },
-      {
         image: "/sentai/luka/Gaisoulg_29_Profile.webp",
-        description: "Luka didalam tubuh Gaisoulg.",
+        description: "Neural link with the Gaisoulg armor.",
       },
       {
         image: "/sentai/luka/Luka_and_Raptor.webp",
-        description: "Cameo Luka di Movie Kyuranger vs Space Squad.",
+        description: "Joint operation with Space Squad assets.",
       },
     ],
   },
   "gokai-green": {
     id: "gokai-green",
-    name: "Don Dogoier (Doc)",
+    name: "Don Dogoier",
     rangerName: "Gokai Green",
     series: "Kaizoku Sentai Gokaiger",
     color: "Green",
@@ -183,30 +182,29 @@ const characterDatabase: Record<string, CharacterData> = {
     image: "/sentai/don/Don_Dogoier.webp",
     actor: "Kazuki Shimizu",
     bounty: "Z=300,000",
-    quote: "A-aku akan melakukan yang terbaik!",
+    quote: "I-I'll do my very best!",
     homeworld: "Unknown",
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
-    bio: "Juru masak dan teknisi kapal yang cerdas namun penakut. Dia dijuluki 'Doc' oleh Marvelous. Meskipun sering panik, dia ahli dalam strategi dan perbaikan peralatan.",
-    history: `<p><strong>Bergabung:</strong> Marvelous merekrutnya karena dia butuh seseorang untuk bersih-bersih dan memasak, bukan karena kemampuan bertarungnya.</p><br/><p><strong>Gaya Bertarung:</strong> Doc bertarung dengan gaya akrobatik yang konyol dan sering kali tidak sengaja mengalahkan musuh karena keberuntungan atau kepanikan.</p>`,
-    forms: ["Normal", "Cross Armor Mode", "Gokai Christmas"],
+    bio: "Affectionately known as 'Doc,' he serves as the Galleon's engineer, chef, and tactical analyst. Despite his timid nature and tendency to panic, his genius-level intellect and unconventional fighting style are vital to the team's survival.",
+    history: `<p><strong>Recruitment:</strong> Marvelous initially scouted him for his technical and domestic skills. Doc turned the Galleon into a home rather than just a warship.</p><br/><p><strong>Combat Style:</strong> He utilizes a chaotic, acrobatic 'accidental' fighting style that confuses enemies, turning his fear into unpredictable maneuvers.</p>`,
+    forms: ["Standard Gokai Green", "Gokai Christmas"],
     arsenal: [
       "Mobilate",
-      "Gokai Gun (Dual Wield)",
-      "Gokai Saber",
+      "Gokai Gun (Dual Wield Master)",
+      "Tactical Laptop",
       "Ranger Keys",
-      "Laptop",
     ],
     mecha: [{ name: "Gokai Racer", image: "/sentai/don/KSG-Gokai_Racer.webp" }],
     trivia: [
-      "Bounty terendah di tim.",
-      "Sering jadi bahan lelucon.",
-      "Koki yang sangat handal.",
+      "Holds the record for the most frequent 'comic relief' bounty updates.",
+      "Culinary skills are rated at Galactic 5-Star levels.",
+      "Possesses near-instantaneous mechanical repair capabilities.",
     ],
     gallery: [
       {
         image: "/sentai/don/Don_Dogoier_29.webp",
-        description: "Ekspresi panik Doc.",
+        description: "Standard tactical stress analysis.",
       },
     ],
   },
@@ -221,26 +219,26 @@ const characterDatabase: Record<string, CharacterData> = {
     image: "/sentai/ahim/ahim.png",
     actor: "Yui Koike",
     bounty: "Z=4,000,000",
-    quote: "Saya akan bertarung dengan anggun.",
+    quote: "I shall fight with grace and elegance.",
     homeworld: "Famille",
     firstAppearance: "Gokaiger Ep. 1",
     lastAppearance: "Ten Gokaiger",
-    bio: "Putri dari Planet Famille yang dihancurkan Zangyack. Dia bergabung dengan Gokaiger untuk menjadi simbol harapan bagi rakyatnya yang selamat. Sopan, anggun, namun mematikan.",
-    history: `<p><strong>Latar Belakang:</strong> Dia meminta Marvelous untuk membiarkannya bergabung agar wajahnya terpampang di poster buronan, sehingga rakyatnya tahu dia masih hidup dan berjuang.</p><br/><p><strong>Keahlian:</strong> Ahim sering menggunakan dua pistol (Gokai Gun) dalam pertempuran jarak jauh dengan gaya yang elegan.</p>`,
-    forms: ["Normal", "Cross Armor Mode"],
-    arsenal: ["Mobilate", "Gokai Gun (Dual Wield)", "Ranger Keys"],
+    bio: "The last princess of the fallen Planet Famille. She chose the life of a pirate to serve as a beacon of hope for her scattered people, proving that royalty does not hide but fights for its subjects. She is the epitome of grace under fire.",
+    history: `<p><strong>The Princess:</strong> After witnessing the destruction of her kingdom by the Zangyack commander Zatsurig, she joined the Gokaigers to ensure her face appeared on wanted posters as a signal to survivors.</p><br/><p><strong>The Duelist:</strong> Specializes in long-range suppression using dual Gokai Guns with a distinct, ballet-like precision.</p>`,
+    forms: ["Standard Gokai Pink", "Cross Armor Mode"],
+    arsenal: ["Mobilate", "Gokai Gun (Akimbo Proficiency)", "Ranger Keys"],
     mecha: [
       { name: "Gokai Marine", image: "/sentai/ahim/KSG-Gokai_Marine.webp" },
     ],
     trivia: [
-      "Sangat suka teh.",
-      "Sering mendamaikan pertengkaran kru.",
-      "Putri asli.",
+      "An expert in high-society tea ceremonies and diplomacy.",
+      "Functions as the crew's primary moral compass and mediator.",
+      "Only member of the team with confirmed royal lineage.",
     ],
     gallery: [
       {
         image: "/sentai/ahim/pinkahim.jpg",
-        description: "Ahim Menjadi Abare Pink.",
+        description: "Unauthorized 'Abare Pink' field test.",
       },
     ],
   },
@@ -259,20 +257,24 @@ const characterDatabase: Record<string, CharacterData> = {
     homeworld: "Earth",
     firstAppearance: "Gokaiger Ep. 17",
     lastAppearance: "Ten Gokaiger",
-    bio: "Satu-satunya manusia Bumi di tim. Gai adalah superfan Super Sentai yang mendapatkan kekuatannya dari semangat para ranger terdahulu setelah menyelamatkan seorang gadis dari kecelakaan.",
-    history: `<p><strong>Asal Usul:</strong> Dalam koma setelah kecelakaan, dia ditemui oleh tiga hantu ranger ke-6 yang memberinya Gokai Cellular dan Ranger Key.</p><br/><p><strong>Peran:</strong> Ensiklopedia berjalan bagi tim. Dia yang menjelaskan sejarah Super Sentai kepada kru bajak laut yang tidak tahu apa-apa.</p>`,
-    forms: ["Normal", "Gold Mode", "Cross Armor Mode"],
-    arsenal: ["Gokai Cellular", "Gokai Spear", "Ranger Keys"],
+    bio: "The only Earthling on the team and the world's premier Super Sentai historian. He gained his powers through a heroic act of self-sacrifice, earning the respect of the spirits of past Sixth Rangers.",
+    history: `<p><strong>Ascension:</strong> While in a near-death state after saving a child, he was visited by the spirits of DragonRanger, TimeFire, and AbareKiller, who entrusted him with the Gokai Cellular.</p><br/><p><strong>The Fanatic:</strong> Acts as the crew's living encyclopedia, often providing crucial tactical data regarding the powers of the past Sentai generations.</p>`,
+    forms: [
+      "Standard Gokai Silver",
+      "Gold Mode (15-Ranger Fusion)",
+      "Cross Armor Mode",
+    ],
+    arsenal: ["Gokai Cellular", "Gokai Spear (Trident/Gun Mode)", "Anchor Key"],
     mecha: [{ name: "GoZyuDrill", image: "/sentai/gai/KSG-GozyuDrill.webp" }],
     trivia: [
-      "Bisa menggabungkan Ranger Key menjadi Anchor Key.",
-      "Pencipta Gold Mode.",
-      "Sangat hiperaktif.",
+      "Architect of the 'Gold Mode' fusion armor.",
+      "Exhibits extreme hyper-excitement when meeting past Sentai warriors.",
+      "Developed a custom Anchor Key for multi-fusion transformations.",
     ],
     gallery: [
       {
         image: "/sentai/gai/Gai_and_Misao.webp",
-        description: "Gai saat bertemu Misao.",
+        description: "Historical summit with Zyuoh The World.",
       },
     ],
   },
@@ -286,333 +288,383 @@ export default function CharacterProfilePage({
   const { id } = use(params);
   const [data, setData] = useState<CharacterData | null>(null);
   const [activeTab, setActiveTab] = useState("profile");
+  const [showHackModal, setShowHackModal] = useState(false);
+  const [hackProgress, setHackProgress] = useState(0);
 
   useEffect(() => {
     if (id && characterDatabase[id]) {
       setData(characterDatabase[id]);
     } else {
-      setData(characterDatabase["luka-millfy"]);
+      setData(characterDatabase["gokai-red"]);
     }
   }, [id]);
 
   if (!data)
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white font-mono">
-        ACCESSING ARCHIVES...
+      <div className="min-h-screen bg-black flex items-center justify-center text-red-500 font-mono">
+        <Terminal className="mr-2 animate-pulse" /> INITIALIZING ARCHIVE LINK...
       </div>
     );
 
-  const glowColor =
+  const themeHex =
     {
-      Yellow: "rgba(250, 204, 21, 0.5)",
-      Red: "rgba(220, 38, 38, 0.5)",
-      Blue: "rgba(59, 130, 246, 0.5)",
-      Green: "rgba(34, 197, 94, 0.5)",
-      Pink: "rgba(244, 114, 182, 0.5)",
-      Silver: "rgba(209, 213, 219, 0.5)",
-    }[data.color] || "rgba(255, 255, 255, 0.5)";
+      Yellow: "#facc15",
+      Red: "#dc2626",
+      Blue: "#3b82f6",
+      Green: "#22c55e",
+      Pink: "#f472b6",
+      Silver: "#d1d5db",
+    }[data.color] || "#ffffff";
+
+  const handleDownload = () => {
+    setShowHackModal(true);
+    setHackProgress(0);
+    const interval = setInterval(() => {
+      setHackProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setTimeout(() => setShowHackModal(false), 1000);
+          return 100;
+        }
+        return prev + Math.floor(Math.random() * 20) + 5;
+      });
+    }, 150);
+  };
 
   return (
     <div
-      className={`min-h-screen bg-[#050505] text-white font-sans ${
-        data.themeColor.split(" ")[2]
-      }`}
+      className={`min-h-screen bg-[#050505] text-zinc-100 font-sans selection:bg-white selection:text-black relative`}
     >
       <Navbar />
 
-      <div className="relative w-full pt-20 pb-8 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden border-b border-white/10">
+      {showHackModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
+          <div className="w-full max-w-md border border-white/20 bg-zinc-950 p-8 rounded-2xl shadow-[0_0_50px_rgba(255,255,255,0.1)] relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+              <div
+                className="h-full bg-white transition-all duration-300 shadow-[0_0_15px_#fff]"
+                style={{ width: `${hackProgress}%` }}
+              />
+            </div>
+            <div className="flex justify-between items-start mb-6">
+              <div className="space-y-1">
+                <h3 className="text-white font-mono text-sm font-bold tracking-[0.2em] uppercase flex items-center gap-2">
+                  <Terminal size={16} className="text-white animate-pulse" />{" "}
+                  Decrypting_Dossier
+                </h3>
+                <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase">
+                  Target: {data.id}.sys
+                </p>
+              </div>
+              <button
+                onClick={() => setShowHackModal(false)}
+                className="text-zinc-500 hover:text-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="space-y-4 font-mono">
+              <div className="bg-black/50 p-4 border border-white/5 rounded-lg">
+                <div className="text-[10px] text-green-500 mb-2">
+                  {" "}
+                  {`> BYPASSING_ZANGYACK_FIREWALL...`}
+                </div>
+                <div className="text-[10px] text-blue-400 mb-2">
+                  {" "}
+                  {`> EXTRACTING_BIOMETRIC_DATA...`}
+                </div>
+                <div className="text-[10px] text-white/40 italic">
+                  {hackProgress < 100
+                    ? `Packet_Loss: 0.00${Math.floor(Math.random() * 9)}%`
+                    : "Dossier_Verified. Access Granted."}
+                </div>
+              </div>
+              <div className="flex justify-between items-center text-[10px] tracking-widest uppercase font-bold">
+                <span className="text-zinc-500">Progress:</span>
+                <span className="text-white">{hackProgress}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section className="relative pt-24 pb-12 md:pt-40 md:pb-20 px-4 md:px-10 lg:px-24 border-b border-white/5 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
         <div
-          className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-current opacity-10 pointer-events-none"
-          style={{ color: glowColor.replace("0.5", "1") }}
-        />
-        <div
-          className="absolute -left-20 top-20 w-96 h-96 blur-[120px] rounded-full pointer-events-none"
-          style={{ backgroundColor: glowColor }}
+          className="absolute top-0 right-0 w-full md:w-1/2 h-full opacity-10 pointer-events-none blur-[120px]"
+          style={{ backgroundColor: themeHex }}
         />
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8 md:gap-12 items-end">
-          <div className="relative aspect-[3/4] lg:aspect-square rounded-xl md:rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl animate-in fade-in slide-in-from-left duration-700">
-            <img
-              src={data.image}
-              alt={data.name}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6">
-              <Badge className="mb-2 md:mb-3 bg-white/90 text-black hover:bg-white font-bold uppercase tracking-wider text-xs md:text-sm">
-                {data.series}
-              </Badge>
-              <h1 className="font-oswald text-4xl sm:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-none mb-1 text-white drop-shadow-lg">
-                {data.rangerName}
-              </h1>
-              <p className="text-lg md:text-xl font-medium text-gray-300 font-mono">
-                {data.name}
-              </p>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 md:gap-16 items-center">
+          <div className="lg:col-span-5 xl:col-span-4 self-center relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl">
+              <img
+                src={data.image}
+                alt={data.name}
+                className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <Badge className="mb-2 bg-white/10 backdrop-blur-md border-white/20 text-[10px] uppercase tracking-widest">
+                  {data.series}
+                </Badge>
+                <p className="text-white/50 font-mono text-[10px] uppercase tracking-[0.3em]">
+                  Designation: {data.rangerName}
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom duration-700 delay-200">
-            <div
-              className="glass-panel p-6 md:p-8 rounded-xl border-l-4 border-current relative overflow-hidden"
-              style={{ borderColor: glowColor.replace("0.5", "1") }}
-            >
-              <Quote
-                size={32}
-                className={`absolute top-4 right-4 opacity-20 md:w-10 md:h-10 ${
-                  data.themeColor.split(" ")[0]
-                }`}
-              />
-              <p className="text-xl md:text-3xl font-oswald font-medium italic text-gray-100 leading-tight pr-8">
-                "{data.quote}"
-              </p>
-              <div className="flex flex-wrap gap-3 md:gap-4 mt-4 md:mt-6">
-                <Badge
-                  variant="outline"
-                  className="text-gray-400 border-white/20 py-1 px-2 md:px-3 uppercase text-[10px] md:text-xs tracking-widest"
-                >
-                  First: {data.firstAppearance.split(":")[0]}
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="text-gray-400 border-white/20 py-1 px-2 md:px-3 uppercase text-[10px] md:text-xs tracking-widest"
-                >
-                  Status: Active
-                </Badge>
+          <div className="lg:col-span-7 xl:col-span-8 space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 text-zinc-500 font-mono text-[10px] md:text-xs tracking-[0.4em] uppercase">
+                <Terminal size={14} /> System.Archives // {data.id}
+              </div>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black uppercase italic tracking-tighter leading-none text-white drop-shadow-2xl">
+                {data.rangerName}
+              </h1>
+              <div className="flex items-center gap-4">
+                <div className="h-px w-16 bg-white/20" />
+                <p className="text-xl md:text-2xl font-light text-zinc-400 font-mono tracking-widest uppercase italic">
+                  {data.name}
+                </p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
               <StatBox
-                label="Bounty/Rank"
+                label="Bounty"
                 value={data.bounty}
-                icon={<Target size={12} className="md:w-3.5 md:h-3.5" />}
+                icon={<Target size={14} />}
               />
               <StatBox
-                label="Homeworld"
+                label="Origin"
                 value={data.homeworld}
-                icon={<MapPin size={12} className="md:w-3.5 md:h-3.5" />}
+                icon={<MapPin size={14} />}
               />
               <StatBox
-                label="Portrayer"
+                label="Biometric"
                 value={data.actor}
-                icon={<User size={12} className="md:w-3.5 md:h-3.5" />}
+                icon={<User size={14} />}
               />
               <StatBox
-                label="Color ID"
+                label="Chroma"
                 value={data.color}
-                icon={<Layers size={12} className="md:w-3.5 md:h-3.5" />}
+                icon={<Layers size={14} />}
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
-              <Link href="/characters" className="w-full sm:w-auto">
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link href="/characters">
                 <Button
                   variant="outline"
-                  className="h-10 md:h-12 w-full border-white/20 bg-white/5 hover:bg-white/10 text-gray-200 uppercase tracking-wider font-bold text-sm md:text-base"
+                  className="h-14 px-8 border-white/10 bg-white/5 hover:bg-white hover:text-black transition-all font-mono text-[10px] tracking-widest uppercase rounded-none"
                 >
-                  <ArrowLeft className="mr-2 h-4 w-4 md:h-[18px] md:w-[18px]" />{" "}
-                  Database
+                  <ArrowLeft className="mr-3 w-4 h-4" /> System.Exit
                 </Button>
               </Link>
-              <Button className="h-10 md:h-12 w-full sm:w-auto text-black font-bold uppercase tracking-wider bg-white hover:bg-gray-200 text-sm md:text-base">
-                Download Dossier
+              <Button
+                onClick={handleDownload}
+                className="h-14 px-8 bg-zinc-100 text-black hover:bg-white rounded-none font-mono text-[10px] tracking-widest uppercase font-bold min-w-[200px]"
+              >
+                <Download className="mr-3" /> DOWNLOAD_DOSSIER
               </Button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-8 md:py-12">
-        <div className="flex gap-4 md:gap-8 border-b border-white/10 mb-8 md:mb-10 overflow-x-auto scrollbar-hide pb-2 md:pb-0">
+      <nav className="sticky top-16 z-40 bg-[#050505]/80 backdrop-blur-md border-b border-white/5 px-6 lg:px-24">
+        <div className="max-w-7xl mx-auto flex gap-8 md:gap-12 overflow-x-auto scrollbar-hide py-5">
           {["profile", "history", "arsenal", "gallery", "trivia"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-3 md:pb-4 text-sm md:text-lg font-oswald font-bold uppercase tracking-widest transition-all whitespace-nowrap px-2 ${
+              className={`whitespace-nowrap text-[10px] md:text-xs font-mono font-bold uppercase tracking-[0.4em] transition-all relative ${
                 activeTab === tab
-                  ? `border-b-4 ${
-                      data.themeColor.split(" ")[1]
-                    } text-white scale-105`
-                  : "text-gray-500 hover:text-gray-300 border-transparent"
+                  ? "text-white"
+                  : "text-zinc-600 hover:text-zinc-400"
               }`}
             >
               {tab}
+              {activeTab === tab && (
+                <div className="absolute -bottom-5 left-0 w-full h-[2px] bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
+              )}
             </button>
           ))}
         </div>
+      </nav>
 
-        <div className="min-h-[300px] md:min-h-[400px] animate-in fade-in duration-500">
-          {activeTab === "profile" && (
-            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-              <div className="md:col-span-2">
-                <h3 className="text-xl md:text-2xl font-oswald uppercase text-white mb-4 md:mb-6 flex items-center gap-2">
-                  <User className="text-gray-400 h-5 w-5 md:h-6 md:w-6" />{" "}
-                  Personal Data
-                </h3>
-                <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6 md:mb-8 font-light">
+      <main className="max-w-7xl mx-auto px-6 lg:px-24 py-12 md:py-24">
+        {activeTab === "profile" && (
+          <div className="grid lg:grid-cols-12 gap-16 items-start animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="lg:col-span-7 space-y-12">
+              <div className="relative p-10 md:p-14 bg-white/[0.02] border border-white/5 rounded-[2rem] backdrop-blur-sm group">
+                <Quote
+                  size={80}
+                  className="absolute -top-10 -left-10 text-white/[0.03] group-hover:text-white/[0.07] transition-colors"
+                />
+                <p className="relative z-10 text-3xl md:text-5xl font-medium italic text-zinc-100 leading-tight mb-10 tracking-tight">
+                  "{data.quote}"
+                </p>
+                <p className="text-zinc-400 text-lg md:text-xl leading-relaxed font-light border-l-2 border-white/10 pl-8">
                   {data.bio}
                 </p>
               </div>
-              <div className="space-y-6">
-                <div className="bg-zinc-900/40 p-5 md:p-6 rounded-xl border border-white/5">
-                  <h4 className="text-xs md:text-sm text-gray-500 uppercase font-bold mb-3 md:mb-4">
-                    Forms & Modes
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {data.forms.map((form, i) => (
-                      <Badge
-                        key={i}
-                        variant="secondary"
-                        className="bg-white/10 text-white hover:bg-white/20 py-1 md:py-1.5 text-xs"
-                      >
-                        {form}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-zinc-900/40 p-5 md:p-6 rounded-xl border border-white/5">
-                  <h4 className="text-xs md:text-sm text-gray-500 uppercase font-bold mb-3 md:mb-4">
-                    Abilities
-                  </h4>
-                  <div className="space-y-3 md:space-y-4 font-mono text-[10px] md:text-xs">
-                    <SkillBar
-                      label="Agility"
-                      percent={90}
-                      color={data.themeColor
-                        .split(" ")[0]
-                        .replace("text-", "bg-")}
-                    />
-                    <SkillBar label="Combat" percent={85} color="bg-blue-500" />
-                    <SkillBar
-                      label="Spirit"
-                      percent={100}
-                      color="bg-orange-500"
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
-          )}
 
-          {activeTab === "history" && (
-            <div className="max-w-4xl">
-              <div className="bg-zinc-900/30 p-6 md:p-8 rounded-xl border-l-2 border-white/10">
-                <div
-                  className="text-gray-300 leading-relaxed text-base md:text-lg space-y-4 md:space-y-6 font-light"
-                  dangerouslySetInnerHTML={{ __html: data.history }}
-                />
-              </div>
-            </div>
-          )}
-
-          {activeTab === "arsenal" && (
-            <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
-              <div className="bg-zinc-900/30 p-6 md:p-8 rounded-xl border border-white/5">
-                <h3 className="text-lg md:text-xl font-oswald uppercase text-white mb-4 md:mb-6 flex items-center gap-2">
-                  <Zap className="text-yellow-400 h-4 w-4 md:h-5 md:w-5" />{" "}
-                  Arsenal
-                </h3>
-                <ul className="space-y-3 md:space-y-4">
-                  {data.arsenal.map((item, i) => (
-                    <li
+            <div className="lg:col-span-5 space-y-8">
+              <div className="p-8 bg-zinc-900/40 border border-white/5 rounded-3xl">
+                <h4 className="text-[10px] text-zinc-500 uppercase font-black tracking-[0.3em] mb-6 flex items-center gap-2">
+                  <Activity size={14} /> Combat_Forms.log
+                </h4>
+                <div className="grid gap-3">
+                  {data.forms.map((form, i) => (
+                    <div
                       key={i}
-                      className="flex items-center gap-3 md:gap-4 text-gray-300 text-sm md:text-base"
+                      className="flex items-center gap-3 p-4 bg-black/40 rounded-xl border border-white/5 text-[11px] text-zinc-300 font-mono hover:border-white/20 transition-all"
                     >
-                      <div
-                        className={`h-1.5 w-1.5 rounded-full ${data.themeColor
-                          .split(" ")[0]
-                          .replace("text-", "bg-")}`}
-                      />
-                      <span className="font-medium">{item}</span>
-                    </li>
+                      <ChevronRight size={12} className="text-zinc-700" />{" "}
+                      {form}
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
-              <div className="bg-zinc-900/30 p-6 md:p-8 rounded-xl border border-white/5">
-                <h3 className="text-lg md:text-xl font-oswald uppercase text-white mb-4 md:mb-6 flex items-center gap-2">
-                  <Shield className="text-blue-400 h-4 w-4 md:h-5 md:w-5" />{" "}
-                  Mecha Units
-                </h3>
-                {data.mecha.map((mech, i) => (
+
+              <div className="p-8 bg-zinc-900/40 border border-white/5 rounded-3xl">
+                <h4 className="text-[10px] text-zinc-500 uppercase font-black tracking-[0.3em] mb-8 flex items-center gap-2">
+                  <Zap size={14} /> Efficiency_Matrix.sys
+                </h4>
+                <div className="space-y-8">
+                  <SkillBar
+                    label="Agility_Drive"
+                    percent={92}
+                    color={themeHex}
+                  />
+                  <SkillBar
+                    label="Tactical_Combat"
+                    percent={88}
+                    color="#ffffff"
+                  />
+                  <SkillBar label="Will_Power" percent={100} color="#ffffff" />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "history" && (
+          <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="bg-white/[0.02] p-10 md:p-16 rounded-[3rem] border border-white/5 relative overflow-hidden">
+              <Activity
+                className="absolute -top-10 -right-10 text-white/[0.02]"
+                size={300}
+              />
+              <div
+                className="relative z-10 prose prose-invert prose-lg max-w-none prose-p:text-zinc-400 prose-strong:text-white prose-p:leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: data.history }}
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTab === "arsenal" && (
+          <div className="grid lg:grid-cols-2 gap-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="p-10 bg-white/[0.02] rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xl font-bold uppercase text-white mb-10 tracking-[0.2em] flex items-center gap-3">
+                <Zap className="text-yellow-500" size={20} /> Tactical_Loadout
+              </h3>
+              <div className="grid gap-4">
+                {data.arsenal.map((item, i) => (
                   <div
                     key={i}
-                    className="mb-4 md:mb-6 last:mb-0 group cursor-pointer"
+                    className="flex items-center justify-between p-5 bg-black/40 rounded-2xl border border-white/5 group hover:border-white/20 transition-all"
                   >
-                    <div className="aspect-video bg-black rounded-lg overflow-hidden relative mb-2 border border-white/5 group-hover:border-white/20 transition-all">
-                      <img
-                        src={mech.image}
-                        alt={mech.name}
-                        className="w-full h-full object-contain p-2 opacity-90 group-hover:opacity-100 transition-opacity"
-                      />
-                      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/50 to-transparent p-2 md:p-3">
-                        <span className="text-lg md:text-xl font-oswald uppercase tracking-widest text-white">
-                          {mech.name}
-                        </span>
-                      </div>
-                    </div>
+                    <span className="text-zinc-300 font-mono text-sm uppercase tracking-widest">
+                      {item}
+                    </span>
+                    <Activity
+                      size={14}
+                      className="text-zinc-800 group-hover:text-zinc-500 transition-colors"
+                    />
                   </div>
                 ))}
               </div>
             </div>
-          )}
 
-          {activeTab === "gallery" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-              {data.gallery.length > 0 ? (
-                data.gallery.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="group relative bg-zinc-900 border border-white/10 rounded-xl overflow-hidden hover:border-white transition-all duration-300"
-                  >
-                    <div className="aspect-[4/3] bg-black overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={`Gallery ${idx}`}
-                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                      />
-                    </div>
-                    <div className="p-3 md:p-4 bg-zinc-900/90 absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-white/10">
-                      <p className="text-xs md:text-sm text-gray-300 font-medium leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                    <div className="absolute top-3 right-3 bg-black/50 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ImageIcon
-                        size={14}
-                        className="text-white md:w-4 md:h-4"
-                      />
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-16 md:py-20 text-gray-500">
-                  <ImageIcon className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 opacity-20" />
-                  <p>No images available in database.</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "trivia" && (
-            <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
-              {data.trivia.map((fact, i) => (
+            <div className="p-10 bg-white/[0.02] rounded-[2.5rem] border border-white/5 overflow-hidden">
+              <h3 className="text-xl font-bold uppercase text-white mb-10 tracking-[0.2em] flex items-center gap-3">
+                <Shield className="text-blue-500" size={20} /> Heavy_Assets
+              </h3>
+              {data.mecha.map((mech, i) => (
                 <div
                   key={i}
-                  className="flex gap-3 md:gap-4 p-4 md:p-5 bg-zinc-900/50 rounded-xl border border-white/5 hover:border-white/20 transition-all"
+                  className="group relative rounded-3xl overflow-hidden border border-white/5 aspect-video bg-black/40"
                 >
-                  <div className="flex-shrink-0 mt-1">
-                    <Star
-                      size={16}
-                      className="text-yellow-400 md:w-[18px] md:h-[18px]"
-                    />
+                  <img
+                    src={mech.image}
+                    alt={mech.name}
+                    className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-1000"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                  <div className="absolute bottom-8 left-8">
+                    <p className="text-2xl font-black uppercase text-white tracking-widest italic">
+                      {mech.name}
+                    </p>
                   </div>
-                  <p className="text-gray-300 text-sm md:text-lg">{fact}</p>
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
+
+        {activeTab === "gallery" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            {data.gallery.map((item, idx) => (
+              <div
+                key={idx}
+                className="group relative aspect-[4/5] bg-zinc-950 rounded-3xl overflow-hidden border border-white/5 shadow-2xl"
+              >
+                <img
+                  src={item.image}
+                  alt={item.description}
+                  className="w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <p className="text-xs font-mono text-zinc-100 uppercase tracking-tighter leading-relaxed border-l-2 border-white pl-4">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === "trivia" && (
+          <div className="grid md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            {data.trivia.map((fact, i) => (
+              <div
+                key={i}
+                className="flex gap-8 p-10 bg-white/[0.02] rounded-3xl border border-white/5 hover:bg-white/[0.04] transition-all group"
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center border border-white/5 group-hover:border-yellow-500/50 transition-colors">
+                    <Star
+                      size={18}
+                      className="text-zinc-600 group-hover:text-yellow-500"
+                    />
+                  </div>
+                </div>
+                <p className="text-zinc-400 text-lg font-light leading-relaxed">
+                  {fact}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
     </div>
   );
 }
@@ -627,14 +679,11 @@ function StatBox({
   icon: any;
 }) {
   return (
-    <div className="p-3 md:p-4 bg-zinc-900/80 border border-white/5 rounded-lg hover:border-white/20 transition-colors backdrop-blur-sm">
-      <div className="flex items-center gap-2 text-gray-500 mb-1 md:mb-2 text-[8px] md:text-[10px] uppercase font-bold tracking-widest">
+    <div className="p-5 bg-white/[0.03] border border-white/5 rounded-2xl backdrop-blur-md group hover:border-white/20 transition-all hover:-translate-y-1 duration-300">
+      <div className="flex items-center gap-2 text-zinc-600 mb-2 text-[9px] uppercase font-bold tracking-[0.3em]">
         {icon} {label}
       </div>
-      <div
-        className="font-oswald text-sm md:text-lg text-white truncate font-medium"
-        title={value}
-      >
+      <div className="font-bold text-lg text-zinc-100 truncate group-hover:text-white transition-colors uppercase italic font-mono tracking-tight">
         {value}
       </div>
     </div>
@@ -651,15 +700,19 @@ function SkillBar({
   color: string;
 }) {
   return (
-    <div>
-      <div className="flex justify-between mb-1 text-[10px] md:text-xs font-bold tracking-wider">
-        <span className="text-gray-500 uppercase">{label}</span>
-        <span className="text-white">{percent}%</span>
+    <div className="space-y-4">
+      <div className="flex justify-between items-end">
+        <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-[0.2em]">
+          {label}
+        </span>
+        <span className="text-zinc-100 font-mono text-xs font-bold">
+          {percent}%
+        </span>
       </div>
-      <div className="h-1 md:h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+      <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
         <div
-          className={`h-full ${color} rounded-full`}
-          style={{ width: `${percent}%` }}
+          className="h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+          style={{ width: `${percent}%`, backgroundColor: color }}
         />
       </div>
     </div>

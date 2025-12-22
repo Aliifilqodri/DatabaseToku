@@ -7,14 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { BookOpen, Layers, Sword, Zap, Activity, Target } from "lucide-react";
 import Link from "next/link";
 
-// --- DATA HERO SLIDER (GOKAIGER EXCLUSIVE) ---
 const heroEntries = [
   {
-    id: "gokai-red", // Matches key in characterDatabase
+    id: "gokai-red",
     title: "GOKAI RED",
     subtitle: "CAPTAIN MARVELOUS",
-    desc: "Kapten bajak laut yang tak kenal takut. Dia memimpin krunya dengan insting liar demi mencari Harta Karun Terbesar di Alam Semesta.",
-    image: "/sentai/marvelous/Captain_Marvelous.webp", // Ensure this path is correct
+    desc: "A fearless pirate captain who leads his crew with wild instincts. He travels across the galaxy in search of the Greatest Treasure in the Universe.",
+    image: "/sentai/marvelous/Captain_Marvelous.webp",
     logo: "MARVELOUS",
     bounty: "UNLIMITED",
     color: "text-red-600",
@@ -29,11 +28,11 @@ const heroEntries = [
     motif: "Captain",
   },
   {
-    id: "joe-gibken", // Matches key in characterDatabase
+    id: "joe-gibken",
     title: "GOKAI BLUE",
     subtitle: "JOE GIBKEN",
-    desc: "Wakil kapten yang tenang dan ahli pedang. Mantan elit Zangyack yang bersumpah setia pada Marvelous setelah diselamatkan olehnya.",
-    image: "/sentai/joe/Joe_Gibken.webp", // Ensure this path is correct
+    desc: "The calm and collected first mate and master swordsman. A former Zangyack elite who swore loyalty to Marvelous after being rescued by him.",
+    image: "/sentai/joe/Joe_Gibken.webp",
     logo: "JOE",
     bounty: "Z=8,000,000",
     color: "text-blue-500",
@@ -43,11 +42,11 @@ const heroEntries = [
     motif: "Swordsman",
   },
   {
-    id: "luka-millfy", // Matches key in characterDatabase
+    id: "luka-millfy",
     title: "GOKAI YELLOW",
     subtitle: "LUKA MILLFY",
-    desc: "Pengintai kapal yang mencintai harta karun. Meski terlihat serakah, dia bertarung demi melindungi anak-anak dari kemiskinan.",
-    image: "/sentai/luka/Luka_Millfy.webp", // Ensure this path is correct
+    desc: "The crew's lookout with a sharp eye for treasure. Despite her tough exterior and love for money, she fights to protect children from poverty.",
+    image: "/sentai/luka/Luka_Millfy.webp",
     logo: "LUKA",
     bounty: "Z=3,000,000",
     color: "text-yellow-400",
@@ -57,11 +56,11 @@ const heroEntries = [
     motif: "Lookout",
   },
   {
-    id: "gokai-silver", // Matches key in characterDatabase
+    id: "gokai-silver",
     title: "GOKAI SILVER",
     subtitle: "GAI IKARI",
-    desc: "Satu-satunya manusia Bumi di tim. Superfan Super Sentai yang mendapatkan kekuatan dari semangat para pahlawan terdahulu.",
-    image: "/sentai/gai/Gai_Ikari.webp", // Ensure this path is correct
+    desc: "The only Earthling on the team. A Super Sentai superfan who gained his powers through the burning spirit of past legendary heroes.",
+    image: "/sentai/gai/Gai_Ikari.webp",
     logo: "GAI",
     bounty: "Z=300,000",
     color: "text-gray-300",
@@ -77,8 +76,6 @@ const heroEntries = [
   },
 ];
 
-// --- DATA ANGGOTA KRU (WANTED POSTERS) ---
-// IDs here must match keys in characterDatabase
 const crewMembers = [
   {
     id: "gokai-red",
@@ -124,7 +121,6 @@ const crewMembers = [
   },
 ];
 
-// --- DATA MECHA ---
 const mechaUnits = [
   {
     id: "galleon",
@@ -148,7 +144,7 @@ const mechaUnits = [
     id: "racer",
     name: "Gokai Racer",
     pilot: "Green",
-    image: "/sentai/don/KSG-Gokai_Racer.webp",
+    image: "/sentai/don/KSG-G racer.webp",
   },
   {
     id: "marine",
@@ -180,9 +176,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#050505] font-sans selection:bg-primary selection:text-white overflow-x-hidden">
       <Navbar />
 
-      {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full overflow-hidden">
-        {/* Background Image */}
         {heroEntries.map((entry, idx) => (
           <div
             key={entry.id}
@@ -202,10 +196,8 @@ export default function HomePage() {
           </div>
         ))}
 
-        {/* Hero Content */}
         <div className="relative z-20 h-full flex items-center px-6 sm:px-12 lg:px-20 pt-20 md:pt-16">
           <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left: Info Text (RESPONSIVE TYPOGRAPHY) */}
             <div className="space-y-4 md:space-y-6">
               <div className="inline-flex items-center gap-3 border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-mono tracking-widest uppercase text-white">
                 <span
@@ -264,7 +256,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: HUD Stats (Hidden on Mobile) */}
             <div className="hidden lg:flex justify-end">
               <div className="glass-panel w-80 p-6 rounded-xl border border-white/10 relative overflow-hidden">
                 <Activity
@@ -323,7 +314,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Indicators */}
         <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2 md:gap-3 z-30">
           {heroEntries.map((_, idx) => (
             <button
@@ -339,7 +329,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* --- SECTION 2: THE CREW (RESPONSIVE GRID) --- */}
       <div className="relative z-10 bg-[#0a0a0a] pb-20 pt-10">
         <div className="px-6 sm:px-12 lg:px-20 mb-8 md:mb-12">
           <div className="flex items-center gap-4 mb-2">
@@ -358,7 +347,6 @@ export default function HomePage() {
         </div>
 
         <div className="px-6 sm:px-12 lg:px-20">
-          {/* Grid Responsive: 2 kolom di HP, 3 di Tablet, 6 di Desktop */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
             {crewMembers.map((crew) => (
               <Link
@@ -396,7 +384,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* --- SECTION 3: PIRATE MACHINES (RESPONSIVE GRID) --- */}
       <div className="bg-[#050505] pb-32 border-t border-white/5">
         <div className="px-6 sm:px-12 lg:px-20 py-16">
           <div className="flex justify-between items-end mb-8">
@@ -416,7 +403,6 @@ export default function HomePage() {
             </Button>
           </div>
 
-          {/* Grid Responsive: 1 kolom di HP, 2 di Tablet, 3 di Desktop */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {mechaUnits.map((mech) => (
               <div
