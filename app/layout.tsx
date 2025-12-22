@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "Archive",
   ],
   icons: {
-    icon: "/ultra/unnamed.jpg", // Logo di tab browser
+    icon: "/ultra/unnamed.jpg",
     apple: "/ultra/unnamed.jpg",
   },
   openGraph: {
@@ -46,9 +46,12 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary", // Menggunakan format kecil tanpa banner besar
+    card: "summary",
     title: "Tokusatsu Universe | Global Database",
     description: "The most advanced database for Tokusatsu fans worldwide.",
+  },
+  verification: {
+    google: "googlec901956dbd13e996",
   },
   robots: {
     index: true,
