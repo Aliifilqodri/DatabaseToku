@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Download,
   X,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -297,6 +298,10 @@ export default function CharacterProfilePage({
     } else {
       setData(characterDatabase["gokai-red"]);
     }
+    // Reset tab ketika pindah karakter
+    setActiveTab("profile");
+    // Scroll ke atas ketika pindah karakter
+    window.scrollTo(0, 0);
   }, [id]);
 
   if (!data)
@@ -456,7 +461,7 @@ export default function CharacterProfilePage({
             </div>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/characters">
+              <Link href="/character">
                 <Button
                   variant="outline"
                   className="h-14 px-8 border-white/10 bg-white/5 hover:bg-white hover:text-black transition-all font-mono text-[10px] tracking-widest uppercase rounded-none"
@@ -496,7 +501,7 @@ export default function CharacterProfilePage({
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6 lg:px-24 py-12 md:py-24">
+      <main className="max-w-7xl mx-auto px-6 lg:px-24 py-12 md:py-24 min-h-[50vh]">
         {activeTab === "profile" && (
           <div className="grid lg:grid-cols-12 gap-16 items-start animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="lg:col-span-7 space-y-12">
@@ -665,6 +670,8 @@ export default function CharacterProfilePage({
           </div>
         )}
       </main>
+
+      <SquadNavigation currentId={data.id} />
     </div>
   );
 }
@@ -714,6 +721,46 @@ function SkillBar({
           className="h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(255,255,255,0.3)]"
           style={{ width: `${percent}%`, backgroundColor: color }}
         />
+      </div>
+    </div>
+  );
+}
+
+function SquadNavigation({ currentId }: { currentId: string }) {
+  const squad = Object.values(characterDatabase).filter(
+    (c) => c.id !== currentId
+  );
+  return (
+    <div className="border-t border-white/5 bg-black/20 py-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-24">
+        <h3 className="text-xl font-bold uppercase text-white mb-8 tracking-[0.2em] flex items-center gap-3">
+          <Users className="text-red-600" size={20} /> Squad_Manifest
+        </h3>
+        <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          {squad.map((member) => (
+            <Link
+              // UPDATE: Sesuai request folder mas '/character' (tunggal)
+              href={`/character/${member.id}`}
+              key={member.id}
+              className="snap-center shrink-0 w-[200px] group relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/5 bg-zinc-950"
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <p className="text-[9px] text-zinc-400 font-mono uppercase tracking-widest mb-1">
+                  {member.rangerName}
+                </p>
+                <p className="text-white font-bold uppercase italic text-lg leading-none">
+                  {member.name.split(" ")[0]}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

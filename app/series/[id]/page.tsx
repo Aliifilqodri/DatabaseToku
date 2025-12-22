@@ -6,20 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
-  Calendar,
   Star,
-  Users,
-  Shield,
   Zap,
   Info,
   Share2,
   Check,
   PlayCircle,
-  Film,
   AlertTriangle,
   Wrench,
   Layers,
-  ChevronRight,
+  Skull,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -185,6 +182,14 @@ const seriesDatabase: any = {
         img: "/sentai/gai/Junya_Ikeda_Headshot.webp",
       },
     ],
+    villains: [
+      {
+        name: "Basco ta Jolokia",
+        actor: "Kei Hosogai",
+        role: "Rival / Villain",
+        img: "/sentai/support/Kei_Hosogai_Headshot.webp",
+      },
+    ],
     forms: [
       "Gokai Change",
       "Gold Mode",
@@ -245,7 +250,6 @@ export default function SeriesWikiPage({
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-primary selection:text-white pb-20">
       <Navbar />
 
-      {/* HERO SECTION - FIXED RESPONSIVENESS */}
       <div className="relative h-[70vh] md:h-[85vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -310,7 +314,6 @@ export default function SeriesWikiPage({
         </div>
       </div>
 
-      {/* TABS - HORIZONTAL SCROLL ON MOBILE */}
       <div className="max-w-7xl mx-auto px-4 md:px-12 -mt-10 relative z-10">
         <div className="flex overflow-x-auto scrollbar-hide border-b border-white/10 bg-[#050505]/90 backdrop-blur-md sticky top-[70px] z-40">
           {["overview", "cast", "arsenal & movies", "episodes"].map((tab) => (
@@ -382,28 +385,64 @@ export default function SeriesWikiPage({
           )}
 
           {activeTab === "cast" && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
-              {data.cast?.map((actor: any, idx: number) => (
-                <div
-                  key={idx}
-                  className="group relative aspect-[3/4] bg-zinc-900 border border-white/5 overflow-hidden transition-all hover:border-primary"
-                >
-                  <img
-                    src={actor.img}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    alt={actor.name}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 w-full p-3">
-                    <p className="text-white font-oswald font-bold text-sm md:text-lg uppercase leading-none">
-                      {actor.role}
-                    </p>
-                    <p className="text-primary text-[8px] md:text-[10px] font-bold uppercase mt-1">
-                      {actor.actor}
-                    </p>
-                  </div>
+            <div className="space-y-16">
+              <div>
+                <h3 className="font-oswald text-2xl text-white uppercase mb-6 flex items-center gap-3 border-l-4 border-primary pl-4">
+                  <Users size={24} className="text-primary" /> Core Crew
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
+                  {data.cast?.map((actor: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className="group relative aspect-[3/4] bg-zinc-900 border border-white/5 overflow-hidden transition-all hover:border-primary"
+                    >
+                      <img
+                        src={actor.img}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        alt={actor.name}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 w-full p-3">
+                        <p className="text-white font-oswald font-bold text-sm md:text-lg uppercase leading-none">
+                          {actor.role}
+                        </p>
+                        <p className="text-primary text-[8px] md:text-[10px] font-bold uppercase mt-1">
+                          {actor.actor}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div>
+                <h3 className="font-oswald text-2xl text-white uppercase mb-6 flex items-center gap-3 border-l-4 border-red-800 pl-4">
+                  <Skull size={24} className="text-red-600" /> Villains & Allies
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
+                  {data.villains?.map((actor: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className="group relative aspect-[3/4] bg-zinc-900 border border-white/5 overflow-hidden transition-all hover:border-red-600"
+                    >
+                      <img
+                        src={actor.img}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        alt={actor.name}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 w-full p-3">
+                        <p className="text-white font-oswald font-bold text-sm md:text-lg uppercase leading-none">
+                          {actor.role}
+                        </p>
+                        <p className="text-zinc-400 text-[8px] md:text-[10px] font-bold uppercase mt-1">
+                          {actor.actor}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
