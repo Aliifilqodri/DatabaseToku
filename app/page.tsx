@@ -144,7 +144,7 @@ const mechaUnits = [
     id: "racer",
     name: "Gokai Racer",
     pilot: "Green",
-    image: "/sentai/don/KSG-G racer.webp",
+    image: "/sentai/don/KSG-Gokai_Racer.webp",
   },
   {
     id: "marine",
