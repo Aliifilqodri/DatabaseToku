@@ -1,174 +1,198 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Layers, Sword, Zap, Activity, Target } from "lucide-react";
 import Link from "next/link";
 
-const heroEntries = [
-  {
-    id: "gokai-red",
-    title: "GOKAI RED",
-    subtitle: "CAPTAIN MARVELOUS",
-    desc: "A fearless pirate captain who leads his crew with wild instincts. He travels across the galaxy in search of the Greatest Treasure in the Universe.",
-    image: "/sentai/marvelous/Captain_Marvelous.webp",
-    logo: "MARVELOUS",
-    bounty: "UNLIMITED",
-    color: "text-red-600",
-    bgGradient: "from-red-900/50 to-transparent",
-    stats: {
-      punch: "5.0 t",
-      kick: "10.0 t",
-      height: "185 cm",
-      weight: "75 kg",
-    },
-    year: "2011",
-    motif: "Captain",
-  },
-  {
-    id: "joe-gibken",
-    title: "GOKAI BLUE",
-    subtitle: "JOE GIBKEN",
-    desc: "The calm and collected first mate and master swordsman. A former Zangyack elite who swore loyalty to Marvelous after being rescued by him.",
-    image: "/sentai/joe/Joe_Gibken.webp",
-    logo: "JOE",
-    bounty: "Z=8,000,000",
-    color: "text-blue-500",
-    bgGradient: "from-blue-900/50 to-transparent",
-    stats: { punch: "4.5 t", kick: "9.0 t", height: "180 cm", weight: "70 kg" },
-    year: "2011",
-    motif: "Swordsman",
-  },
-  {
-    id: "luka-millfy",
-    title: "GOKAI YELLOW",
-    subtitle: "LUKA MILLFY",
-    desc: "The crew's lookout with a sharp eye for treasure. Despite her tough exterior and love for money, she fights to protect children from poverty.",
-    image: "/sentai/luka/Luka_Millfy.webp",
-    logo: "LUKA",
-    bounty: "Z=3,000,000",
-    color: "text-yellow-400",
-    bgGradient: "from-yellow-900/50 to-transparent",
-    stats: { punch: "4.0 t", kick: "8.5 t", height: "165 cm", weight: "55 kg" },
-    year: "2011",
-    motif: "Lookout",
-  },
-  {
-    id: "gokai-silver",
-    title: "GOKAI SILVER",
-    subtitle: "GAI IKARI",
-    desc: "The only Earthling on the team. A Super Sentai superfan who gained his powers through the burning spirit of past legendary heroes.",
-    image: "/sentai/gai/Gai_Ikari.webp",
-    logo: "GAI",
-    bounty: "Z=300,000",
-    color: "text-gray-300",
-    bgGradient: "from-gray-800/50 to-transparent",
-    stats: {
-      punch: "5.5 t",
-      kick: "10.5 t",
-      height: "178 cm",
-      weight: "72 kg",
-    },
-    year: "2011",
-    motif: "Fanboy",
-  },
-];
-
-const crewMembers = [
-  {
-    id: "gokai-red",
-    name: "Marvelous",
-    role: "Captain",
-    image: "/sentai/marvelous/Gokai_Red_Rollcall_2.webp",
-    color: "text-red-500 border-red-500",
-  },
-  {
-    id: "gokai-blue",
-    name: "Joe Gibken",
-    role: "First Mate",
-    image: "/sentai/joe/Gokai_Blue_Rollcall_2.webp",
-    color: "text-blue-500 border-blue-500",
-  },
-  {
-    id: "luka-millfy",
-    name: "Luka Millfy",
-    role: "Lookout",
-    image: "/sentai/luka/luka-ranger.webp",
-    color: "text-yellow-400 border-yellow-400",
-  },
-  {
-    id: "gokai-green",
-    name: "Don Dogoier",
-    role: "Doctor/Cook",
-    image: "/sentai/don/Gokai_Green_Rollcall_2.webp",
-    color: "text-green-500 border-green-500",
-  },
-  {
-    id: "gokai-pink",
-    name: "Ahim de Famille",
-    role: "Princess",
-    image: "/sentai/ahim/pink.jpg",
-    color: "text-pink-400 border-pink-400",
-  },
-  {
-    id: "gokai-silver",
-    name: "Gai Ikari",
-    role: "6th Hero",
-    image: "/sentai/gai/Gokai_Silver_Rollcall_2.webp",
-    color: "text-gray-300 border-gray-300",
-  },
-];
-
-const mechaUnits = [
-  {
-    id: "galleon",
-    name: "Gokai Galleon",
-    pilot: "Red",
-    image: "/sentai/marvelous/KSG-GokaiGalleon.webp",
-  },
-  {
-    id: "jet",
-    name: "Gokai Jet",
-    pilot: "Blue",
-    image: "/sentai/joe/KSG-Gokai_Jet.webp",
-  },
-  {
-    id: "trailer",
-    name: "Gokai Trailer",
-    pilot: "Yellow",
-    image: "/sentai/luka/KSG-Gokai_Trailer.webp",
-  },
-  {
-    id: "racer",
-    name: "Gokai Racer",
-    pilot: "Green",
-    image: "/sentai/don/KSG-Gokai_Racer.webp",
-  },
-  {
-    id: "marine",
-    name: "Gokai Marine",
-    pilot: "Pink",
-    image: "/sentai/ahim/KSG-Gokai_Marine.webp",
-  },
-  {
-    id: "drill",
-    name: "GoZyu Drill",
-    pilot: "Silver",
-    image: "/sentai/gai/KSG-GozyuDrill.webp",
-  },
-];
-
 export default function HomePage() {
+  const { t, lang } = useLanguage();
   const [current, setCurrent] = useState(0);
+
+  const heroEntries = [
+    {
+      id: "gokai-red",
+      title: "GOKAI RED",
+      subtitle: t("CAPTAIN MARVELOUS", "KAPTEN MARVELOUS"),
+      desc: t(
+        "A fearless pirate captain who leads his crew with wild instincts. He travels across the galaxy in search of the Greatest Treasure in the Universe.",
+        "Seorang kapten bajak laut pemberani yang memimpin krunya dengan insting liar. Dia menjelajahi galaksi untuk mencari Harta Karun Terbesar di Alam Semesta."
+      ),
+      image: "/sentai/marvelous/Captain_Marvelous.webp",
+      logo: "MARVELOUS",
+      bounty: t("UNLIMITED", "TAK TERBATAS"),
+      color: "text-red-600",
+      bgGradient: "from-red-900/50 to-transparent",
+      stats: {
+        punch: "5.0 t",
+        kick: "10.0 t",
+        height: "185 cm",
+        weight: "75 kg",
+      },
+      year: "2011",
+      motif: t("Captain", "Kapten"),
+    },
+    {
+      id: "joe-gibken",
+      title: "GOKAI BLUE",
+      subtitle: "JOE GIBKEN",
+      desc: t(
+        "The calm and collected first mate and master swordsman. A former Zangyack elite who swore loyalty to Marvelous after being rescued by him.",
+        "Wakil kapten yang tenang dan ahli pedang tingkat tinggi. Mantan elit Zangyack yang bersumpah setia kepada Marvelous setelah diselamatkan olehnya."
+      ),
+      image: "/sentai/joe/Joe_Gibken.webp",
+      logo: "JOE",
+      bounty: "Z=8,000,000",
+      color: "text-blue-500",
+      bgGradient: "from-blue-900/50 to-transparent",
+      stats: {
+        punch: "4.5 t",
+        kick: "9.0 t",
+        height: "180 cm",
+        weight: "70 kg",
+      },
+      year: "2011",
+      motif: t("Swordsman", "Pendekar Pedang"),
+    },
+    {
+      id: "luka-millfy",
+      title: "GOKAI YELLOW",
+      subtitle: "LUKA MILLFY",
+      desc: t(
+        "The crew's lookout with a sharp eye for treasure. Despite her tough exterior and love for money, she fights to protect children from poverty.",
+        "Pengintai kru dengan mata tajam untuk harta karun. Meskipun terlihat tangguh dan menyukai uang, dia bertarung untuk melindungi anak-anak dari kemiskinan."
+      ),
+      image: "/sentai/luka/Luka_Millfy.webp",
+      logo: "LUKA",
+      bounty: "Z=3,000,000",
+      color: "text-yellow-400",
+      bgGradient: "from-yellow-900/50 to-transparent",
+      stats: {
+        punch: "4.0 t",
+        kick: "8.5 t",
+        height: "165 cm",
+        weight: "55 kg",
+      },
+      year: "2011",
+      motif: t("Lookout", "Pengintai"),
+    },
+    {
+      id: "gokai-silver",
+      title: "GOKAI SILVER",
+      subtitle: "GAI IKARI",
+      desc: t(
+        "The only Earthling on the team. A Super Sentai superfan who gained his powers through the burning spirit of past legendary heroes.",
+        "Satu-satunya penduduk Bumi di tim. Seorang penggemar berat Super Sentai yang mendapatkan kekuatannya melalui semangat membara dari para pahlawan legendaris masa lalu."
+      ),
+      image: "/sentai/gai/Gai_Ikari.webp",
+      logo: "GAI",
+      bounty: "Z=300,000",
+      color: "text-gray-300",
+      bgGradient: "from-gray-800/50 to-transparent",
+      stats: {
+        punch: "5.5 t",
+        kick: "10.5 t",
+        height: "178 cm",
+        weight: "72 kg",
+      },
+      year: "2011",
+      motif: t("Fanboy", "Penggemar Berat"),
+    },
+  ];
+
+  const crewMembers = [
+    {
+      id: "gokai-red",
+      name: "Marvelous",
+      role: t("Captain", "Kapten"),
+      image: "/sentai/marvelous/Gokai_Red_Rollcall_2.webp",
+      color: "text-red-500 border-red-500",
+    },
+    {
+      id: "gokai-blue",
+      name: "Joe Gibken",
+      role: t("First Mate", "Wakil Kapten"),
+      image: "/sentai/joe/Gokai_Blue_Rollcall_2.webp",
+      color: "text-blue-500 border-blue-500",
+    },
+    {
+      id: "luka-millfy",
+      name: "Luka Millfy",
+      role: t("Lookout", "Pengintai"),
+      image: "/sentai/luka/luka-ranger.webp",
+      color: "text-yellow-400 border-yellow-400",
+    },
+    {
+      id: "gokai-green",
+      name: "Don Dogoier",
+      role: t("Doctor/Cook", "Dokter/Koki"),
+      image: "/sentai/don/Gokai_Green_Rollcall_2.webp",
+      color: "text-green-500 border-green-500",
+    },
+    {
+      id: "gokai-pink",
+      name: "Ahim de Famille",
+      role: t("Princess", "Putri Kerajaan"),
+      image: "/sentai/ahim/pink.jpg",
+      color: "text-pink-400 border-pink-400",
+    },
+    {
+      id: "gokai-silver",
+      name: "Gai Ikari",
+      role: t("6th Hero", "Pahlawan ke-6"),
+      image: "/sentai/gai/Gokai_Silver_Rollcall_2.webp",
+      color: "text-gray-300 border-gray-300",
+    },
+  ];
+
+  const mechaUnits = [
+    {
+      id: "galleon",
+      name: "Gokai Galleon",
+      pilot: t("Red", "Merah"),
+      image: "/sentai/marvelous/KSG-GokaiGalleon.webp",
+    },
+    {
+      id: "jet",
+      name: "Gokai Jet",
+      pilot: t("Blue", "Biru"),
+      image: "/sentai/joe/KSG-Gokai_Jet.webp",
+    },
+    {
+      id: "trailer",
+      name: "Gokai Trailer",
+      pilot: t("Yellow", "Kuning"),
+      image: "/sentai/luka/KSG-Gokai_Trailer.webp",
+    },
+    {
+      id: "racer",
+      name: "Gokai Racer",
+      pilot: t("Green", "Hijau"),
+      image: "/sentai/don/KSG-G racer.webp",
+    },
+    {
+      id: "marine",
+      name: "Gokai Marine",
+      pilot: t("Pink", "Merah Muda"),
+      image: "/sentai/ahim/KSG-Gokai_Marine.webp",
+    },
+    {
+      id: "drill",
+      name: "GoZyu Drill",
+      pilot: t("Silver", "Perak"),
+      image: "/sentai/gai/KSG-GozyuDrill.webp",
+    },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === heroEntries.length - 1 ? 0 : prev + 1));
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroEntries.length]);
 
   const activeHero = heroEntries[current];
 
@@ -206,7 +230,7 @@ export default function HomePage() {
                     "bg-"
                   )} animate-pulse`}
                 />
-                WANTED: {activeHero.bounty}
+                {t("WANTED", "BURONAN")}: {activeHero.bounty}
               </div>
 
               <div>
@@ -228,7 +252,7 @@ export default function HomePage() {
                   variant="outline"
                   className="text-gray-300 border-gray-500 text-xs md:text-sm px-2 md:px-3 rounded-sm uppercase"
                 >
-                  Role: {activeHero.motif}
+                  {t("Role", "Peran")}: {activeHero.motif}
                 </Badge>
               </div>
 
@@ -244,14 +268,15 @@ export default function HomePage() {
                       "bg-"
                     )} hover:brightness-110`}
                   >
-                    <BookOpen className="mr-2" size={18} /> View Dossier
+                    <BookOpen className="mr-2" size={18} />{" "}
+                    {t("View Dossier", "Lihat Dosir")}
                   </Button>
                 </Link>
                 <Button
                   variant="outline"
                   className="h-12 md:h-14 px-6 md:px-8 border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-sm md:text-lg uppercase tracking-wider rounded-none clip-angle backdrop-blur-sm"
                 >
-                  <Layers className="mr-2" size={18} /> Modes
+                  <Layers className="mr-2" size={18} /> {t("Modes", "Mode")}
                 </Button>
               </div>
             </div>
@@ -262,14 +287,13 @@ export default function HomePage() {
                   className={`absolute top-6 right-6 ${activeHero.color} animate-pulse`}
                 />
                 <h3 className="font-oswald text-xl text-white uppercase tracking-widest border-b border-white/10 pb-4 mb-6">
-                  Combat Specs
+                  {t("Combat Specs", "Spek Tempur")}
                 </h3>
-
                 <div className="space-y-6 font-mono text-sm text-gray-300">
                   <div>
                     <div className="flex justify-between mb-1">
                       <span className="flex items-center gap-2">
-                        <Sword size={14} /> Power
+                        <Sword size={14} /> {t("Power", "Kekuatan")}
                       </span>
                       <span className={activeHero.color}>
                         {activeHero.stats.punch}
@@ -284,11 +308,10 @@ export default function HomePage() {
                       />
                     </div>
                   </div>
-
                   <div>
                     <div className="flex justify-between mb-1">
                       <span className="flex items-center gap-2">
-                        <Zap size={14} /> Speed
+                        <Zap size={14} /> {t("Speed", "Kecepatan")}
                       </span>
                       <span className={activeHero.color}>
                         {activeHero.stats.kick}
@@ -303,10 +326,13 @@ export default function HomePage() {
                       />
                     </div>
                   </div>
-
-                  <div className="pt-4 border-t border-white/10 flex justify-between text-xs uppercase">
-                    <span>H: {activeHero.stats.height}</span>
-                    <span>W: {activeHero.stats.weight}</span>
+                  <div className="pt-4 border-t border-white/10 flex justify-between text-[10px] uppercase">
+                    <span>
+                      {t("H", "T")}: {activeHero.stats.height}
+                    </span>
+                    <span>
+                      {t("W", "B")}: {activeHero.stats.weight}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -334,15 +360,15 @@ export default function HomePage() {
           <div className="flex items-center gap-4 mb-2">
             <Target className="text-red-600 animate-pulse" />
             <span className="text-red-600 font-mono uppercase tracking-widest text-xs md:text-sm">
-              Target Locked
+              {t("Target Locked", "Target Terkunci")}
             </span>
           </div>
           <h2 className="font-oswald text-3xl md:text-5xl font-bold text-white uppercase">
-            The{" "}
+            {t("The", "Kru")}{" "}
             <span className="text-stroke text-transparent stroke-white">
               Gokaiger
             </span>{" "}
-            Crew
+            {t("Crew", "")}
           </h2>
         </div>
 
@@ -389,17 +415,17 @@ export default function HomePage() {
           <div className="flex justify-between items-end mb-8">
             <div>
               <h2 className="font-oswald text-2xl md:text-3xl font-bold text-white uppercase">
-                Pirate Machines
+                {t("Pirate Machines", "Mesin Bajak Laut")}
               </h2>
               <p className="text-gray-500 text-xs md:text-sm mt-1">
-                Primary Assault Vehicles
+                {t("Primary Assault Vehicles", "Kendaraan Tempur Utama")}
               </p>
             </div>
             <Button
               variant="link"
               className="text-white decoration-transparent uppercase tracking-wider text-xs hidden md:block"
             >
-              View Formation
+              {t("View Formation", "Lihat Formasi")}
             </Button>
           </div>
 
@@ -424,13 +450,18 @@ export default function HomePage() {
                     variant="outline"
                     className="text-xs text-gray-400 border-white/10"
                   >
-                    Pilot: {mech.pilot}
+                    {t("Pilot", "Pilot")}: {mech.pilot}
                   </Badge>
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="px-6 sm:px-12 lg:px-20 py-10 border-t border-white/5 text-[10px] font-mono text-zinc-600 uppercase tracking-[0.2em]">
+        {t("SYSTEM_CORE", "INTI_SISTEM")}:{" "}
+        {lang === "EN" ? "ENGLISH_DECODED" : "INDONESIA_TERDETEKSI"}
       </div>
     </div>
   );

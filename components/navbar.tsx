@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   Menu,
   Search,
@@ -16,6 +17,7 @@ import {
   Compass,
   Heart,
   Command,
+  Globe,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,26 +49,26 @@ const genres = [
 ];
 
 export function Navbar() {
+  const { lang, setLang, t } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const pathname = usePathname();
 
-  // Handle Scroll effect
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsSearchOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -75,13 +77,12 @@ export function Navbar() {
     }
   }, [isMobileMenuOpen]);
 
-  // Handle Search Execution
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Logic search anda (contoh: push ke router)
-      console.log("Searching for:", searchQuery);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setIsSearchOpen(false);
+      setSearchQuery("");
     }
   };
 
@@ -95,21 +96,16 @@ export function Navbar() {
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between">
-          {/* LOGO */}
           <Link href="/" className="relative z-[110] flex items-center group">
-            <span className="font-oswald text-2xl md:text-3xl font-black italic tracking-tighter text-white">
-              TOKU
-              <span className="text-primary group-hover:text-white transition-colors duration-300">
-                SATSU
-              </span>
+            <span className="font-oswald text-2xl md:text-3xl font-black italic tracking-tighter text-white uppercase">
+              Toku<span className="text-primary">satsu</span>
             </span>
           </Link>
 
-          {/* DESKTOP NAV */}
           <div className="hidden lg:flex items-center gap-8">
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1.5 font-oswald text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-all outline-none group">
-                Database
+                {t("Database", "Basis Data")}
                 <ChevronDown
                   size={14}
                   className="group-data-[state=open]:rotate-180 transition-transform duration-300 text-primary"
@@ -126,9 +122,7 @@ export function Navbar() {
                       href={genre.href}
                       className="flex items-center gap-3 w-full font-oswald uppercase tracking-wider text-sm"
                     >
-                      <span className="text-primary group-focus:text-white transition-colors">
-                        {genre.icon}
-                      </span>
+                      <span className="text-primary">{genre.icon}</span>
                       {genre.name}
                     </Link>
                   </DropdownMenuItem>
@@ -144,7 +138,7 @@ export function Navbar() {
                   : "text-zinc-400 hover:text-white"
               }`}
             >
-              Characters
+              {t("Characters", "Karakter")}
             </Link>
             <Link
               href="/movies"
@@ -154,13 +148,18 @@ export function Navbar() {
                   : "text-zinc-400 hover:text-white"
               }`}
             >
-              Archives
+              {t("Archives", "Arsip")}
             </Link>
           </div>
 
-          {/* ACTIONS */}
           <div className="flex items-center gap-2 md:gap-4">
-            {/* Search Toggle */}
+            <button
+              onClick={() => setLang(lang === "EN" ? "ID" : "EN")}
+              className="flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 hover:bg-primary hover:text-black transition-all rounded-none font-mono text-[10px] font-black uppercase tracking-tighter"
+            >
+              <Globe size={12} /> {lang}
+            </button>
+
             <button
               onClick={() => setIsSearchOpen(true)}
               className="text-white/70 hover:text-primary transition-all p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 group active:scale-95"
@@ -181,7 +180,7 @@ export function Navbar() {
                   size={18}
                   className="mr-2 group-hover:rotate-12 transition-transform"
                 />
-                Community
+                {t("Community", "Komunitas")}
               </Button>
             </Link>
 
@@ -195,7 +194,6 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* --- SEARCH OVERLAY --- */}
       <div
         className={`fixed inset-0 z-[1000] bg-[#050505]/95 backdrop-blur-2xl transition-all duration-500 flex items-start justify-center pt-[10vh] px-6 ${
           isSearchOpen
@@ -218,20 +216,23 @@ export function Navbar() {
             />
             <input
               type="text"
-              placeholder="SEARCH THE MULTIVERSE..."
+              placeholder={t("SEARCH THE MULTIVERSE...", "CARI MULTIVERSE...")}
               className="w-full h-20 bg-white/5 border-b-2 border-primary/50 text-white px-16 text-2xl font-oswald uppercase tracking-widest focus:outline-none focus:border-primary transition-all"
               autoFocus={isSearchOpen}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <div className="mt-4 flex items-center gap-2 text-zinc-500 font-mono text-xs">
-              <Command size={14} /> PRESS ENTER TO DEPLOY SEARCH
+            <div className="mt-4 flex items-center gap-2 text-zinc-500 font-mono text-xs uppercase tracking-widest">
+              <Command size={14} />{" "}
+              {t(
+                "Press enter to deploy search",
+                "Tekan enter untuk memulai pencarian"
+              )}
             </div>
           </form>
         </div>
       </div>
 
-      {/* --- MOBILE FULLSCREEN OVERLAY --- */}
       <div
         className={`fixed inset-0 z-[999] bg-[#050505] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
           isMobileMenuOpen
@@ -257,7 +258,7 @@ export function Navbar() {
           <div className="space-y-12">
             <div className="flex flex-col gap-6">
               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-500">
-                Navigation
+                {t("Navigation", "Navigasi")}
               </p>
               <div className="grid gap-4">
                 <Link
@@ -269,7 +270,7 @@ export function Navbar() {
                     <Users size={24} />
                   </div>
                   <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary transition-colors">
-                    Characters
+                    {t("Characters", "Karakter")}
                   </span>
                 </Link>
                 <Link
@@ -281,7 +282,7 @@ export function Navbar() {
                     <Film size={24} />
                   </div>
                   <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary transition-colors">
-                    Archives
+                    {t("Archives", "Arsip")}
                   </span>
                 </Link>
               </div>
@@ -289,7 +290,7 @@ export function Navbar() {
 
             <div className="space-y-6">
               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-500">
-                Categories
+                {t("Categories", "Kategori")}
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {genres.map((genre, idx) => (
@@ -304,9 +305,7 @@ export function Navbar() {
                     style={{ transitionDelay: `${idx * 50 + 200}ms` }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <span className="text-primary group-active:text-black">
-                      {genre.icon}
-                    </span>
+                    <span className="text-primary">{genre.icon}</span>
                     <span className="font-oswald text-xs font-bold uppercase tracking-widest">
                       {genre.name}
                     </span>
@@ -319,7 +318,8 @@ export function Navbar() {
           <div className="mt-auto pt-10">
             <Link href="https://discord.gg/v5XU8bdYbN" target="_blank">
               <Button className="w-full bg-[#5865F2] h-16 rounded-2xl text-white font-oswald font-bold uppercase tracking-[0.2em] text-lg shadow-2xl shadow-[#5865F2]/20">
-                <MessageCircle className="mr-3" /> Join Community
+                <MessageCircle className="mr-3" />{" "}
+                {t("Join Community", "Gabung Komunitas")}
               </Button>
             </Link>
           </div>
