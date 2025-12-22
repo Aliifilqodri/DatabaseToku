@@ -171,7 +171,7 @@ export default function HomePage() {
       id: "racer",
       name: "Gokai Racer",
       pilot: t("Green", "Hijau"),
-      image: "/sentai/don/KSG-G racer.webp",
+      image: "/sentai/don/KSG-Gokai_Racer.webp",
     },
     {
       id: "marine",
