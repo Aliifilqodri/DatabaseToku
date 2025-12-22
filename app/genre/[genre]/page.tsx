@@ -31,82 +31,52 @@ const genreDatabase: Record<
 > = {
   "kamen-rider": {
     title: "Kamen Rider Universe",
-    desc: "The cyborg heroes who fight against evil organizations to protect humanity's freedom. From the solitary battles of the Showa era to the multi-rider wars of Reiwa.",
+    desc: "The cyborg heroes who fight against evil organizations to protect humanity's freedom.",
     banner: "/kr/Kamen-Rider-0.jpg",
     color: "from-green-600/20",
   },
   "super-sentai": {
     title: "Super Sentai Series",
-    desc: "Multicolored teams of heroes who use teamwork, heavy weaponry, and giant mecha to battle interdimensional threats.",
+    desc: "Multicolored teams of heroes who use teamwork and giant mecha to battle threats.",
     banner: "/sentai/introduction-to-tokusatsu-super-sentai.jpg",
     color: "from-red-600/20",
   },
   ultraman: {
     title: "Ultraman Multiverse",
-    desc: "Giants of Light from Nebula M78 and beyond who merge with humans to defend Earth from Kaiju and alien invaders.",
+    desc: "Giants of Light who defend Earth from Kaiju and alien invaders.",
     banner: "/ultra/ultraman-netflix-1.jpg",
     color: "from-blue-600/20",
   },
-  "metal-heroes": {
-    title: "Metal Heroes",
-    desc: "Space Sheriffs and cyborg police officers clad in metallic combat suits fighting criminal syndicates.",
-    banner: "/mh/Gokai.webp",
-    color: "from-zinc-600/20",
-  },
-  chouseishin: {
-    title: "Chouseishin Series",
-    desc: "The Star God Series produced by Toho. Warriors awakened by the zodiac constellations defend Earth from alien invaders.",
-    banner: "/chou/Bdjyjq_3f.jpg",
-    color: "from-purple-600/20",
-  },
-  godzilla: {
-    title: "Godzilla & Kaiju",
-    desc: "The King of the Monsters and the titans that ruled the earth before humanity.",
-    banner: "/gz/godzilla-vs-kong-d35bic6awbsf6bt2.jpg",
-    color: "from-orange-600/20",
+  "power-rangers": {
+    title: "Power Rangers",
+    desc: "Teenagers with attitude, adapted for a global audience with explosive action.",
+    banner: "/pr/2140584.webp",
+    color: "from-yellow-600/20",
   },
 };
 
 const allSeries = [
   {
-    id: "geats",
-    title: "Kamen Rider Geats",
-    genre: "kamen-rider",
-    year: "2022",
+    id: "goozuger",
+    title: "No.1 Sentai Goozuger",
+    genre: "super-sentai",
+    year: "2025",
     era: "Reiwa",
-    img: "/kr/kamen-rider-geats-updated-poster-with-all-riders-revealed-v0-y8sp6kg027g91.webp",
-    rating: 4.9,
-  },
-  {
-    id: "zero-one",
-    title: "Kamen Rider Zero-One",
-    genre: "kamen-rider",
-    year: "2019",
-    era: "Reiwa",
-    img: "/kr/OIP.webp",
-    rating: 4.8,
-  },
-  {
-    id: "build",
-    title: "Kamen Rider Build",
-    genre: "kamen-rider",
-    year: "2017",
-    era: "Heisei",
-    img: "/kr/456d61_ed354e3abfd74719a2b66f766f3ae3fe~mv2.jpg",
-    rating: 4.9,
-  },
-  {
-    id: "w",
-    title: "Kamen Rider W",
-    genre: "kamen-rider",
-    year: "2009",
-    era: "Heisei",
-    img: "/kr/OIP (1).webp",
+    img: "/sntai/OIP (9).webp",
     rating: 5.0,
   },
   {
+    id: "boonboomger",
+    title: "Boonboomger",
+    genre: "super-sentai",
+    year: "2024",
+    era: "Reiwa",
+    img: "/sntai/1jachzvwj3fc1.jpeg",
+    rating: 4.7,
+  },
+  {
     id: "king-ohger",
-    title: "Ohsama Sentai King-Ohger",
+    title: "King-Ohger",
     genre: "super-sentai",
     year: "2023",
     era: "Reiwa",
@@ -115,7 +85,7 @@ const allSeries = [
   },
   {
     id: "donbrothers",
-    title: "Avataro Sentai Donbrothers",
+    title: "Donbrothers",
     genre: "super-sentai",
     year: "2022",
     era: "Reiwa",
@@ -123,8 +93,98 @@ const allSeries = [
     rating: 4.7,
   },
   {
+    id: "zenkaiger",
+    title: "Zenkaiger",
+    genre: "super-sentai",
+    year: "2021",
+    era: "Reiwa",
+    img: "/sntai/awGb7VoRro0Z6N4S5hdpKbQbRFp.webp",
+    rating: 4.5,
+  },
+  {
+    id: "kiramager",
+    title: "Kiramager",
+    genre: "super-sentai",
+    year: "2020",
+    era: "Reiwa",
+    img: "/sntai/kiramager_1185px.webp",
+    rating: 4.6,
+  },
+  {
+    id: "ryusoulger",
+    title: "Ryusoulger",
+    genre: "super-sentai",
+    year: "2019",
+    era: "Heisei",
+    img: "/sntai/Ryusoulger-Movie-Poster.jpg",
+    rating: 4.4,
+  },
+  {
+    id: "lu-pat",
+    title: "Lupin v Pat",
+    genre: "super-sentai",
+    year: "2018",
+    era: "Heisei",
+    img: "/sntai/0V6WN_4c.jpg",
+    rating: 4.8,
+  },
+  {
+    id: "kyuranger",
+    title: "Kyuranger",
+    genre: "super-sentai",
+    year: "2017",
+    era: "Heisei",
+    img: "/sntai/C3BdCV2UsAAAHAh.jpg",
+    rating: 4.7,
+  },
+  {
+    id: "zyuohger",
+    title: "Zyuohger",
+    genre: "super-sentai",
+    year: "2016",
+    era: "Heisei",
+    img: "/sntai/OIP (1).webp",
+    rating: 4.4,
+  },
+  {
+    id: "ninninger",
+    title: "Ninninger",
+    genre: "super-sentai",
+    year: "2015",
+    era: "Heisei",
+    img: "/sntai/740full-shuriken-sentai-ninninger-poster.jpg",
+    rating: 4.2,
+  },
+  {
+    id: "toqger",
+    title: "ToQger",
+    genre: "super-sentai",
+    year: "2014",
+    era: "Heisei",
+    img: "/sntai/OIP (2).webp",
+    rating: 4.7,
+  },
+  {
+    id: "kyoryuger",
+    title: "Kyoryuger",
+    genre: "super-sentai",
+    year: "2013",
+    era: "Heisei",
+    img: "/sntai/mhTMn3TEUX20BxMQRBVVLLrpfPg.webp",
+    rating: 4.8,
+  },
+  {
+    id: "go-busters",
+    title: "Go-Busters",
+    genre: "super-sentai",
+    year: "2012",
+    era: "Heisei",
+    img: "/sntai/iNMSkX1OATr2SCW30gjDBCtrikJ.webp",
+    rating: 4.6,
+  },
+  {
     id: "gokaiger",
-    title: "Kaizoku Sentai Gokaiger",
+    title: "Gokaiger",
     genre: "super-sentai",
     year: "2011",
     era: "Heisei",
@@ -132,58 +192,364 @@ const allSeries = [
     rating: 5.0,
   },
   {
-    id: "blazar",
-    title: "Ultraman Blazar",
-    genre: "ultraman",
-    year: "2023",
-    era: "Reiwa",
-    img: "/ultra/OIP (2).webp",
-    rating: 4.8,
-  },
-  {
-    id: "decker",
-    title: "Ultraman Decker",
-    genre: "ultraman",
-    year: "2022",
-    era: "Reiwa",
-    img: "/ultra/ultraman_decker_global_poster_by_dhiotito_df2y5he-fullview.jpg",
-    rating: 4.6,
-  },
-  {
-    id: "tiga",
-    title: "Ultraman Tiga",
-    genre: "ultraman",
-    year: "1996",
+    id: "goseiger",
+    title: "Goseiger",
+    genre: "super-sentai",
+    year: "2010",
     era: "Heisei",
-    img: "/ultra/ioKlOmo7OEd46KU4SXNaMXv0Mlh.webp",
+    img: "/sntai/OIP (3).webp",
+    rating: 4.3,
+  },
+  {
+    id: "shinkenger",
+    title: "Shinkenger",
+    genre: "super-sentai",
+    year: "2009",
+    era: "Heisei",
+    img: "/sntai/BQWQq_4f.jpg",
     rating: 5.0,
   },
   {
-    id: "gransazer",
-    title: "Chouseishin Gransazer",
-    genre: "chouseishin",
-    year: "2003",
+    id: "go-onger",
+    title: "Go-Onger",
+    genre: "super-sentai",
+    year: "2008",
     era: "Heisei",
-    img: "/chou/actor-chouseishin-gransazer-958105_large.jpg",
-    rating: 4.8,
+    img: "/sntai/qJHz1FrP1gEf0Qf64fC1c0uP89Q.webp",
+    rating: 4.5,
   },
   {
-    id: "justirisers",
-    title: "Genseishin Justirisers",
-    genre: "chouseishin",
-    year: "2004",
+    id: "gekiranger",
+    title: "Gekiranger",
+    genre: "super-sentai",
+    year: "2007",
     era: "Heisei",
-    img: "/chou/abRBwf.jpg",
+    img: "/sntai/juken_sentai_gekiranger.webp",
     rating: 4.7,
   },
   {
-    id: "sazer-x",
-    title: "Chousei Kantai Sazer-X",
-    genre: "chouseishin",
+    id: "boukenger",
+    title: "Boukenger",
+    genre: "super-sentai",
+    year: "2006",
+    era: "Heisei",
+    img: "/sntai/MV5BZDc0MWU1YjUtOTgyMS00ZjllLTg1N2QtM2IwNjRlYWJmNGJhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    rating: 4.6,
+  },
+  {
+    id: "magiranger",
+    title: "Magiranger",
+    genre: "super-sentai",
     year: "2005",
     era: "Heisei",
-    img: "/chou/OIP.webp",
+    img: "/sntai/m7v4jdKVf1DRvaAqj9R8HmTT8pp.webp",
+    rating: 4.8,
+  },
+  {
+    id: "dekaranger",
+    title: "Dekaranger",
+    genre: "super-sentai",
+    year: "2004",
+    era: "Heisei",
+    img: "/sntai/e9lX8WyJJW2gkfhEAGnpb2QD2Nj.webp",
     rating: 4.9,
+  },
+  {
+    id: "aba-ranger",
+    title: "Abaranger",
+    genre: "super-sentai",
+    year: "2003",
+    era: "Heisei",
+    img: "/sntai/abaranger_flt.webp",
+    rating: 4.7,
+  },
+  {
+    id: "hurricaneger",
+    title: "Hurricaneger",
+    genre: "super-sentai",
+    year: "2002",
+    era: "Heisei",
+    img: "/sntai/hurricanefinallivetourposter_8.webp",
+    rating: 4.6,
+  },
+  {
+    id: "gaoranger",
+    title: "Gaoranger",
+    genre: "super-sentai",
+    year: "2001",
+    era: "Heisei",
+    img: "/sntai/wp11741805.webp",
+    rating: 4.8,
+  },
+  {
+    id: "timeranger",
+    title: "Timeranger",
+    genre: "super-sentai",
+    year: "2000",
+    era: "Heisei",
+    img: "/sntai/OIP2.webp",
+    rating: 4.9,
+  },
+  {
+    id: "gogofive",
+    title: "GoGoFive",
+    genre: "super-sentai",
+    year: "1999",
+    era: "Heisei",
+    img: "/sntai/OIP (6).webp",
+    rating: 4.7,
+  },
+  {
+    id: "gingaman",
+    title: "Gingaman",
+    genre: "super-sentai",
+    year: "1998",
+    era: "Heisei",
+    img: "/sntai/2f9c2fdb-d765-4165-925f-a6f057e3679f.webp",
+    rating: 4.6,
+  },
+  {
+    id: "megaranger",
+    title: "Megaranger",
+    genre: "super-sentai",
+    year: "1997",
+    era: "Heisei",
+    img: "/sntai/8Befa05m4THW4PfUktm8BIQPOQj.webp",
+    rating: 4.8,
+  },
+  {
+    id: "carranger",
+    title: "Carranger",
+    genre: "super-sentai",
+    year: "1996",
+    era: "Heisei",
+    img: "/sntai/6ptpR09s6N1dV6gPcn36HqOs4D2.webp",
+    rating: 4.5,
+  },
+  {
+    id: "ohranger",
+    title: "Ohranger",
+    genre: "super-sentai",
+    year: "1995",
+    era: "Heisei",
+    img: "/sntai/ohren_v1.webp",
+    rating: 4.2,
+  },
+  {
+    id: "kakuranger",
+    title: "Kakuranger",
+    genre: "super-sentai",
+    year: "1994",
+    era: "Heisei",
+    img: "/sntai/65fc5eb8e1542.jpg",
+    rating: 4.9,
+  },
+  {
+    id: "dairanger",
+    title: "Dairanger",
+    genre: "super-sentai",
+    year: "1993",
+    era: "Heisei",
+    img: "/sntai/cqaxNNvVA01eCWc9rH2IOrvu2Oc.webp",
+    rating: 5.0,
+  },
+  {
+    id: "zyuranger",
+    title: "Zyuranger",
+    genre: "super-sentai",
+    year: "1992",
+    era: "Showa",
+    img: "/sntai/OIP (4).webp",
+    rating: 4.7,
+  },
+  {
+    id: "jetman",
+    title: "Jetman",
+    genre: "super-sentai",
+    year: "1991",
+    era: "Showa",
+    img: "/sntai/OIP (7).webp",
+    rating: 5.0,
+  },
+  {
+    id: "fiveman",
+    title: "Fiveman",
+    genre: "super-sentai",
+    year: "1990",
+    era: "Showa",
+    img: "/sntai/71kdKpQO4zL._AC_SL1500_.jpg",
+    rating: 4.1,
+  },
+  {
+    id: "turboranger",
+    title: "Turboranger",
+    genre: "super-sentai",
+    year: "1989",
+    era: "Showa",
+    img: "/sntai/MV5BYTgxYmE4OGUtOTAyZC00MDg2LWI2ZTItYjYzOTljNzk0ZWUzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    rating: 4.3,
+  },
+  {
+    id: "liveman",
+    title: "Liveman",
+    genre: "super-sentai",
+    year: "1988",
+    era: "Showa",
+    img: "/sntai/hbMV06yJ6nHWj0LweEQCDXWhXcq.webp",
+    rating: 4.8,
+  },
+  {
+    id: "maskman",
+    title: "Maskman",
+    genre: "super-sentai",
+    year: "1987",
+    era: "Showa",
+    img: "/sntai/dupV2Bm1W20yypWsMoEAx6AohSR.webp",
+    rating: 4.7,
+  },
+  {
+    id: "flashman",
+    title: "Flashman",
+    genre: "super-sentai",
+    year: "1986",
+    era: "Showa",
+    img: "/sntai/OIP (8).webp",
+    rating: 4.8,
+  },
+  {
+    id: "changeman",
+    title: "Changeman",
+    genre: "super-sentai",
+    year: "1985",
+    era: "Showa",
+    img: "/sntai/54Q2MOsu5M3jvN84TwoIG9D324o.webp",
+    rating: 4.9,
+  },
+  {
+    id: "bioman",
+    title: "Bioman",
+    genre: "super-sentai",
+    year: "1984",
+    era: "Showa",
+    img: "/sntai/OIP (5).webp",
+    rating: 4.7,
+  },
+  {
+    id: "dynaman",
+    title: "Dynaman",
+    genre: "super-sentai",
+    year: "1983",
+    era: "Showa",
+    img: "/sntai/mu8pXQGVoA7HUSXODD0w1kE8Xqv.webp",
+    rating: 4.4,
+  },
+  {
+    id: "goggle-v",
+    title: "Goggle V",
+    genre: "super-sentai",
+    year: "1982",
+    era: "Showa",
+    img: "/sntai/goggle5_v1.webp",
+    rating: 4.3,
+  },
+  {
+    id: "sunvulcan",
+    title: "Sun Vulcan",
+    genre: "super-sentai",
+    year: "1981",
+    era: "Showa",
+    img: "/sntai/MV5BNDNiZWQ3YTgtYjcxYy00OTYxLTkxYjYtMjMwODhjZmI0N2QyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    rating: 4.5,
+  },
+  {
+    id: "denjiman",
+    title: "Denjiman",
+    genre: "super-sentai",
+    year: "1980",
+    era: "Showa",
+    img: "/sntai/q54nIUlmuXNE7bVoJf4Fxv4Pf2h.webp",
+    rating: 4.4,
+  },
+  {
+    id: "battlefever",
+    title: "Battle Fever J",
+    genre: "super-sentai",
+    year: "1979",
+    era: "Showa",
+    img: "/sntai/MV5BZjM1MjMyNGEtNjQzYy00MjMwLWEwYTMtMTlmYWQ3YzUxODU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    rating: 4.2,
+  },
+  {
+    id: "jakq",
+    title: "JAKQ",
+    genre: "super-sentai",
+    year: "1977",
+    era: "Showa",
+    img: "/sntai/jakq_dengekitai___the_complete_series_dvd_cover_by_powerman68_deznild-pre.jpg",
+    rating: 4.0,
+  },
+  {
+    id: "goranger",
+    title: "Goranger",
+    genre: "super-sentai",
+    year: "1975",
+    era: "Showa",
+    img: "/sntai/9RVSbWwobL9hpC987rHMsQ48XYK.webp",
+    rating: 4.9,
+  },
+  {
+    id: "akibaranger",
+    title: "Akibaranger",
+    genre: "super-sentai",
+    year: "2012",
+    era: "Unofficial",
+    img: "/sntai/oZt75GWV0LhqYrCwMZUKBa7punf.jpg",
+    rating: 4.9,
+  },
+  {
+    id: "akibaranger-s2",
+    title: "Akibaranger S2",
+    genre: "super-sentai",
+    year: "2013",
+    era: "Unofficial",
+    img: "/sntai/eYYqZd_4f.jpg",
+    rating: 4.8,
+  },
+  {
+    id: "high-school-heroes",
+    title: "High School Heroes",
+    genre: "super-sentai",
+    year: "2021",
+    era: "Unofficial",
+    img: "/sntai/the_high_school_heroes_poster.webp",
+    rating: 4.6,
+  },
+  {
+    id: "after-v",
+    title: "After V",
+    genre: "super-sentai",
+    year: "2014",
+    era: "Unofficial",
+    img: "/sntai/OIP (10).webp",
+    rating: 4.2,
+  },
+  {
+    id: "pr-jungle-fury",
+    title: "PR Jungle Fury",
+    genre: "power-rangers",
+    year: "2008",
+    era: "Disney",
+    img: "/pr/236250.jpg",
+    rating: 4.8,
+  },
+  {
+    id: "pr-mystic-force",
+    title: "PR Mystic Force",
+    genre: "power-rangers",
+    year: "2006",
+    era: "Disney",
+    img: "/pr/91+UfueBQeL._SL1500_.jpg",
+    rating: 4.7,
   },
 ];
 
@@ -218,7 +584,12 @@ export default function GenrePage({
     }
   };
 
-  const eras = ["All", "Reiwa", "Heisei", "Showa"];
+  const eras = useMemo(() => {
+    if (genre === "power-rangers") return ["All", "Disney", "Saban", "Hasbro"];
+    if (genre === "super-sentai")
+      return ["All", "Reiwa", "Heisei", "Showa", "Unofficial"];
+    return ["All", "Reiwa", "Heisei", "Showa"];
+  }, [genre]);
 
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-primary selection:text-white relative">
@@ -282,11 +653,6 @@ export default function GenrePage({
                       </>
                     )}
                     <span className="relative z-10">{era}</span>
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 ${
-                        isActive ? "opacity-20" : "group-hover/btn:opacity-10"
-                      } transition-opacity`}
-                    />
                   </button>
                 );
               })}
@@ -345,10 +711,6 @@ export default function GenrePage({
                     <div className="flex items-center gap-2 text-[10px] text-zinc-400 font-mono tracking-widest">
                       <Calendar size={12} className="text-primary" />{" "}
                       {series.year}
-                      <ChevronRight
-                        size={12}
-                        className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
-                      />
                     </div>
                   </div>
                 </div>
@@ -357,16 +719,10 @@ export default function GenrePage({
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-32 text-center bg-white/[0.01] border border-dashed border-white/10 rounded-3xl">
-            <div className="relative mb-6">
-              <Filter className="text-zinc-800 h-20 w-20" />
-              <AlertTriangle className="absolute -bottom-2 -right-2 text-primary h-8 w-8 animate-bounce" />
-            </div>
+            <Filter className="text-zinc-800 h-20 w-20 mb-6" />
             <h3 className="text-3xl font-oswald font-bold text-zinc-400 uppercase tracking-tighter">
               Out of Temporal Range
             </h3>
-            <p className="text-zinc-600 font-mono text-sm uppercase mt-2 tracking-widest">
-              No series detected in the {activeEra} era.
-            </p>
           </div>
         )}
       </div>
@@ -375,11 +731,10 @@ export default function GenrePage({
         <AlertDialogContent className="bg-zinc-950 border border-white/10 text-white p-0 rounded-none max-w-[95vw] sm:max-w-[500px] overflow-hidden">
           <button
             onClick={() => setAlertOpen(false)}
-            className="absolute top-4 right-4 z-50 p-2 bg-white/5 hover:bg-primary hover:text-black transition-all text-zinc-400 rounded-none"
+            className="absolute top-4 right-4 z-50 p-2 text-zinc-400 hover:text-white"
           >
             <X size={20} />
           </button>
-
           <div className="p-8">
             <AlertDialogHeader>
               <AlertDialogTitle className="font-oswald text-3xl uppercase italic flex items-center gap-4 text-primary">
@@ -396,11 +751,8 @@ export default function GenrePage({
                 </span>
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="mt-8 flex flex-col sm:flex-row gap-3">
-              <AlertDialogCancel className="bg-transparent border border-white/10 hover:bg-white/5 text-white font-black uppercase tracking-widest rounded-none h-14 transition-all m-0 sm:flex-1">
-                CLOSE
-              </AlertDialogCancel>
-              <AlertDialogAction className="bg-primary hover:bg-white text-black font-black uppercase tracking-widest rounded-none h-14 transition-all m-0 sm:flex-1">
+            <AlertDialogFooter className="mt-8">
+              <AlertDialogAction className="bg-primary hover:bg-white text-black font-black uppercase tracking-widest rounded-none h-14 w-full">
                 RETURN TO DECK
               </AlertDialogAction>
             </AlertDialogFooter>

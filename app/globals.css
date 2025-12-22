@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* 1. MAPPING VARIABLE (Agar class Tailwind mengenali variable CSS) */
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -26,73 +25,68 @@
   --radius-lg: var(--radius);
 }
 
-/* 2. DEFINISI WARNA (Tema Gelap Cinematic) */
 @layer base {
   :root {
-    --background: 0 0% 2%;    /* #050505 - Hitam Pekat */
-    --foreground: 0 0% 98%;   /* Putih */
-
+    --background: 0 0% 2%;
+    --foreground: 0 0% 98%;
     --card: 0 0% 4%;
     --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 4%; 
+    --popover: 0 0% 4%;
     --popover-foreground: 0 0% 98%;
-
-    --primary: 330 81% 60%;   /* Geats Magenta Pink */
+    --primary: 330 81% 60%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
-
     --muted: 0 0% 15%;
     --muted-foreground: 240 5% 64.9%;
-
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 330 81% 60%;
-
     --radius: 0.5rem;
   }
 }
 
-/* 3. BASE STYLES (Penerapan Global) */
 @layer base {
-  * {
-    /* Menggunakan syntax CSS native untuk menghindari error circular dependency */
-    border-color: hsl(var(--border)); 
-    outline-color: hsl(var(--ring) / 0.5);
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+    scroll-behavior: smooth;
   }
+
+  * {
+    border-color: hsl(var(--border));
+    outline-color: hsl(var(--ring) / 0.5);
+    box-sizing: border-box;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* 4. CUSTOM UTILITIES (Scrollbar & Efek Kaca) */
-
-/* Scrollbar Futuristik */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505; 
+  background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333; 
+  background: #333;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary)); 
+  background: hsl(var(--primary));
 }
 
-/* Glass Panel HUD */
 .glass-panel {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(12px);
@@ -100,13 +94,19 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Efek Tulisan Bolong */
 .text-stroke {
-  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
   color: transparent;
 }
 
-/* Sudut Miring Sci-Fi */
 .clip-angle {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

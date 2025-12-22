@@ -18,6 +18,7 @@ import {
   Heart,
   Command,
   Globe,
+  Swords,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,6 +36,11 @@ const genres = [
   },
   { name: "Kamen Rider", href: "/genre/kamen-rider", icon: <Zap size={18} /> },
   { name: "Ultraman", href: "/genre/ultraman", icon: <Zap size={18} /> },
+  {
+    name: "Power Rangers",
+    href: "/genre/power-rangers",
+    icon: <Swords size={18} />,
+  },
   {
     name: "Metal Heroes",
     href: "/genre/metal-heroes",
@@ -194,6 +200,7 @@ export function Navbar() {
         </div>
       </nav>
 
+      {/* Search Overlay */}
       <div
         className={`fixed inset-0 z-[1000] bg-[#050505]/95 backdrop-blur-2xl transition-all duration-500 flex items-start justify-center pt-[10vh] px-6 ${
           isSearchOpen
@@ -233,6 +240,7 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <div
         className={`fixed inset-0 z-[999] bg-[#050505] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
           isMobileMenuOpen
