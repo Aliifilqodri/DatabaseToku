@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tokusatsu Universe Archive",
     description: "Deep dive into the multiverse of Japanese heroes.",
-    url: "https://wikitoku.vercel.app",
+    url: "https://wikitoku.vercel.app/",
     siteName: "Tokusatsu Universe",
     locale: "en_US",
     type: "website",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     description: "The most advanced database for Tokusatsu fans worldwide.",
   },
   verification: {
-    google: "googlec901956dbd13e996",
+    google: "ogC7-qxXJSK9Cxltc4oGjldZdicXPOdgE155mEJJAPo",
   },
   robots: {
     index: true,
