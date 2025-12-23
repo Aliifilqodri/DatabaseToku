@@ -186,7 +186,7 @@ const seriesDatabase: any = {
       {
         name: "Basco ta Jolokia",
         actor: "Kei Hosogai",
-        role: "Rival / Villain",
+        role: "Basco ta Jolokia",
         img: "/sentai/support/Kei_Hosogai_Headshot.webp",
       },
     ],

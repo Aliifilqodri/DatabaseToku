@@ -10,14 +10,12 @@ import {
   Calendar,
   Filter,
   AlertTriangle,
-  ChevronRight,
   Database,
   X,
 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -53,9 +51,28 @@ const genreDatabase: Record<
     banner: "/pr/2140584.webp",
     color: "from-yellow-600/20",
   },
+  chouseishin: {
+    title: "Chouseishin Series",
+    desc: "Ancient warriors awakened to protect the Earth from cosmic invaders.",
+    banner: "/chou/Bdjyjq_3f.jpg",
+    color: "from-purple-600/20",
+  },
+  "metal-heroes": {
+    title: "Metal Hero Series",
+    desc: "Space sheriffs and armored heroes protected by advanced metallic combat suits.",
+    banner: "/gokai/Gokai.webp", // <--- TAMBAHKAN LINK GAMBAR DISINI
+    color: "from-zinc-600/20",
+  },
+  godzilla: {
+    title: "Godzilla & Kaiju",
+    desc: "The King of the Monsters and the colossal titans that rule the Earth.",
+    banner: "/gz/godzilla-vs-kong-d35bic6awbsf6bt2.jpg", // <--- TAMBAHKAN LINK GAMBAR DISINI
+    color: "from-emerald-900/20",
+  },
 };
 
 const allSeries = [
+  /* --- SUPER SENTAI (FULL ARCHIVE) --- */
   {
     id: "goozuger",
     title: "No.1 Sentai Goozuger",
@@ -533,8 +550,104 @@ const allSeries = [
     img: "/sntai/OIP (10).webp",
     rating: 4.2,
   },
+
+  /* --- KAMEN RIDER --- */
   {
-    id: "pr-jungle-fury",
+    id: "gavv",
+    title: "Kamen Rider Gavv",
+    genre: "kamen-rider",
+    year: "2024",
+    era: "Reiwa",
+    img: "/kr/Kamen-Ridaer-0.jpg",
+    rating: 4.5,
+  },
+  {
+    id: "geats",
+    title: "Geats",
+    genre: "kamen-rider",
+    year: "2022",
+    era: "Reiwa",
+    img: "/kr/kamen-rider-geats-updated-poster-with-all-riders-revealed-v0-y8sp6kg027g91.webp",
+    rating: 4.9,
+  },
+  {
+    id: "black",
+    title: "Kamen Rider Black",
+    genre: "kamen-rider",
+    year: "1987",
+    era: "Showa",
+    img: "/kr/ktJktpJhiiV4uyK7YtH35oiM1OO.webp",
+    rating: 5.0,
+  },
+  {
+    id: "zero-one",
+    title: "Kamen Rider Zero-One",
+    genre: "kamen-rider",
+    year: "2019",
+    era: "Reiwa",
+    img: "/kr/OIP.webp", // Sesuaikan nama file gambarmu
+    rating: 4.7,
+  },
+  {
+    id: "build",
+    title: "Kamen Rider Build",
+    genre: "kamen-rider",
+    year: "2017",
+    era: "Heisei",
+    img: "/kr/456d61_ed354e3abfd74719a2b66f766f3ae3fe~mv2.jpg", // Sesuaikan nama file gambarmu
+    rating: 5.0,
+  },
+  {
+    id: "w",
+    title: "Kamen Rider W",
+    genre: "kamen-rider",
+    year: "2009",
+    era: "Heisei",
+    img: "/kr/OIP (1).webp", // Sesuaikan nama file gambarmu
+    rating: 5.0,
+  },
+
+  /* --- ULTRAMAN --- */
+  {
+    id: "arc",
+    title: "Ultraman Arc",
+    genre: "ultraman",
+    year: "2024",
+    era: "Reiwa",
+    img: "/ultra/Ultraman-Arc-Poster-Visual-EN_v.jpg",
+    rating: 4.6,
+  },
+  {
+    id: "tiga",
+    title: "Ultraman Tiga",
+    genre: "ultraman",
+    year: "1996",
+    era: "Heisei",
+    img: "/ultra/ioKlOmo7OEd46KU4SXNaMXv0Mlh.webp",
+    rating: 5.0,
+  },
+  {
+    id: "blazar",
+    title: "Ultraman Blazar",
+    genre: "ultraman",
+    year: "2023",
+    era: "Reiwa",
+    img: "/ultra/OIP (2).webp", // Pastikan nama file gambarnya sesuai di folder public/ultra
+    rating: 4.8,
+  },
+  {
+    id: "decker",
+    title: "Ultraman Decker",
+    genre: "ultraman",
+    year: "2022",
+    era: "Reiwa",
+    img: "/ultra/ultraman_decker_global_poster_by_dhiotito_df2y5he-fullview.jpg", // Pastikan nama file gambarnya sesuai di folder public/ultra
+    rating: 4.5,
+  },
+
+  /* --- POWER RANGERS --- */
+  {
+    id: "jungle-fury",
     title: "PR Jungle Fury",
     genre: "power-rangers",
     year: "2008",
@@ -543,13 +656,126 @@ const allSeries = [
     rating: 4.8,
   },
   {
-    id: "pr-mystic-force",
+    id: "mystic-force",
     title: "PR Mystic Force",
     genre: "power-rangers",
     year: "2006",
     era: "Disney",
-    img: "/pr/91+UfueBQeL._SL1500_.jpg",
+    img: "/pr/91+UfueBQeL._SL1500_.jpg", // Pastikan file gambar ini ada di folder public/pr/
     rating: 4.7,
+  },
+  {
+    id: "mmpr",
+    title: "Mighty Morphin",
+    genre: "power-rangers",
+    year: "1993",
+    era: "Saban",
+    img: "/pr/OIP.webp",
+    rating: 5.0,
+  },
+
+  /* --- CHOUSEISHIN --- */
+  {
+    id: "gransazer",
+    title: "Gransazer",
+    genre: "chouseishin",
+    year: "2003",
+    era: "Heisei",
+    img: "/chou/actor-chouseishin-gransazer-958105_large.jpg",
+    rating: 4.8,
+  },
+  {
+    id: "justirisers",
+    title: "Justirisers",
+    genre: "chouseishin",
+    year: "2004",
+    era: "Heisei",
+    img: "/chou/abRBwf.jpg",
+    rating: 4.6,
+  },
+  {
+    id: "sazer-x",
+    title: "Sazer-X",
+    genre: "chouseishin",
+    year: "2005",
+    era: "Heisei",
+    img: "/chou/OIP.webp",
+    rating: 4.5,
+  },
+  /* --- METAL HEROES --- */
+  {
+    id: "gavan",
+    title: "Uchuu Keiji Gavan",
+    genre: "metal-heroes",
+    year: "1982",
+    era: "Showa",
+    img: "/mh/1536667246938_orig.png",
+    rating: 4.9,
+  },
+  {
+    id: "sharivan",
+    title: "Uchuu Keiji Sharivan",
+    genre: "metal-heroes",
+    year: "1983",
+    era: "Showa",
+    img: "/mh/MV5BZDdiYTdkMGQtNjc0ZC00ODJjLThlYjgtNDdkYTE1NTA2MDBjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    rating: 4.7,
+  },
+  {
+    id: "jiband",
+    title: "Kidou Keiji Jiban",
+    genre: "metal-heroes",
+    year: "1989",
+    era: "Showa",
+    img: "/mh/dfd2nr8-8a18d218-2a86-409a-b2cd-31ae5b654bed.jpg",
+    rating: 4.8,
+  },
+  {
+    id: "b-fighter",
+    title: "Juukou B-Fighter",
+    genre: "metal-heroes",
+    year: "1995",
+    era: "Heisei",
+    img: "/mh/MV5BMmYwM2M4YTItNTViOC00MWQ3LWFlYjgtMWYxNGQyYTJjNDY1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    rating: 4.6,
+  },
+
+  /* --- GODZILLA --- */
+  {
+    id: "godzilla-minus-one",
+    title: "Godzilla Minus One",
+    genre: "godzilla",
+    year: "2023",
+    era: "Reiwa",
+    img: "/gz/wp12691878.webp",
+    rating: 5.0,
+  },
+  {
+    id: "shin-godzilla",
+    title: "Shin Godzilla",
+    genre: "godzilla",
+    year: "2016",
+    era: "Heisei",
+    img: "/gz/MV5BODQ4ZmIzNWMtY2NiYi00MmM1LWFjMGQtMDE0Nzc1NzhjNjEyXkEyXkFqcGdeQXVyNDUwNzM4MzQ@._V1_.jpg",
+    rating: 4.8,
+  },
+  {
+    id: "godzilla-final-wars",
+    title: "Godzilla: Final Wars",
+    genre: "godzilla",
+    year: "2004",
+    era: "Heisei",
+    img: "/gz/2617182f25cd036cef420fa14f0c458a73d80dd6ef097319a030919eeb0c7470.jpg",
+    rating: 4.5,
+  },
+  {
+    id: "godzilla-1954",
+    title: "Godzilla (Original)",
+    genre: "godzilla",
+    year: "1954",
+    era: "Showa",
+    img: "/gz/fg635r7DxfmbQpnIh7vLCOsGoOG.webp",
+    rating: 5.0,
   },
 ];
 
@@ -585,7 +811,7 @@ export default function GenrePage({
   };
 
   const eras = useMemo(() => {
-    if (genre === "power-rangers") return ["All", "Disney", "Saban", "Hasbro"];
+    if (genre === "power-rangers") return ["All", "Hasbro", "Disney", "Saban"];
     if (genre === "super-sentai")
       return ["All", "Reiwa", "Heisei", "Showa", "Unofficial"];
     return ["All", "Reiwa", "Heisei", "Showa"];
@@ -593,7 +819,6 @@ export default function GenrePage({
 
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-primary selection:text-white relative">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
       <Navbar />
 
       <div className="relative h-[60vh] w-full overflow-hidden">
@@ -611,16 +836,10 @@ export default function GenrePage({
 
         <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 lg:p-24">
           <div className="max-w-5xl space-y-6">
-            <div className="flex items-center gap-3 animate-in slide-in-from-left-10 duration-700">
-              <div className="h-px w-12 bg-primary" />
-              <span className="font-mono text-xs sm:text-sm tracking-[0.5em] uppercase text-primary font-bold">
-                Archives_Locked
-              </span>
-            </div>
             <h1 className="font-oswald text-5xl sm:text-7xl md:text-9xl font-black uppercase italic tracking-tighter text-white drop-shadow-2xl leading-[0.85] animate-in slide-in-from-bottom-10 duration-1000">
               {genreInfo.title}
             </h1>
-            <p className="text-sm sm:text-lg md:text-xl text-zinc-300 max-w-2xl font-sans leading-relaxed border-l-2 border-primary/50 pl-6 animate-in fade-in duration-1000 delay-300">
+            <p className="text-sm sm:text-lg md:text-xl text-zinc-300 max-w-2xl font-sans leading-relaxed border-l-2 border-primary/50 pl-6">
               {genreInfo.desc}
             </p>
           </div>
@@ -634,125 +853,94 @@ export default function GenrePage({
               <Filter size={12} /> Temporal_Filtering
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              {eras.map((era) => {
-                const isActive = activeEra === era;
-                return (
-                  <button
-                    key={era}
-                    onClick={() => setActiveEra(era)}
-                    className={`relative px-8 py-2 text-xs font-black uppercase tracking-[0.2em] transition-all duration-500 group/btn ${
-                      isActive
-                        ? "bg-primary text-white border-primary shadow-[0_0_25px_rgba(255,255,255,0.3)] scale-105 z-10"
-                        : "bg-transparent border-white/10 text-zinc-500 hover:text-white hover:border-white/40"
-                    } border`}
-                  >
-                    {isActive && (
-                      <>
-                        <div className="absolute -top-[1px] -left-[1px] w-2 h-2 border-t-2 border-l-2 border-white" />
-                        <div className="absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b-2 border-r-2 border-white" />
-                      </>
-                    )}
-                    <span className="relative z-10">{era}</span>
-                  </button>
-                );
-              })}
+              {eras.map((era) => (
+                <button
+                  key={era}
+                  onClick={() => setActiveEra(era)}
+                  className={`px-8 py-2 text-xs font-black uppercase tracking-[0.2em] transition-all duration-500 ${
+                    activeEra === era
+                      ? "bg-primary text-white border-primary"
+                      : "bg-transparent border-white/10 text-zinc-500 hover:text-white"
+                  } border`}
+                >
+                  {era}
+                </button>
+              ))}
             </div>
           </div>
-
-          <div className="flex flex-col items-end gap-2">
-            <div className="flex items-center gap-4 text-zinc-500 font-mono text-xs uppercase">
-              <span className="flex items-center gap-2">
-                <Database size={14} /> Records: {filteredSeries.length}
-              </span>
-              <span className="w-1 h-1 bg-zinc-800 rounded-full" />
-              <span>Status: Active</span>
-            </div>
-            <div className="h-1 w-32 bg-zinc-900 rounded-full overflow-hidden">
-              <div className="h-full bg-primary w-2/3 animate-pulse" />
-            </div>
+          <div className="flex flex-col items-end gap-2 text-zinc-500 font-mono text-xs uppercase">
+            <span>
+              <Database size={14} /> Records: {filteredSeries.length}
+            </span>
           </div>
         </div>
 
-        {filteredSeries.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            {filteredSeries.map((series, index) => (
-              <Link
-                href={`/series/${series.id}`}
-                key={series.id}
-                onClick={(e) => handleCardClick(e, series.id)}
-                className="group relative block transition-all duration-500"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <div className="relative aspect-[2/3] overflow-hidden bg-zinc-950 border border-white/5 shadow-2xl transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-primary/10">
-                  <img
-                    src={series.img}
-                    alt={series.title}
-                    className="h-full w-full object-cover transition-all duration-700 grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-primary/10 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all">
-                    <div className="p-4 bg-white text-black rounded-full scale-50 group-hover:scale-100 transition-transform duration-500">
-                      <Eye size={24} strokeWidth={3} />
-                    </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+          {filteredSeries.map((series) => (
+            <Link
+              href={`/series/${series.id}`}
+              key={series.id}
+              onClick={(e) => handleCardClick(e, series.id)}
+              className="group relative block transition-all"
+            >
+              <div className="relative aspect-[2/3] overflow-hidden bg-zinc-950 border border-white/5 shadow-2xl transition-all group-hover:border-primary/50">
+                <img
+                  src={series.img}
+                  alt={series.title}
+                  className="h-full w-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
+                  <div className="bg-black/80 backdrop-blur-xl border border-white/10 px-3 py-1 text-[10px] font-black text-yellow-500 flex items-center gap-1.5">
+                    <Star size={10} fill="currentColor" /> {series.rating}
                   </div>
-                  <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
-                    <div className="bg-black/80 backdrop-blur-xl border border-white/10 px-3 py-1 text-[10px] font-black text-yellow-500 flex items-center gap-1.5 shadow-xl">
-                      <Star size={10} fill="currentColor" /> {series.rating}
-                    </div>
-                    <Badge className="bg-primary hover:bg-primary border-none rounded-none px-2 py-1 text-[8px] font-black text-white uppercase tracking-tighter shadow-lg">
-                      {series.era}
-                    </Badge>
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <div className="h-[2px] w-0 bg-primary mb-4 group-hover:w-full transition-all duration-700" />
-                    <h3 className="font-oswald font-black text-xl uppercase italic leading-none text-white group-hover:text-primary transition-colors mb-2">
-                      {series.title}
-                    </h3>
-                    <div className="flex items-center gap-2 text-[10px] text-zinc-400 font-mono tracking-widest">
-                      <Calendar size={12} className="text-primary" />{" "}
-                      {series.year}
-                    </div>
+                  <Badge className="bg-primary border-none rounded-none px-2 py-1 text-[8px] font-black">
+                    {series.era}
+                  </Badge>
+                </div>
+                <div className="absolute bottom-0 left-0 w-full p-6">
+                  <h3 className="font-oswald font-black text-xl uppercase italic text-white group-hover:text-primary transition-colors">
+                    {series.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-[10px] text-zinc-400 font-mono">
+                    <Calendar size={12} className="text-primary" />{" "}
+                    {series.year}
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-32 text-center bg-white/[0.01] border border-dashed border-white/10 rounded-3xl">
-            <Filter className="text-zinc-800 h-20 w-20 mb-6" />
-            <h3 className="text-3xl font-oswald font-bold text-zinc-400 uppercase tracking-tighter">
-              Out of Temporal Range
-            </h3>
-          </div>
-        )}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
-        <AlertDialogContent className="bg-zinc-950 border border-white/10 text-white p-0 rounded-none max-w-[95vw] sm:max-w-[500px] overflow-hidden">
+        <AlertDialogContent className="bg-zinc-950 border border-white/10 text-white rounded-none p-0 overflow-hidden max-w-[95vw] sm:max-w-[500px]">
+          {/* TOMBOL CLOSE (X) DI SINI */}
           <button
             onClick={() => setAlertOpen(false)}
-            className="absolute top-4 right-4 z-50 p-2 text-zinc-400 hover:text-white"
+            className="absolute top-4 right-4 z-50 p-2 text-zinc-400 hover:text-white transition-colors"
           >
-            <X size={20} />
+            <X size={24} />
           </button>
+
           <div className="p-8">
             <AlertDialogHeader>
               <AlertDialogTitle className="font-oswald text-3xl uppercase italic flex items-center gap-4 text-primary">
                 <AlertTriangle className="h-10 w-10 animate-pulse" />{" "}
                 SYSTEM_OFFLINE
               </AlertDialogTitle>
-              <AlertDialogDescription className="text-zinc-400 font-sans leading-relaxed text-lg pt-4 border-t border-white/5">
+              <AlertDialogDescription className="text-zinc-400 text-lg pt-4 border-t border-white/5 font-sans">
                 Access to this data core is restricted. Our pirate crew is
                 currently decrypting archives.
                 <br />
                 <br />
-                <span className="text-white font-mono text-sm underline tracking-tighter">
+                <span className="text-white font-mono text-sm underline tracking-tight">
                   Currently Available: [Kaizoku Sentai Gokaiger]
                 </span>
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="mt-8">
-              <AlertDialogAction className="bg-primary hover:bg-white text-black font-black uppercase tracking-widest rounded-none h-14 w-full">
+              <AlertDialogAction className="bg-primary text-black font-black w-full h-14 rounded-none uppercase tracking-widest hover:bg-white transition-colors">
                 RETURN TO DECK
               </AlertDialogAction>
             </AlertDialogFooter>
