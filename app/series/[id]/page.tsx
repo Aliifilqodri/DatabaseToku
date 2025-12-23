@@ -30,7 +30,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-const generateEpisodes = () => {
+// --- GENERATOR EPISODE GOKAIGER ---
+const generateGokaigerEpisodes = () => {
   const titles = [
     "The Space Pirates Appear",
     "The Worth of This Planet",
@@ -87,12 +88,34 @@ const generateEpisodes = () => {
 
   return Array.from({ length: 51 }, (_, i) => ({
     id: i + 1,
-    title: titles[i] || `Episode ${i + 1}: Cosmic Odyssey`,
+    title: titles[i] || `Episode ${i + 1}`,
     duration: "24 min",
     type: "TV",
   }));
 };
 
+// --- GENERATOR EPISODE TIGA ---
+const generateTigaEpisodes = () => {
+  const specialTitles: Record<number, string> = {
+    1: "Inheritance of Light",
+    2: "Stone of Legends",
+    3: "The Devil's Prophecy",
+    25: "The Devil's Judgment",
+    44: "The Shadow Inherited",
+    50: "Take Me Higher!",
+    51: "Master of Darkness",
+    52: "To The Shining Ones",
+  };
+
+  return Array.from({ length: 52 }, (_, i) => ({
+    id: i + 1,
+    title: specialTitles[i + 1] || `Episode ${i + 1}: Defense of the Ancient`,
+    duration: "24 min",
+    type: "TV",
+  }));
+};
+
+// --- DATA MOVIES ---
 const gokaigerMoviesList = [
   {
     id: "m1",
@@ -138,6 +161,38 @@ const gokaigerMoviesList = [
   },
 ];
 
+const tigaMoviesList = [
+  {
+    id: "m1",
+    title: "Ultraman Tiga: The Final Odyssey",
+    duration: "1h 25m",
+    type: "Movie",
+    img: "/ultra/movies/final_odyssey.webp",
+  },
+  {
+    id: "m2",
+    title: "Ultraman Tiga & Dyna & Gaia: Battle in Hyperspace",
+    duration: "1h 23m",
+    type: "Crossover",
+    img: "/ultra/movies/tdg_battle.webp",
+  },
+  {
+    id: "m3",
+    title: "Ultraman Tiga Gaiden: Revival of the Ancient Giant",
+    duration: "45m",
+    type: "Gaiden",
+    img: "/ultra/movies/ancient_giant.webp",
+  },
+  {
+    id: "m4",
+    title: "Superior Ultraman 8 Brothers",
+    duration: "1h 38m",
+    type: "Movie",
+    img: "/ultra/movies/8_brothers.webp",
+  },
+];
+
+// --- DATABASE UTAMA ---
 const seriesDatabase: any = {
   "kaizoku-sentai-gokaiger": {
     title: "Kaizoku Sentai Gokaiger",
@@ -246,8 +301,138 @@ const seriesDatabase: any = {
       "Theme Song": "Kaizoku Sentai Gokaiger",
       "Next Series": "Tokumei Sentai Go-Busters",
     },
-    episodeList: generateEpisodes(),
+    episodeList: generateGokaigerEpisodes(),
     movieList: gokaigerMoviesList,
+  },
+  // --- DATA ULTRAMAN TIGA ---
+  tiga: {
+    title: "Ultraman Tiga",
+    jpTitle: "ウルトラマンティガ",
+    tagline: "Light is a bond... one that is inherited.",
+    desc: "In the year 2007, giant monsters appear to destroy humanity as predicted by an ancient time capsule. Daigo Madoka, a GUTS pilot, merges with the statue of a giant from a lost civilization to become Ultraman Tiga. Unlike previous heroes, Tiga can change forms (Type Change) to adapt to any battle situation.",
+    epicHistory:
+      "30 million years ago, Tiga was a giant of darkness who destroyed the ancient civilization. Touched by the leader of the Earth Defense Force, Yuzare, he chose the light and sealed his dark brethren. Now, reawakened in the Neo Frontier Era, Tiga fights to protect humanity from the darkness once again.",
+    year: "1996 - 1997",
+    episodes: 52,
+    studio: "Tsuburaya Prod.",
+    writer: "Chiaki J. Konaka",
+    director: "Hirochika Muraishi",
+    rating: 5.0,
+    image: "/ultra/tiga_bg_hero.jpg",
+    color: "from-purple-600 to-indigo-500",
+    cast: [
+      {
+        name: "Daigo Madoka",
+        actor: "Hiroshi Nagano",
+        role: "GUTS Ace / Tiga",
+        img: "/ultra/cast/daigo.jpg",
+      },
+      {
+        name: "Megumi Iruma",
+        actor: "Mio Takaki",
+        role: "GUTS Captain",
+        img: "/ultra/cast/iruma.jpg",
+      },
+      {
+        name: "Rena Yanase",
+        actor: "Takami Yoshimoto",
+        role: "GUTS Ace Pilot",
+        img: "/ultra/cast/rena.jpg",
+      },
+      {
+        name: "Seiichi Munakata",
+        actor: "Akitoshi Ohtaki",
+        role: "Vice Captain",
+        img: "/ultra/cast/munakata.jpg",
+      },
+      {
+        name: "Masami Horii",
+        actor: "Yukio Masuda",
+        role: "Tech Expert",
+        img: "/ultra/cast/horii.jpg",
+      },
+      {
+        name: "Tetsuo Shinjo",
+        actor: "Shigeki Kagemaru",
+        role: "Marksman",
+        img: "/ultra/cast/shinjo.jpg",
+      },
+    ],
+    villains: [
+      {
+        name: "Gatanothor",
+        actor: "CGI/Suit",
+        role: "Evil God",
+        img: "/ultra/villains/gatanothor.jpg",
+      },
+      {
+        name: "Camearra",
+        actor: "Miyoko Yoshimoto",
+        role: "Dark Giant",
+        img: "/ultra/villains/camearra.jpg",
+      },
+      {
+        name: "Kyrieloid",
+        actor: "Suit Actor",
+        role: "Infernal Warrior",
+        img: "/ultra/villains/kyrieloid.jpg",
+      },
+      {
+        name: "Evil Tiga",
+        actor: "Keiji Takao",
+        role: "Shadow Giant",
+        img: "/ultra/villains/evil_tiga.jpg",
+      },
+    ],
+    arsenal: [
+      {
+        name: "Spark Lens",
+        type: "Transformation",
+        img: "/ultra/arsenal/spark_lens.webp",
+        desc: "An ancient artifact used by Daigo to transform into light and merge with Tiga's statue.",
+      },
+      {
+        name: "GUTS Wing 1",
+        type: "Mecha",
+        img: "/ultra/arsenal/guts_wing_1.webp",
+        desc: "High-speed interceptor jet capable of changing flight modes. Armed with laser cannons.",
+      },
+      {
+        name: "GUTS Wing 2",
+        type: "Mecha",
+        img: "/ultra/arsenal/guts_wing_2.webp",
+        desc: "Larger support craft equipped with the powerful Texas Beam cannon.",
+      },
+      {
+        name: "Artdessei",
+        type: "Mothership",
+        img: "/ultra/arsenal/artdessei.webp",
+        desc: "Massive underground battleship designed for space combat. Features the hidden Maximum Naqis cannon.",
+      },
+      {
+        name: "GUTS Rifle",
+        type: "Weapon",
+        img: "/ultra/arsenal/guts_rifle.webp",
+        desc: "Standard issue energy rifle used by GUTS members for ground combat against aliens.",
+      },
+    ],
+    gallery: [
+      "/ultra/gallery/tiga_multi.jpg",
+      "/ultra/gallery/tiga_sky.jpg",
+      "/ultra/gallery/tiga_power.jpg",
+      "/ultra/gallery/guts_base.jpg",
+      "/ultra/gallery/tiga_glitter.jpg",
+      "/ultra/gallery/final_battle.jpg",
+    ],
+    wikiStats: {
+      "Suit Actor": "Koji Nakamura",
+      Network: "MBS / TBS",
+      "Theme Song": "Take Me Higher (V6)",
+      Organization: "TPC / GUTS",
+      "Key Mechanic": "Type Change",
+    },
+    episodeList: generateTigaEpisodes(),
+    movieList: tigaMoviesList,
   },
 };
 
@@ -265,9 +450,19 @@ export default function SeriesWikiPage({
   const [openArsenal, setOpenArsenal] = useState<string | null>(null);
 
   useEffect(() => {
-    const found =
-      seriesDatabase[id] || seriesDatabase["kaizoku-sentai-gokaiger"];
-    if (found) setData(found);
+    // Logic untuk mencari data berdasarkan ID, default ke Gokaiger jika tidak ketemu (opsional)
+    // Disini saya ubah agar jika id 'tiga' dia load data Tiga.
+    const found = seriesDatabase[id];
+
+    if (found) {
+      setData(found);
+    } else {
+      // Fallback atau 404 handling
+      // Untuk demo ini saya biarkan null agar muncul screen Data Corrupted jika ID salah
+      // Kecuali id kosong/default
+      if (id === "kaizoku-sentai-gokaiger")
+        setData(seriesDatabase["kaizoku-sentai-gokaiger"]);
+    }
     setLoading(false);
   }, [id]);
 
@@ -279,14 +474,20 @@ export default function SeriesWikiPage({
 
   if (loading)
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white font-oswald animate-pulse">
+      <div className="min-h-screen bg-black flex items-center justify-center text-white font-oswald animate-pulse tracking-widest text-xl">
         INITIALIZING ARCHIVE...
       </div>
     );
   if (!data)
     return (
       <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white">
-        <h1>404 - DATA CORRUPTED</h1>
+        <h1 className="text-4xl font-oswald mb-4">404 - DATA CORRUPTED</h1>
+        <p className="text-zinc-500">
+          The requested archive [{id}] does not exist in our database.
+        </p>
+        <Link href="/" className="mt-8 text-primary hover:underline">
+          Return to Deck
+        </Link>
       </div>
     );
 
@@ -302,6 +503,10 @@ export default function SeriesWikiPage({
             className="h-full w-full object-cover brightness-[0.3]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
+          {/* Dynamic Color Overlay based on Series */}
+          <div
+            className={`absolute inset-0 bg-gradient-to-r ${data.color} mix-blend-overlay opacity-30`}
+          />
         </div>
 
         <div className="absolute inset-0 flex items-end md:items-center px-6 sm:px-12 lg:px-20 pb-12 md:pb-0">
@@ -340,7 +545,7 @@ export default function SeriesWikiPage({
                 className="h-12 md:h-16 px-6 md:px-10 bg-zinc-800/50 hover:bg-zinc-700 text-gray-400 border border-dashed border-zinc-600 font-oswald text-sm md:text-xl uppercase tracking-widest rounded-none"
               >
                 <AlertTriangle className="mr-2 text-yellow-600" size={18} />{" "}
-                System Error
+                System Status
               </Button>
               <Button
                 onClick={handleShare}
@@ -669,8 +874,8 @@ export default function SeriesWikiPage({
               </DialogTitle>
             </DialogHeader>
             <p className="text-zinc-400 font-mono text-xs leading-relaxed uppercase">
-              Archive server offline due to Zangyack intrusion. Recalibrating
-              decryption layers.
+              Archive server offline. Currently performing data synchronization
+              with TPC Main Computer.
             </p>
             <Button
               onClick={() => setIsMaintenanceOpen(false)}

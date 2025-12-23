@@ -5,7 +5,6 @@ import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
-  Eye,
   Star,
   Calendar,
   Filter,
@@ -60,13 +59,13 @@ const genreDatabase: Record<
   "metal-heroes": {
     title: "Metal Hero Series",
     desc: "Space sheriffs and armored heroes protected by advanced metallic combat suits.",
-    banner: "/mh/Gokai.webp", // <--- TAMBAHKAN LINK GAMBAR DISINI
+    banner: "/mh/Gokai.webp",
     color: "from-zinc-600/20",
   },
   godzilla: {
     title: "Godzilla & Kaiju",
     desc: "The King of the Monsters and the colossal titans that rule the Earth.",
-    banner: "/gz/godzilla-vs-kong-d35bic6awbsf6bt2.jpg", // <--- TAMBAHKAN LINK GAMBAR DISINI
+    banner: "/gz/godzilla-vs-kong-d35bic6awbsf6bt2.jpg",
     color: "from-emerald-900/20",
   },
 };
@@ -1216,7 +1215,7 @@ const allSeries = [
     genre: "power-rangers",
     year: "2006",
     era: "Disney",
-    img: "/pr/91+UfueBQeL._SL1500_.jpg", // Pastikan file gambar ini ada di folder public/pr/
+    img: "/pr/91+UfueBQeL._SL1500_.jpg",
     rating: 4.7,
   },
   {
@@ -1359,7 +1358,7 @@ export default function GenrePage({
   }, [genre, activeEra]);
 
   const handleCardClick = (e: React.MouseEvent, seriesId: string) => {
-    if (seriesId !== "gokaiger") {
+    if (seriesId !== "gokaiger" && seriesId !== "tiga") {
       e.preventDefault();
       setAlertOpen(true);
     }
@@ -1470,7 +1469,6 @@ export default function GenrePage({
 
       <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
         <AlertDialogContent className="bg-zinc-950 border border-white/10 text-white rounded-none p-0 overflow-hidden max-w-[95vw] sm:max-w-[500px]">
-          {/* TOMBOL CLOSE (X) DI SINI */}
           <button
             onClick={() => setAlertOpen(false)}
             className="absolute top-4 right-4 z-50 p-2 text-zinc-400 hover:text-white transition-colors"
@@ -1490,7 +1488,7 @@ export default function GenrePage({
                 <br />
                 <br />
                 <span className="text-white font-mono text-sm underline tracking-tight">
-                  Currently Available: [Kaizoku Sentai Gokaiger]
+                  Currently Available: [Kaizoku Sentai Gokaiger] [Ultraman Tiga]
                 </span>
               </AlertDialogDescription>
             </AlertDialogHeader>

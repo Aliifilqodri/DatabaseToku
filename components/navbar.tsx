@@ -19,6 +19,7 @@ import {
   Command,
   Globe,
   Swords,
+  Home,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -94,6 +95,29 @@ export function Navbar() {
 
   return (
     <>
+      <style jsx global>{`
+        @keyframes gitir {
+          0% {
+            transform: translate(0, 0) rotate(0deg);
+          }
+          25% {
+            transform: translate(1px, 1px) rotate(1deg);
+          }
+          50% {
+            transform: translate(-1px, -1px) rotate(-1deg);
+          }
+          75% {
+            transform: translate(-1px, 1px) rotate(0deg);
+          }
+          100% {
+            transform: translate(1px, -1px) rotate(0deg);
+          }
+        }
+        .hover-gitir:hover {
+          animation: gitir 0.2s infinite;
+        }
+      `}</style>
+
       <nav
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           isScrolled
@@ -102,13 +126,29 @@ export function Navbar() {
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between">
-          <Link href="/" className="relative z-[110] flex items-center group">
+          <Link
+            href="/"
+            className="relative z-[110] flex items-center group"
+            style={{ WebkitTapHighlightColor: "transparent" }}
+          >
             <span className="font-oswald text-2xl md:text-3xl font-black italic tracking-tighter text-white uppercase">
               Toku<span className="text-primary">satsu</span>
             </span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
+            <Link
+              href="/"
+              className={`font-oswald text-xs font-bold uppercase tracking-[0.2em] transition-all flex items-center gap-2 hover-gitir ${
+                pathname === "/"
+                  ? "text-primary"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <Home size={14} className="mb-0.5" />
+              {t("Home", "Beranda")}
+            </Link>
+
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1.5 font-oswald text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-all outline-none group">
                 {t("Database", "Basis Data")}
@@ -162,6 +202,7 @@ export function Navbar() {
             <button
               onClick={() => setLang(lang === "EN" ? "ID" : "EN")}
               className="flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 hover:bg-primary hover:text-black transition-all rounded-none font-mono text-[10px] font-black uppercase tracking-tighter"
+              style={{ WebkitTapHighlightColor: "transparent" }}
             >
               <Globe size={12} /> {lang}
             </button>
@@ -169,6 +210,7 @@ export function Navbar() {
             <button
               onClick={() => setIsSearchOpen(true)}
               className="text-white/70 hover:text-primary transition-all p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 group active:scale-95"
+              style={{ WebkitTapHighlightColor: "transparent" }}
             >
               <Search
                 size={20}
@@ -190,9 +232,11 @@ export function Navbar() {
               </Button>
             </Link>
 
+            {/* --- FIX TOMBOL BURGER (Ganti style biar kelihatan Putih) --- */}
             <button
-              className="lg:hidden relative z-[110] flex items-center justify-center w-11 h-11 bg-primary text-black rounded-full shadow-lg shadow-primary/20 active:scale-90 transition-transform"
+              className="lg:hidden relative z-[110] flex items-center justify-center w-11 h-11 bg-white/5 text-white border border-white/10 rounded-full shadow-lg active:scale-90 transition-all hover:bg-white/10"
               onClick={() => setIsMobileMenuOpen(true)}
+              style={{ WebkitTapHighlightColor: "transparent" }}
             >
               <Menu size={22} />
             </button>
@@ -211,6 +255,7 @@ export function Navbar() {
         <button
           onClick={() => setIsSearchOpen(false)}
           className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors"
+          style={{ WebkitTapHighlightColor: "transparent" }}
         >
           <X size={32} />
         </button>
@@ -257,6 +302,7 @@ export function Navbar() {
           <button
             className="w-12 h-12 flex items-center justify-center bg-white/5 rounded-full text-white border border-white/10 active:rotate-90 transition-transform duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
+            style={{ WebkitTapHighlightColor: "transparent" }}
           >
             <X size={24} />
           </button>
@@ -270,14 +316,35 @@ export function Navbar() {
               </p>
               <div className="grid gap-4">
                 <Link
+                  href="/"
+                  className="group flex items-center gap-6"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ WebkitTapHighlightColor: "transparent" }}
+                >
+                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all group-active:scale-95 group-active:bg-primary/20">
+                    <Home
+                      size={24}
+                      className="text-zinc-300 group-hover:text-black group-active:text-primary"
+                    />
+                  </div>
+                  <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary group-active:text-primary transition-colors">
+                    {t("Home", "Beranda")}
+                  </span>
+                </Link>
+
+                <Link
                   href="/characters"
                   className="group flex items-center gap-6"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all group-active:scale-90">
-                    <Users size={24} />
+                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all group-active:scale-95 group-active:bg-primary/20">
+                    <Users
+                      size={24}
+                      className="text-zinc-300 group-hover:text-black group-active:text-primary"
+                    />
                   </div>
-                  <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary transition-colors">
+                  <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary group-active:text-primary transition-colors">
                     {t("Characters", "Karakter")}
                   </span>
                 </Link>
@@ -285,11 +352,15 @@ export function Navbar() {
                   href="/movies"
                   className="group flex items-center gap-6"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ WebkitTapHighlightColor: "transparent" }}
                 >
-                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all group-active:scale-90">
-                    <Film size={24} />
+                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all group-active:scale-95 group-active:bg-primary/20">
+                    <Film
+                      size={24}
+                      className="text-zinc-300 group-hover:text-black group-active:text-primary"
+                    />
                   </div>
-                  <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary transition-colors">
+                  <span className="text-4xl font-oswald font-black uppercase italic text-white group-hover:text-primary group-active:text-primary transition-colors">
                     {t("Archives", "Arsip")}
                   </span>
                 </Link>
@@ -305,16 +376,19 @@ export function Navbar() {
                   <Link
                     key={genre.name}
                     href={genre.href}
-                    className={`flex flex-col gap-3 p-6 bg-white/[0.03] border border-white/5 rounded-2xl active:bg-primary active:text-black transition-all ${
+                    className={`flex flex-col gap-3 p-6 bg-white/[0.03] border border-white/5 rounded-2xl active:scale-95 active:border-primary/50 transition-all ${
                       isMobileMenuOpen
                         ? "translate-y-0 opacity-100"
                         : "translate-y-4 opacity-0"
                     }`}
-                    style={{ transitionDelay: `${idx * 50 + 200}ms` }}
+                    style={{
+                      transitionDelay: `${idx * 50 + 200}ms`,
+                      WebkitTapHighlightColor: "transparent",
+                    }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <span className="text-primary">{genre.icon}</span>
-                    <span className="font-oswald text-xs font-bold uppercase tracking-widest">
+                    <span className="font-oswald text-xs font-bold uppercase tracking-widest text-zinc-300 active:text-primary">
                       {genre.name}
                     </span>
                   </Link>
@@ -324,8 +398,12 @@ export function Navbar() {
           </div>
 
           <div className="mt-auto pt-10">
-            <Link href="https://discord.gg/v5XU8bdYbN" target="_blank">
-              <Button className="w-full bg-[#5865F2] h-16 rounded-2xl text-white font-oswald font-bold uppercase tracking-[0.2em] text-lg shadow-2xl shadow-[#5865F2]/20">
+            <Link
+              href="https://discord.gg/v5XU8bdYbN"
+              target="_blank"
+              style={{ WebkitTapHighlightColor: "transparent" }}
+            >
+              <Button className="w-full bg-[#5865F2] h-16 rounded-2xl text-white font-oswald font-bold uppercase tracking-[0.2em] text-lg shadow-2xl shadow-[#5865F2]/20 active:scale-95 transition-transform">
                 <MessageCircle className="mr-3" />{" "}
                 {t("Join Community", "Gabung Komunitas")}
               </Button>
