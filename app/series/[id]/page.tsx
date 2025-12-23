@@ -17,6 +17,10 @@ import {
   Layers,
   Skull,
   Users,
+  ChevronDown,
+  ChevronUp,
+  Image as ImageIcon,
+  Film,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -95,36 +99,42 @@ const gokaigerMoviesList = [
     title: "Gokaiger Goseiger Super Sentai 199 Hero Great Battle",
     duration: "1h 21m",
     type: "Movie",
+    img: "/sentai/movies/199_heroes.webp",
   },
   {
     id: "m2",
     title: "Kaizoku Sentai Gokaiger the Movie: The Flying Ghost Ship",
     duration: "30m",
     type: "Movie",
+    img: "/sentai/movies/ghost_ship.webp",
   },
   {
     id: "m3",
     title: "Kaizoku Sentai Gokaiger vs. Space Sheriff Gavan",
     duration: "1h 04m",
     type: "Movie",
+    img: "/sentai/movies/vs_gavan.webp",
   },
   {
     id: "m4",
     title: "Kamen Rider x Super Sentai: Super Hero Taisen",
     duration: "1h 29m",
     type: "Crossover",
+    img: "/sentai/movies/hero_taisen.webp",
   },
   {
     id: "m5",
     title: "Tokumei Sentai Go-Busters vs. Kaizoku Sentai Gokaiger",
     duration: "1h 00m",
     type: "Movie",
+    img: "/sentai/movies/vs_gobusters.webp",
   },
   {
     id: "m6",
     title: "Kaizoku Sentai: Ten Gokaiger",
     duration: "1h 01m",
     type: "V-Cinext",
+    img: "/sentai/movies/ten_gokaiger.webp",
   },
 ];
 
@@ -190,12 +200,45 @@ const seriesDatabase: any = {
         img: "/sentai/support/Kei_Hosogai_Headshot.webp",
       },
     ],
-    forms: [
-      "Gokai Change",
-      "Gold Mode",
-      "Cross Armor Mode",
-      "Gokai Red Gold Mode",
-      "Tajadol Charge",
+    arsenal: [
+      {
+        name: "Mobilates",
+        type: "Changer",
+        img: "/sentai/arsenal/mobilates.webp",
+        desc: "The primary transformation device used by the Gokaigers.",
+      },
+      {
+        name: "Gokai Sabre",
+        type: "Weapon",
+        img: "/sentai/arsenal/sabre.webp",
+        desc: "A versatile cutlass used for close-quarters combat.",
+      },
+      {
+        name: "Gokai Gun",
+        type: "Weapon",
+        img: "/sentai/arsenal/gun.webp",
+        desc: "High-powered flintlock-style energy pistols.",
+      },
+      {
+        name: "Ranger Keys",
+        type: "Artifact",
+        img: "/sentai/arsenal/keys.webp",
+        desc: "Keys containing the powers of previous Super Sentai.",
+      },
+      {
+        name: "Gokai Galleon Buster",
+        type: "Finisher",
+        img: "/sentai/arsenal/buster.webp",
+        desc: "A powerful cannon created from the core spirit of the crew.",
+      },
+    ],
+    gallery: [
+      "/sentai/gallery/gokai1.webp",
+      "/sentai/gallery/gokai2.webp",
+      "/sentai/gallery/gokai3.webp",
+      "/sentai/gallery/gokai4.webp",
+      "/sentai/gallery/gokai5.webp",
+      "/sentai/gallery/gokai6.webp",
     ],
     wikiStats: {
       "Suit Actor": "Hirofumi Fukuzawa",
@@ -219,6 +262,7 @@ export default function SeriesWikiPage({
   const [loading, setLoading] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
   const [isMaintenanceOpen, setIsMaintenanceOpen] = useState(false);
+  const [openArsenal, setOpenArsenal] = useState<string | null>(null);
 
   useEffect(() => {
     const found =
@@ -268,7 +312,6 @@ export default function SeriesWikiPage({
             >
               <ArrowLeft size={14} /> Back to Database
             </Link>
-
             <div className="flex flex-wrap gap-2">
               <Badge className="bg-white text-black font-bold text-[10px] md:text-sm px-2 rounded-none">
                 {data.year}
@@ -283,7 +326,6 @@ export default function SeriesWikiPage({
                 <Star size={10} fill="black" /> {data.rating}
               </Badge>
             </div>
-
             <div className="space-y-1">
               <h2 className="font-oswald text-xl md:text-3xl text-gray-500 font-bold uppercase tracking-[0.2em]">
                 {data.jpTitle}
@@ -292,7 +334,6 @@ export default function SeriesWikiPage({
                 {data.title}
               </h1>
             </div>
-
             <div className="flex flex-wrap gap-3 pt-4">
               <Button
                 onClick={() => setIsMaintenanceOpen(true)}
@@ -316,19 +357,21 @@ export default function SeriesWikiPage({
 
       <div className="max-w-7xl mx-auto px-4 md:px-12 -mt-10 relative z-10">
         <div className="flex overflow-x-auto scrollbar-hide border-b border-white/10 bg-[#050505]/90 backdrop-blur-md sticky top-[70px] z-40">
-          {["overview", "cast", "arsenal & movies", "episodes"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 md:px-8 py-4 md:py-5 font-oswald text-sm md:text-lg font-bold uppercase tracking-widest transition-all border-b-4 whitespace-nowrap ${
-                activeTab === tab
-                  ? "border-primary text-white bg-white/5"
-                  : "border-transparent text-gray-600 hover:text-gray-300"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
+          {["overview", "cast", "arsenal", "movies", "episodes", "gallery"].map(
+            (tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 md:px-8 py-4 md:py-5 font-oswald text-sm md:text-lg font-bold uppercase tracking-widest transition-all border-b-4 whitespace-nowrap ${
+                  activeTab === tab
+                    ? "border-primary text-white bg-white/5"
+                    : "border-transparent text-gray-600 hover:text-gray-300"
+                }`}
+              >
+                {tab}
+              </button>
+            )
+          )}
         </div>
 
         <div className="py-8 md:py-12 min-h-[500px] animate-in fade-in slide-in-from-bottom-5 duration-500">
@@ -414,7 +457,6 @@ export default function SeriesWikiPage({
                   ))}
                 </div>
               </div>
-
               <div>
                 <h3 className="font-oswald text-2xl text-white uppercase mb-6 flex items-center gap-3 border-l-4 border-red-800 pl-4">
                   <Skull size={24} className="text-red-600" /> Villains & Allies
@@ -446,19 +488,93 @@ export default function SeriesWikiPage({
             </div>
           )}
 
-          {activeTab === "arsenal & movies" && (
-            <div className="space-y-12">
-              <section>
-                <h3 className="font-oswald text-2xl text-white uppercase mb-6 flex items-center gap-2">
-                  <Zap size={20} className="text-primary" /> Movie Manifest
-                </h3>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {data.movieList.map((movie: any) => (
-                    <div
-                      key={movie.id}
-                      className="bg-zinc-900/40 border border-white/5 p-5 md:p-6 group hover:border-primary/50 transition-all"
+          {activeTab === "arsenal" && (
+            <div className="space-y-6">
+              <h3 className="font-oswald text-2xl md:text-3xl text-white uppercase mb-8 flex items-center gap-3 border-l-4 border-primary pl-4">
+                <Zap size={24} className="text-primary" /> Arsenal & Gear
+              </h3>
+              <div className="grid gap-4">
+                {data.arsenal.map((item: any, idx: number) => (
+                  <div
+                    key={idx}
+                    className="border border-white/10 bg-zinc-900/20 overflow-hidden"
+                  >
+                    <button
+                      onClick={() =>
+                        setOpenArsenal(
+                          openArsenal === item.name ? null : item.name
+                        )
+                      }
+                      className="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-all text-left"
                     >
-                      <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-center gap-6">
+                        <span className="text-zinc-700 font-oswald text-2xl font-black">
+                          0{idx + 1}
+                        </span>
+                        <div>
+                          <Badge
+                            variant="outline"
+                            className="text-[8px] uppercase border-primary/30 text-primary mb-1"
+                          >
+                            {item.type}
+                          </Badge>
+                          <h4 className="font-oswald text-xl md:text-2xl text-white uppercase">
+                            {item.name}
+                          </h4>
+                        </div>
+                      </div>
+                      {openArsenal === item.name ? (
+                        <ChevronUp className="text-primary" />
+                      ) : (
+                        <ChevronDown className="text-zinc-600" />
+                      )}
+                    </button>
+                    {openArsenal === item.name && (
+                      <div className="p-6 grid md:grid-cols-2 gap-8 bg-black/40 border-t border-white/5 animate-in slide-in-from-top-2 duration-300">
+                        <div className="aspect-video relative bg-zinc-900 border border-white/10">
+                          <img
+                            src={item.img}
+                            alt={item.name}
+                            className="w-full h-full object-contain p-4"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center space-y-4">
+                          <p className="text-zinc-400 text-lg leading-relaxed italic">
+                            "{item.desc}"
+                          </p>
+                          <div className="flex gap-4">
+                            <div className="h-1 w-12 bg-primary" />
+                            <div className="h-1 w-4 bg-zinc-800" />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === "movies" && (
+            <div className="space-y-8">
+              <h3 className="font-oswald text-2xl md:text-3xl text-white uppercase mb-8 flex items-center gap-3 border-l-4 border-primary pl-4">
+                <Film size={24} className="text-primary" /> Cinematic Records
+              </h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {data.movieList.map((movie: any) => (
+                  <div
+                    key={movie.id}
+                    className="group relative bg-zinc-900/40 border border-white/5 overflow-hidden transition-all hover:border-primary/50"
+                  >
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img
+                        src={movie.img}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-75 group-hover:brightness-100"
+                        alt={movie.title}
+                      />
+                    </div>
+                    <div className="p-6 space-y-4">
+                      <div className="flex justify-between items-center">
                         <Badge className="bg-primary text-black rounded-none text-[10px]">
                           {movie.type}
                         </Badge>
@@ -466,13 +582,19 @@ export default function SeriesWikiPage({
                           {movie.duration}
                         </span>
                       </div>
-                      <h4 className="font-oswald text-lg md:text-xl font-bold text-white uppercase group-hover:text-primary transition-colors">
+                      <h4 className="font-oswald text-lg md:text-xl font-bold text-white uppercase group-hover:text-primary transition-colors min-h-[3rem]">
                         {movie.title}
                       </h4>
+                      <Button
+                        variant="outline"
+                        className="w-full border-white/10 text-zinc-400 group-hover:text-white group-hover:border-primary transition-all rounded-none h-10 text-[10px] uppercase tracking-widest"
+                      >
+                        Access Archive
+                      </Button>
                     </div>
-                  ))}
-                </div>
-              </section>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -500,8 +622,35 @@ export default function SeriesWikiPage({
                     </div>
                     <PlayCircle
                       size={28}
-                      className="text-zinc-800 group-hover:text-primary transition-all group-hover:scale-110"
+                      className="text-zinc-800 group-hover:text-primary transition-all group-hover:scale-110 cursor-pointer"
                     />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === "gallery" && (
+            <div className="space-y-8">
+              <h3 className="font-oswald text-2xl md:text-3xl text-white uppercase mb-8 flex items-center gap-3 border-l-4 border-primary pl-4">
+                <ImageIcon size={24} className="text-primary" /> Visual Archives
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                {data.gallery.map((img: string, idx: number) => (
+                  <div
+                    key={idx}
+                    className="group relative aspect-video bg-zinc-900 overflow-hidden border border-white/5 hover:border-primary transition-all"
+                  >
+                    <img
+                      src={img}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      alt={`Gallery ${idx}`}
+                    />
+                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="p-3 bg-black/80 rounded-full border border-primary/50">
+                        <ImageIcon className="text-primary" />
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
