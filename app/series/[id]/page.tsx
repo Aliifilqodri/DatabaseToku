@@ -194,7 +194,8 @@ const tigaMoviesList = [
 
 // --- DATABASE UTAMA ---
 const seriesDatabase: any = {
-  "kaizoku-sentai-gokaiger": {
+  // FIX: Ubah key dari "kaizoku-sentai-gokaiger" menjadi "gokaiger" agar sesuai dengan ID URL
+  gokaiger: {
     title: "Kaizoku Sentai Gokaiger",
     jpTitle: "海賊戦隊ゴーカイジャー",
     tagline: "Let's make it showy!",
@@ -450,18 +451,15 @@ export default function SeriesWikiPage({
   const [openArsenal, setOpenArsenal] = useState<string | null>(null);
 
   useEffect(() => {
-    // Logic untuk mencari data berdasarkan ID, default ke Gokaiger jika tidak ketemu (opsional)
-    // Disini saya ubah agar jika id 'tiga' dia load data Tiga.
+    // FIX: Langsung ambil dari database menggunakan ID yang masuk
+    // Karena sekarang key di database sudah "gokaiger", maka id "gokaiger" dari URL akan cocok.
     const found = seriesDatabase[id];
 
     if (found) {
       setData(found);
     } else {
-      // Fallback atau 404 handling
-      // Untuk demo ini saya biarkan null agar muncul screen Data Corrupted jika ID salah
-      // Kecuali id kosong/default
-      if (id === "kaizoku-sentai-gokaiger")
-        setData(seriesDatabase["kaizoku-sentai-gokaiger"]);
+      // Data not found logic
+      console.log(`Database miss for ID: ${id}`);
     }
     setLoading(false);
   }, [id]);
