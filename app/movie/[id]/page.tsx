@@ -6,613 +6,442 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
+  Calendar,
   Star,
+  Clock,
+  PlayCircle,
+  Users,
+  Film,
+  FileText,
+  Share2,
+  ShieldCheck,
   Zap,
   Info,
-  Share2,
-  Check,
-  PlayCircle,
-  AlertTriangle,
-  Wrench,
-  Layers,
-  Skull,
-  Users,
-  ChevronDown,
-  Shield,
-  Image as ImageIcon,
-  Film,
+  Heart,
 } from "lucide-react";
 import Link from "next/link";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
-const generateEpisodes = () => {
-  const titles = [
-    "The Space Pirates Appear",
-    "The Worth of This Planet",
-    "Changing Courage into Magic",
-    "What are Friends For?",
-    "Judgement Pirates",
-    "The Most Important Thing",
-    "Niki-Niki! Kenpo Lesson",
-    "Little Spy Tactics",
-    "Lion, Run",
-    "Card Game",
-    "The Serious Rebellion",
-    "The Guaranteed Showy Samurai",
-    "Tell Me the Way",
-    "Traffic Safety",
-    "A Privateer Appears",
-    "Clash! Sentai vs. Sentai",
-    "The Amazing Silver Man",
-    "Rampage with the Dinosaur Robot Drill",
-    "Armor of the 15 Warriors",
-    "The Lost Forest",
-    "The Heart of a Warrior",
-    "Promise from the Star",
-    "The People's Lives are Earth's Treasures",
-    "Foolish Earthlings",
-    "Pirates and Ninjas",
-    "ZhuZhu! Ninja Lesson",
-    "The Greatest Treasure",
-    "Wings are Eternal",
-    "The Abare Quick-Change",
-    "Friendship is My Treasure",
-    "The Brave of the Dinosaurs",
-    "One Power",
-    "A Hero's Path",
-    "The Great Gavan",
-    "Dimension of the Soul",
-    "Partners in Justice",
-    "The Greatest Gokaiger",
-    "The Final Stand",
-    "The Legend Continues",
-    "Let's Make it Showy!",
-    "New Beginnings",
-    "The Pirate's Creed",
-    "Echoes of Heroism",
-    "Zangyack's Fall",
-    "Eternal Bonds",
-    "Cosmic Voyage",
-    "The Final Treasure",
-    "Beyond the Stars",
-    "Legacy of Justice",
-    "The Final Voyage",
-    "Farewell Space Pirates",
-  ];
-
-  return Array.from({ length: 51 }, (_, i) => ({
-    id: i + 1,
-    title: titles[i] || `Episode ${i + 1}: Cosmic Odyssey`,
-    duration: "24 min",
-    type: "TV",
-  }));
+type Hero = {
+  name: string;
+  role: string;
 };
 
-const seriesDatabase: any = {
-  "kaizoku-sentai-gokaiger": {
-    title: "Kaizoku Sentai Gokaiger",
-    jpTitle: "海賊戦隊ゴーカイジャー",
-    tagline: "Let's make it showy!",
-    desc: "Set sail into a cosmic odyssey where rebellion meets legacy! Five outlaws from across the stars arrive on Earth seeking the 'Greatest Treasure in the Universe,' only to find a world protected by the spirits of 34 legendary Super Sentai teams.",
-    epicHistory:
-      "Against the crushing weight of an interstellar armada, the Gokaigers waged a war of sheer willpower. From the burning ruins of fallen empires to the final stand on Earth's soil, they proved that true courage isn't granted by blood, but forged in the heat of battle.",
-    year: "2011 - 2012",
-    episodes: 51,
-    studio: "Toei Company",
+type MovieData = {
+  id: string;
+  title: string;
+  jpTitle: string;
+  type: string;
+  year: string;
+  runtime: string;
+  rating: string;
+  poster: string;
+  banner: string;
+  synopsis: string;
+  director: string;
+  writer: string;
+  studio: string;
+  mainCast: Hero[];
+  supportHeroes: Hero[];
+  trivia: string[];
+};
+
+const movieDatabase: Record<string, MovieData> = {
+  "4": {
+    id: "4",
+    title: "Gokaiger Goseiger Super Sentai 199 Hero Great Battle",
+    jpTitle: "ゴーカイジャー ゴセイジャー スーパー戦隊199ヒーロー大決戦",
+    type: "Anniversary Movie",
+    year: "2011",
+    runtime: "81 min",
+    rating: "5.0",
+    poster: "/movie/R.jpeg",
+    banner: "/movie/R.jpeg",
+    synopsis:
+      "The Space Empire Zangyack forms a deadly alliance with the Black Cross King, seeking to plunge Earth into eternal darkness. To stop this ultimate threat, the rebel Gokaigers and the angelic Goseigers must join forces. They are not alone—the spirits and powers of all 33 previous Super Sentai teams rise again, leading to an epic clash featuring 199 legendary heroes.",
+    director: "Noboru Takemoto",
     writer: "Naruhisa Arakawa",
+    studio: "Toei Company",
+    mainCast: [
+      { name: "Ryota Ozawa", role: "Captain Marvelous (Gokai Red)" },
+      { name: "Yudai Chiba", role: "Alata (Gosei Red)" },
+      { name: "Yuki Yamada", role: "Joe Gibken (Gokai Blue)" },
+      { name: "Mao Ichimichi", role: "Luka Millfy (Gokai Yellow)" },
+      { name: "Kazuki Shimizu", role: "Don Dogoier (Gokai Green)" },
+      { name: "Yui Koike", role: "Ahim de Famille (Gokai Pink)" },
+    ],
+    supportHeroes: [
+      { name: "Rika Satoh", role: "Eri (Gosei Pink)" },
+      { name: "Kyousuke Hamao", role: "Agri (Gosei Black)" },
+      { name: "Mikiho Niwa", role: "Mone (Gosei Yellow)" },
+      { name: "Kento Ono", role: "Hyde (Gosei Blue)" },
+      { name: "Satoru Akashi", role: "Bouken Red" },
+      { name: "Chiaki Tani", role: "Shinken Green" },
+      { name: "Umeko", role: "Deka Pink" },
+      { name: "Ryo", role: "Ryuu Ranger" },
+    ],
+    trivia: [
+      "Features every single Sentai hero from Goranger to Gokaiger.",
+      "The Black Cross King returns from the very first Sentai series.",
+      "Delayed due to the 2011 Tōhoku earthquake.",
+    ],
+  },
+  "5": {
+    id: "5",
+    title: "Kaizoku Sentai Gokaiger: The Flying Ghost Ship",
+    jpTitle: "海賊戦隊ゴーカイジャー THE MOVIE 空飛ぶ幽霊船",
+    type: "Theatrical Release",
+    year: "2011",
+    runtime: "30 min",
+    rating: "4.8",
+    poster: "/movie/OIP.jpeg",
+    banner: "/movie/OIP.jpeg",
+    synopsis:
+      "The Gokaigers board a massive, spectral vessel to find the legendary 'God Eye'—a treasure capable of granting any wish. They must battle the undead spirits of past Sentai villains and the ship's sinister captain, Los Dark.",
+    director: "Katsuya Watanabe",
+    writer: "Naruhisa Arakawa",
+    studio: "Toei Company",
+    mainCast: [
+      { name: "Ryota Ozawa", role: "Captain Marvelous" },
+      { name: "Yuki Yamada", role: "Joe Gibken" },
+      { name: "Mao Ichimichi", role: "Luka Millfy" },
+      { name: "Kazuki Shimizu", role: "Don Dogoier" },
+      { name: "Yui Koike", role: "Ahim de Famille" },
+      { name: "Junya Ikeda", role: "Gai Ikari" },
+    ],
+    supportHeroes: [
+      { name: "Ichiro Nagai", role: "Los Dark (Voice)" },
+      { name: "Isao Sasaki", role: "Ghost Ship Guardian" },
+    ],
+    trivia: [
+      "First appearance of Fake GokaiOh.",
+      "Features cameos from various grunt soldiers of past series.",
+    ],
+  },
+  "6": {
+    id: "6",
+    title: "Gokaiger vs. Space Sheriff Gavan: The Movie",
+    jpTitle: "海賊戦隊ゴーカイジャーVS宇宙刑事ギャバン THE MOVIE",
+    type: "Crossover Movie",
+    year: "2012",
+    runtime: "64 min",
+    rating: "4.9",
+    poster: "/movie/8Qw53GWAfnIEdqAQ9HGFmlInsie.jpg",
+    banner: "/movie/8Qw53GWAfnIEdqAQ9HGFmlInsie.jpg",
+    synopsis:
+      "Legendary Space Sheriff Gavan arrests the Gokaigers, but it's revealed to be a plot by the Zangyack Empire. Marvelous must enter the Makuu Space to rescue his childhood savior, Gavan, from the clutches of Gavan Bootleg.",
     director: "Shojiro Nakazawa",
-    rating: 5.0,
-    image: "/sentai/Gokaiger_29.webp",
-    color: "from-red-600 to-yellow-500",
-    cast: [
-      {
-        name: "Captain Marvelous",
-        actor: "Ryota Ozawa",
-        role: "Gokai Red",
-        img: "/sentai/marvelous/Ryota-ozawa.webp",
-      },
-      {
-        name: "Joe Gibken",
-        actor: "Yuki Yamada",
-        role: "Gokai Blue",
-        img: "/sentai/joe/Yuki_Yamada.webp",
-      },
-      {
-        name: "Luka Millfy",
-        actor: "Mao Ichimichi",
-        role: "Gokai Yellow",
-        img: "/sentai/luka/Mao_Ichimichi.webp",
-      },
-      {
-        name: "Don Dogoier",
-        actor: "Kazuki Shimizu",
-        role: "Gokai Green",
-        img: "/sentai/don/Kazuki_Shimizu.webp",
-      },
-      {
-        name: "Ahim de Famille",
-        actor: "Yui Koike",
-        role: "Gokai Pink",
-        img: "/sentai/ahim/Yui_Koike.webp",
-      },
-      {
-        name: "Gai Ikari",
-        actor: "Junya Ikeda",
-        role: "Gokai Silver",
-        img: "/sentai/gai/Junya_Ikeda_Headshot.webp",
-      },
+    writer: "Naruhisa Arakawa",
+    studio: "Toei Company",
+    mainCast: [
+      { name: "Ryota Ozawa", role: "Gokai Red" },
+      { name: "Kenji Ohba", role: "Retsu Ichijouji (Gavan)" },
+      { name: "Yuki Yamada", role: "Gokai Blue" },
+      { name: "Mao Ichimichi", role: "Gokai Yellow" },
     ],
-    villains: [
-      {
-        name: "Basco ta Jolokia",
-        actor: "Kei Hosogai",
-        role: "Basco ta Jolokia",
-        img: "/sentai/support/Kei_Hosogai_Headshot.webp",
-      },
+    supportHeroes: [
+      { name: "Kenji Ohba", role: "Battle Kenya" },
+      { name: "Kenji Ohba", role: "Denzi Blue" },
+      { name: "Kazuki Shimizu", role: "Gokai Green" },
+      { name: "Yui Koike", role: "Gokai Pink" },
+      { name: "Junya Ikeda", role: "Gokai Silver" },
+      { name: "Toshiaki Karasawa", role: "Gavan Bootleg (Voice)" },
     ],
-    arsenal: [
-      {
-        name: "Gokai Galleon Armor",
-        desc: "The ultimate power-up for Gokai Red, utilizing the spirit of the Gokai Galleon and the cross-bone shield.",
-        img: "/sentai/arsenal/galleon-armor.webp",
-      },
-      {
-        name: "Gokai Silver Gold Mode",
-        desc: "An armored form representing the 15 legendary Sixth Rangers of the past.",
-        img: "/sentai/arsenal/gold-mode.webp",
-      },
-      {
-        name: "Mobirates",
-        desc: "The cell-phone transformation device that reads Ranger Keys to unleash Sentai powers.",
-        img: "/sentai/arsenal/mobirates.webp",
-      },
-      {
-        name: "Gokai Sabre & Blast",
-        desc: "The primary weapons used by the core crew for both melee and range combat.",
-        img: "/sentai/arsenal/weapons.webp",
-      },
+    trivia: [
+      "Kenji Ohba plays three of his iconic roles in one film.",
+      "Marks the revival of the Metal Hero franchise.",
     ],
-    gallery: [
-      "/sentai/gallery/gokai_1.webp",
-      "/sentai/gallery/gokai_2.webp",
-      "/sentai/gallery/gokai_3.webp",
-      "/sentai/gallery/gokai_4.webp",
+  },
+  "7": {
+    id: "7",
+    title: "Tokumei Sentai Go-Busters vs. Kaizoku Sentai Gokaiger",
+    jpTitle: "特命戦隊ゴーバスターズVS海賊戦隊ゴーカイジャー THE MOVIE",
+    type: "VS Movie",
+    year: "2013",
+    runtime: "60 min",
+    rating: "4.7",
+    poster: "/movie/91z-idQ1JbL._SL1378_.jpg",
+    banner: "/movie/91z-idQ1JbL._SL1378_.jpg",
+    synopsis:
+      "The Gokaigers return to Earth in a black version of the Gokai Galleon, attacking the Go-Busters. This unexpected betrayal is tied to the 'Phantom Ranger Keys' and a plan to save the universe from a new Zangyack threat.",
+    director: "Takayuki Shibasaki",
+    writer: "Kento Shimoyama",
+    studio: "Toei Company",
+    mainCast: [
+      { name: "Katsuhiro Suzuki", role: "Hiromu Sakurada (Red Buster)" },
+      { name: "Ryota Ozawa", role: "Captain Marvelous (Gokai Red)" },
+      { name: "Ryoma Baba", role: "Ryuji Iwasaki (Blue Buster)" },
+      { name: "Arisa Komiya", role: "Yoko Usami (Yellow Buster)" },
     ],
-    wikiStats: {
-      "Suit Actor": "Hirofumi Fukuzawa",
-      Network: "TV Asahi",
-      "Theme Song": "Kaizoku Sentai Gokaiger",
-      "Next Series": "Tokumei Sentai Go-Busters",
-    },
-    episodeList: generateEpisodes(),
-    movieList: [
-      {
-        id: "4",
-        title: "Gokaiger Goseiger Super Sentai 199 Hero Great Battle",
-        duration: "1h 21m",
-        type: "Movie",
-      },
-      {
-        id: "5",
-        title: "Kaizoku Sentai Gokaiger: The Flying Ghost Ship",
-        duration: "30m",
-        type: "Movie",
-      },
-      {
-        id: "6",
-        title: "Gokaiger vs. Space Sheriff Gavan: The Movie",
-        duration: "1h 04m",
-        type: "Movie",
-      },
-      {
-        id: "7",
-        title: "Tokumei Sentai Go-Busters vs. Kaizoku Sentai Gokaiger",
-        duration: "1h 00m",
-        type: "Movie",
-      },
-      {
-        id: "8",
-        title: "Kaizoku Sentai: Ten Gokaiger",
-        duration: "1h 01m",
-        type: "V-Cinext",
-      },
+    supportHeroes: [
+      { name: "Keisuke Matsumoto", role: "Beet Buster" },
+      { name: "Syo Jinnai", role: "Stag Buster" },
+      { name: "Yuki Yamada", role: "Joe Gibken" },
+      { name: "Mao Ichimichi", role: "Luka Millfy" },
+      { name: "Kazuki Shimizu", role: "Don Dogoier" },
+      { name: "Yui Koike", role: "Ahim de Famille" },
+      { name: "Junya Ikeda", role: "Gai Ikari" },
+      { name: "Ryo Ryusei", role: "Kyoryu Red (Cameo)" },
+    ],
+    trivia: [
+      "First time Gokaigers appear as antagonists initially.",
+      "Features the debut of Zyuden Sentai Kyoryuger.",
+    ],
+  },
+  "8": {
+    id: "8",
+    title: "Kaizoku Sentai: Ten Gokaiger",
+    jpTitle: "テン・ゴーカイジャー",
+    type: "V-Cinext (10th Anniversary)",
+    year: "2021",
+    runtime: "61 min",
+    rating: "5.0",
+    poster: "/movie/ten_gokaiger_1.webp",
+    banner: "/movie/Ten-Gokaiger.jpg",
+    synopsis:
+      "A decade later, the Gokaigers have gone their separate ways. Earth now hosts the 'Super Sentai Derby Colosseum', a gambling ring using Ranger Keys. Marvelous returns to stop the corruption, but he must face his own former crewmates.",
+    director: "Shojiro Nakazawa",
+    writer: "Naruhisa Arakawa",
+    studio: "Toei Company",
+    mainCast: [
+      { name: "Ryota Ozawa", role: "Captain Marvelous" },
+      { name: "Yuki Yamada", role: "Joe Gibken" },
+      { name: "Mao Ichimichi", role: "Luka Millfy" },
+      { name: "Kazuki Shimizu", role: "Don Dogoier" },
+      { name: "Yui Koike", role: "Ahim de Famille" },
+      { name: "Junya Ikeda", role: "Gai Ikari" },
+    ],
+    supportHeroes: [
+      { name: "Kohei Shoji", role: "Zocks Goldtsuiker" },
+      { name: "Kousuke Asai", role: "Gokai Red (Suit)" },
+      { name: "Basco", role: "Spirit Cameo" },
+    ],
+    trivia: [
+      "Full original cast returns after 10 years.",
+      "Introduces Gokai Red Galleon Armor Mode.",
+      "Filmed during the 45th anniversary of Super Sentai.",
     ],
   },
 };
 
-export default function SeriesWikiPage({
+export default function MovieDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const [activeTab, setActiveTab] = useState("overview");
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [isCopied, setIsCopied] = useState(false);
-  const [isMaintenanceOpen, setIsMaintenanceOpen] = useState(false);
-  const [openArsenal, setOpenArsenal] = useState<string | null>(null);
+  const [data, setData] = useState<MovieData | null>(null);
 
   useEffect(() => {
-    const found =
-      seriesDatabase[id] || seriesDatabase["kaizoku-sentai-gokaiger"];
-    if (found) setData(found);
-    setLoading(false);
+    const movie = movieDatabase[id];
+    setData(movie || null);
   }, [id]);
-
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  };
-
-  if (loading)
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white font-oswald animate-pulse">
-        INITIALIZING ARCHIVE...
-      </div>
-    );
 
   if (!data)
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white">
-        <h1>404 - DATA CORRUPTED</h1>
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white font-oswald italic">
+        <p className="tracking-[0.5em] mb-4 text-zinc-500 uppercase">
+          Archive Not Found
+        </p>
+        <Link
+          href="/movies"
+          className="text-primary text-xs border border-primary/30 px-6 py-2 hover:bg-primary hover:text-white transition-all uppercase tracking-widest"
+        >
+          Return to Command Center
+        </Link>
       </div>
     );
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-primary selection:text-white pb-20">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-primary pb-20 overflow-x-hidden">
       <Navbar />
 
-      <div className="relative h-[70vh] md:h-[85vh] w-full overflow-hidden">
+      <div className="relative w-full h-[60vh] lg:h-[75vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={data.image}
-            alt={data.title}
-            className="h-full w-full object-cover brightness-[0.3]"
+            src={data.banner}
+            alt=""
+            className="w-full h-full object-cover opacity-30 scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
         </div>
 
-        <div className="absolute inset-0 flex items-end md:items-center px-6 sm:px-12 lg:px-20 pb-12 md:pb-0">
-          <div className="w-full max-w-4xl space-y-4 md:space-y-6 pt-20">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors text-[10px] md:text-sm font-bold uppercase tracking-[0.3em]"
-            >
-              <ArrowLeft size={14} /> Back to Database
-            </Link>
-
-            <div className="flex flex-wrap gap-2">
-              <Badge className="bg-white text-black font-bold text-[10px] md:text-sm px-2 rounded-none">
-                {data.year}
-              </Badge>
-              <Badge
-                variant="outline"
-                className="text-gray-300 border-white/20 text-[10px] md:text-sm rounded-none uppercase"
-              >
-                {data.episodes} EP
-              </Badge>
-              <Badge className="bg-yellow-500 text-black font-bold flex gap-1 text-[10px] md:text-sm rounded-none">
-                <Star size={10} fill="black" /> {data.rating}
-              </Badge>
-            </div>
-
-            <div className="space-y-1">
-              <h2 className="font-oswald text-xl md:text-3xl text-gray-500 font-bold uppercase tracking-[0.2em]">
-                {data.jpTitle}
-              </h2>
-              <h1 className="font-oswald text-4xl sm:text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-[0.95] text-white">
-                {data.title}
-              </h1>
-            </div>
-
-            <div className="flex flex-wrap gap-3 pt-4">
-              <Button
-                onClick={() => setIsMaintenanceOpen(true)}
-                className="h-12 md:h-16 px-6 md:px-10 bg-zinc-800/50 hover:bg-zinc-700 text-gray-400 border border-dashed border-zinc-600 font-oswald text-sm md:text-xl uppercase tracking-widest rounded-none"
-              >
-                <AlertTriangle className="mr-2 text-yellow-600" size={18} />{" "}
-                System Error
-              </Button>
-              <Button
-                onClick={handleShare}
-                variant="outline"
-                className="h-12 md:h-16 px-6 md:px-8 border-white/20 bg-white/5 font-oswald text-sm md:text-xl uppercase tracking-widest rounded-none"
-              >
-                {isCopied ? <Check size={18} /> : <Share2 size={18} />}{" "}
-                {isCopied ? "Copied" : "Share"}
-              </Button>
-            </div>
+        <div className="absolute bottom-20 left-0 w-full px-6 sm:px-12 lg:px-20 z-20">
+          <div className="animate-in slide-in-from-left duration-1000">
+            <Badge className="bg-primary text-white mb-6 uppercase tracking-[0.2em] px-4 py-1.5 text-xs font-black rounded-none">
+              {data.type}
+            </Badge>
+            <h1 className="text-4xl md:text-8xl font-oswald font-black uppercase leading-[0.85] mb-6 max-w-5xl italic drop-shadow-2xl">
+              {data.title}
+            </h1>
+            <h2 className="text-xl md:text-2xl text-zinc-500 font-oswald uppercase tracking-widest italic">
+              {data.jpTitle}
+            </h2>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-12 -mt-10 relative z-10">
-        <div className="flex overflow-x-auto scrollbar-hide border-b border-white/10 bg-[#050505]/90 backdrop-blur-md sticky top-[70px] z-40">
-          {["overview", "cast", "arsenal & movies", "gallery", "episodes"].map(
-            (tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 md:px-8 py-4 md:py-5 font-oswald text-sm md:text-lg font-bold uppercase tracking-widest transition-all border-b-4 whitespace-nowrap ${
-                  activeTab === tab
-                    ? "border-primary text-white bg-white/5"
-                    : "border-transparent text-gray-600 hover:text-gray-300"
-                }`}
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 -mt-16 relative z-30">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4 space-y-8">
+            <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] group">
+              <img
+                src={data.poster}
+                alt={data.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute top-4 right-4 bg-yellow-500 text-black font-black px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-2xl">
+                <Star size={16} fill="black" /> {data.rating}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <Link
+                href="/movies"
+                className="inline-flex items-center justify-center gap-2 text-zinc-400 hover:text-primary transition-colors font-oswald uppercase tracking-widest text-sm mb-4"
               >
-                {tab}
-              </button>
-            )
-          )}
-        </div>
-
-        <div className="py-8 md:py-12 min-h-[500px]">
-          {activeTab === "overview" && (
-            <div className="grid lg:grid-cols-3 gap-10">
-              <div className="lg:col-span-2 space-y-8 md:space-y-12">
-                <section>
-                  <h3 className="font-oswald text-2xl md:text-3xl text-white uppercase mb-4 md:mb-6 flex items-center gap-3">
-                    <Info size={24} className="text-primary" /> Chronicle Brief
-                  </h3>
-                  <p className="text-zinc-400 text-base md:text-xl leading-relaxed font-light mb-6">
-                    {data.desc}
-                  </p>
-                  <div className="p-6 md:p-8 bg-white/5 border-l-4 border-primary italic text-sm md:text-lg text-zinc-300">
-                    {data.epicHistory}
-                  </div>
-                </section>
-                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
-                  <div className="bg-zinc-900/40 p-6 md:p-8 border border-white/5 border-l-4 border-primary">
-                    <h4 className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1 font-bold">
-                      Architect
-                    </h4>
-                    <p className="text-lg md:text-2xl font-bold font-oswald text-white uppercase">
-                      {data.writer}
-                    </p>
-                  </div>
-                  <div className="bg-zinc-900/40 p-6 md:p-8 border border-white/5 border-l-4 border-primary">
-                    <h4 className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1 font-bold">
-                      Director
-                    </h4>
-                    <p className="text-lg md:text-2xl font-bold font-oswald text-white uppercase">
-                      {data.director}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <aside className="bg-zinc-900/50 p-6 md:p-8 border border-white/5 h-fit space-y-6">
-                <h3 className="font-oswald text-xl uppercase tracking-widest text-white border-b border-white/10 pb-4">
-                  Data Logs
-                </h3>
-                <div className="space-y-4 md:space-y-6 font-mono text-[10px] md:text-sm">
-                  {Object.entries(data.wikiStats).map(([key, value]: any) => (
-                    <div
-                      key={key}
-                      className="flex flex-col gap-1 border-b border-white/5 pb-3"
-                    >
-                      <span className="text-primary/60 uppercase">{key}</span>
-                      <span className="text-white font-bold">{value}</span>
-                    </div>
-                  ))}
-                </div>
-              </aside>
+                <ArrowLeft size={16} /> Back to Archives
+              </Link>
+              <Button
+                disabled
+                className="h-14 bg-zinc-900 border border-white/10 text-zinc-600 font-oswald uppercase tracking-widest cursor-not-allowed"
+              >
+                <PlayCircle className="mr-2" /> Encrypted Trailer
+              </Button>
+              <Button
+                variant="outline"
+                className="h-12 border-white/10 bg-white/5 hover:bg-white/10 text-white font-oswald uppercase tracking-widest"
+              >
+                <Share2 className="mr-2" size={18} /> Distribute Data
+              </Button>
             </div>
-          )}
 
-          {activeTab === "cast" && (
-            <div className="space-y-16">
-              <div>
-                <h3 className="font-oswald text-2xl text-white uppercase mb-6 flex items-center gap-3 border-l-4 border-primary pl-4">
-                  <Users size={24} className="text-primary" /> Core Crew
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
-                  {data.cast?.map((actor: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="group relative aspect-[3/4] bg-zinc-900 border border-white/5 overflow-hidden transition-all hover:border-primary"
-                    >
-                      <img
-                        src={actor.img}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                        alt={actor.name}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                      <div className="absolute bottom-0 left-0 w-full p-3">
-                        <p className="text-white font-oswald font-bold text-sm md:text-lg uppercase leading-none">
-                          {actor.role}
-                        </p>
-                        <p className="text-primary text-[8px] md:text-[10px] font-bold uppercase mt-1">
-                          {actor.actor}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+            <div className="bg-zinc-900/50 backdrop-blur-md p-8 border border-white/5 rounded-3xl space-y-6">
+              <h4 className="font-oswald text-primary uppercase tracking-widest text-xs font-bold border-l-2 border-primary pl-3">
+                Technical Specifications
+              </h4>
+              <div className="space-y-4 text-sm font-mono">
+                <div className="flex flex-col border-b border-white/5 pb-2">
+                  <span className="text-zinc-600 text-[10px] mb-1 uppercase">
+                    Director
+                  </span>
+                  <span className="font-bold text-zinc-200">
+                    {data.director}
+                  </span>
+                </div>
+                <div className="flex flex-col border-b border-white/5 pb-2">
+                  <span className="text-zinc-600 text-[10px] mb-1 uppercase">
+                    Writer
+                  </span>
+                  <span className="font-bold text-zinc-200">{data.writer}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-zinc-600 text-[10px] mb-1 uppercase">
+                    Production Studio
+                  </span>
+                  <span className="font-bold text-zinc-200">{data.studio}</span>
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
-          {activeTab === "arsenal & movies" && (
-            <div className="space-y-20">
-              <section>
-                <h3 className="font-oswald text-2xl text-white uppercase mb-8 flex items-center gap-3 border-l-4 border-primary pl-4">
-                  <Shield size={24} className="text-primary" /> Tactical Arsenal
-                </h3>
-                <div className="grid gap-4 max-w-4xl">
-                  {data.arsenal?.map((item: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="border border-white/10 overflow-hidden"
-                    >
-                      <button
-                        onClick={() =>
-                          setOpenArsenal(
-                            openArsenal === item.name ? null : item.name
-                          )
-                        }
-                        className="w-full flex items-center justify-between p-6 bg-zinc-900/40 hover:bg-zinc-800 transition-colors"
-                      >
-                        <div className="flex items-center gap-4">
-                          <Zap size={18} className="text-primary" />
-                          <span className="font-oswald text-xl uppercase tracking-widest">
-                            {item.name}
-                          </span>
-                        </div>
-                        <ChevronDown
-                          className={`transition-transform duration-300 ${
-                            openArsenal === item.name ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                      <div
-                        className={`grid transition-all duration-500 ease-in-out ${
-                          openArsenal === item.name
-                            ? "grid-rows-[1fr] opacity-100"
-                            : "grid-rows-[0fr] opacity-0"
-                        }`}
-                      >
-                        <div className="overflow-hidden">
-                          <div className="p-6 flex flex-col md:flex-row gap-8 bg-black/40 border-t border-white/5">
-                            <div className="w-full md:w-1/3 aspect-video md:aspect-square bg-zinc-900 border border-white/10 rounded-lg overflow-hidden">
-                              <img
-                                src={item.img}
-                                className="w-full h-full object-cover"
-                                alt={item.name}
-                              />
-                            </div>
-                            <div className="flex-1 space-y-4">
-                              <Badge className="bg-primary text-black rounded-none">
-                                CLASSIFIED_TECH
-                              </Badge>
-                              <p className="text-zinc-400 leading-relaxed italic">
-                                {item.desc}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section>
-                <h3 className="font-oswald text-2xl text-white uppercase mb-8 flex items-center gap-3 border-l-4 border-primary pl-4">
-                  <Film size={24} className="text-primary" /> Movie Manifest
-                </h3>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {data.movieList.map((movie: any) => (
-                    /* PERBAIKAN LINK DI SINI: Pastikan folder route anda adalah /movie/[id] */
-                    <Link href={`/movie/${movie.id}`} key={movie.id}>
-                      <div className="bg-zinc-900/40 border border-white/5 p-6 group hover:border-primary/50 transition-all h-full flex flex-col justify-between cursor-pointer">
-                        <div className="flex justify-between items-start mb-6">
-                          <Badge className="bg-primary text-black rounded-none text-[10px] uppercase tracking-widest font-black">
-                            {movie.type}
-                          </Badge>
-                          <span className="text-[10px] font-mono text-zinc-600">
-                            {movie.duration}
-                          </span>
-                        </div>
-                        <h4 className="font-oswald text-xl md:text-2xl font-bold text-white uppercase group-hover:text-primary transition-colors leading-tight mb-4">
-                          {movie.title}
-                        </h4>
-                        <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                          View Mission{" "}
-                          <ChevronDown size={12} className="-rotate-90" />
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </section>
+          <div className="lg:col-span-8 space-y-16">
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-full border border-white/10 text-xs font-oswald tracking-widest">
+                <Calendar size={14} className="text-primary" /> {data.year}{" "}
+                MISSION
+              </div>
+              <div className="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-full border border-white/10 text-xs font-oswald tracking-widest">
+                <Clock size={14} className="text-primary" /> {data.runtime}
+              </div>
+              <div className="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-full border border-white/10 text-xs font-oswald tracking-widest">
+                <ShieldCheck size={14} className="text-primary" /> CANON
+                VERIFIED
+              </div>
             </div>
-          )}
 
-          {activeTab === "gallery" && (
-            <div className="space-y-8">
-              <h3 className="font-oswald text-2xl text-white uppercase mb-8 flex items-center gap-3 border-l-4 border-primary pl-4">
-                <ImageIcon size={24} className="text-primary" /> Visual Archives
+            <section className="space-y-6">
+              <h3 className="text-3xl font-oswald font-black uppercase flex items-center gap-4">
+                <span className="w-12 h-1 bg-primary"></span> Operation Summary
               </h3>
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-                {data.gallery?.map((img: string, idx: number) => (
-                  <div
-                    key={idx}
-                    className="relative group overflow-hidden border border-white/10 hover:border-primary/50 transition-colors rounded-lg"
-                  >
-                    <img
-                      src={img}
-                      className="w-full h-auto object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
-                      alt={`Archive_${idx}`}
-                    />
-                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+              <p className="text-zinc-400 leading-relaxed text-xl font-light italic border-l-4 border-zinc-800 pl-8">
+                {data.synopsis}
+              </p>
+            </section>
 
-          {activeTab === "episodes" && (
-            <div className="max-w-4xl mx-auto space-y-4">
-              <h3 className="font-oswald text-2xl md:text-4xl text-white uppercase tracking-wider mb-8 flex items-center gap-3">
-                <Layers className="text-primary" /> Episode Manifest
+            <section className="space-y-8">
+              <h3 className="text-3xl font-oswald font-black uppercase flex items-center gap-4">
+                <span className="w-12 h-1 bg-primary"></span> Primary Strike
+                Team
               </h3>
-              <div className="grid gap-3 md:gap-4">
-                {data.episodeList.map((ep: any) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {data.mainCast.map((actor, i) => (
                   <div
-                    key={ep.id}
-                    className="group flex items-center gap-4 md:gap-8 p-4 md:p-6 bg-zinc-900/20 border border-white/5 hover:border-primary/40 transition-all cursor-pointer"
+                    key={i}
+                    className="flex items-center gap-5 bg-white/[0.02] border border-white/5 p-5 rounded-2xl hover:bg-white/[0.05] hover:border-primary/30 transition-all group"
                   >
-                    <span className="font-oswald font-black text-2xl md:text-5xl text-zinc-800 group-hover:text-primary/20 transition-colors italic w-12 md:w-20">
-                      {ep.id < 10 ? `0${ep.id}` : ep.id}
-                    </span>
-                    <div className="flex-1">
-                      <h4 className="font-oswald font-bold text-base md:text-2xl text-zinc-300 group-hover:text-white uppercase transition-colors">
-                        {ep.title}
-                      </h4>
-                      <p className="text-[8px] md:text-[10px] font-mono text-zinc-600 uppercase mt-1">
-                        Runtime: {ep.duration} // {ep.type}
+                    <div className="w-14 h-14 rounded-full bg-zinc-900 flex items-center justify-center text-primary border border-zinc-800 group-hover:scale-110 transition-transform">
+                      <Users size={24} />
+                    </div>
+                    <div>
+                      <p className="font-oswald text-xl text-white uppercase leading-tight tracking-wide">
+                        {actor.name}
+                      </p>
+                      <p className="text-xs text-primary font-black uppercase tracking-[0.2em] mt-1">
+                        {actor.role}
                       </p>
                     </div>
-                    <PlayCircle
-                      size={28}
-                      className="text-zinc-800 group-hover:text-primary transition-all group-hover:scale-110"
-                    />
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+            </section>
+
+            <section className="space-y-8">
+              <h3 className="text-3xl font-oswald font-black uppercase flex items-center gap-4 text-primary">
+                <Zap size={32} /> Tactical Support Assets
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {data.supportHeroes?.map((hero, i) => (
+                  <div
+                    key={i}
+                    className="bg-zinc-900/30 border border-white/5 p-5 rounded-2xl flex flex-col items-center text-center group hover:bg-primary/10 hover:border-primary/20 transition-all"
+                  >
+                    <Heart
+                      size={20}
+                      className="text-zinc-800 group-hover:text-primary mb-3 transition-all group-hover:scale-125"
+                    />
+                    <p className="font-oswald text-sm text-white uppercase tracking-tighter leading-tight">
+                      {hero.role}
+                    </p>
+                    <p className="text-[10px] text-zinc-600 uppercase mt-2 font-bold tracking-widest">
+                      {hero.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="bg-zinc-900/20 border border-zinc-800 p-10 rounded-[40px] relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-5">
+                <Info size={120} />
+              </div>
+              <h3 className="text-2xl font-oswald font-black uppercase text-white mb-8 flex items-center gap-4">
+                <Info className="text-primary" /> Intelligence Briefing
+              </h3>
+              <ul className="space-y-6">
+                {data.trivia.map((fact, i) => (
+                  <li
+                    key={i}
+                    className="flex gap-6 text-zinc-400 text-base leading-relaxed group"
+                  >
+                    <div className="w-2 h-2 rounded-full bg-primary mt-2.5 flex-shrink-0 group-hover:scale-150 transition-transform" />
+                    <span>{fact}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
         </div>
       </div>
-
-      <Dialog open={isMaintenanceOpen} onOpenChange={setIsMaintenanceOpen}>
-        <DialogContent className="bg-black border-2 border-yellow-600 text-white sm:max-w-[450px] rounded-none">
-          <div className="p-4 flex flex-col items-center text-center space-y-4">
-            <Wrench size={40} className="text-yellow-500 animate-pulse" />
-            <DialogHeader>
-              <DialogTitle className="font-oswald text-2xl uppercase text-yellow-500">
-                System Maintenance
-              </DialogTitle>
-            </DialogHeader>
-            <p className="text-zinc-400 font-mono text-xs leading-relaxed uppercase">
-              Archive server offline due to Zangyack intrusion. Recalibrating
-              decryption layers.
-            </p>
-            <Button
-              onClick={() => setIsMaintenanceOpen(false)}
-              className="w-full bg-yellow-600 text-black font-oswald uppercase rounded-none h-12"
-            >
-              Close Link
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
